@@ -1,4 +1,18 @@
 'use client';
-import { GlobalError } from '@/components/ErrorBoundary';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
-export default GlobalError;
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  return (
+    <html>
+      <body>
+        <ErrorBoundary error={error} reset={reset} />
+      </body>
+    </html>
+  );
+}

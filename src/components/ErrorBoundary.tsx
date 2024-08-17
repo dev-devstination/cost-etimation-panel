@@ -111,28 +111,6 @@ const ErrorBoundary = ({
   );
 };
 
-export const RootError = ({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) => <ErrorBoundary error={error} reset={reset} />;
-
-export const GlobalError = ({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) => (
-  <html>
-    <body>
-      <ErrorBoundary error={error} reset={reset} />
-    </body>
-  </html>
-);
-
 export const NotFound = () => (
   <ErrorBoundary error={{} as Error} statusCode={404} />
 );
