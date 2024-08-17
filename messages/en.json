@@ -1,5 +1,16 @@
 {
   "HomePage": {
     "title": "Hello world!"
+  },
+  "ErrorBoundary": {
+    "defaultTitle": "Oops! Something went wrong",
+    "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
+    "notFoundTitle": "Page Not Found",
+    "notFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "serverErrorTitle": "Server Error",
+    "serverErrorDescription": "We're experiencing some server issues. Please try again later.",
+    "errorId": "Error ID: {id}",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home"
   }
 }

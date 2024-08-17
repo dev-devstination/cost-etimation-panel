@@ -1,5 +1,16 @@
 {
   "HomePage": {
-    "title": "Hello world!"
+    "title": "مرحبا بالعالم!"
+  },
+  "ErrorBoundary": {
+    "defaultTitle": "عفوًا! حدث خطأ ما",
+    "defaultDescription": "لقد واجهنا خطأ غير متوقع. تم إخطار فريقنا.",
+    "notFoundTitle": "الصفحة غير موجودة",
+    "notFoundDescription": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "serverErrorTitle": "خطأ في الخادم",
+    "serverErrorDescription": "نواجه بعض المشكلات في الخادم. يرجى المحاولة مرة أخرى لاحقًا.",
+    "errorId": "معرف الخطأ: {id}",
+    "tryAgain": "حاول مرة أخرى",
+    "goHome": "الذهاب إلى الصفحة الرئيسية"
   }
 }

@@ -2,6 +2,7 @@
 
 // import * as Sentry from '@sentry/nextjs';
 
+import { useTranslations } from 'next-intl';
 import {
   AlertTriangle,
   FileQuestion,
@@ -12,6 +13,9 @@ import {
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+
+type ErrorBoundaryTranslations = IntlMessages['ErrorBoundary'];
+type ErrorBoundaryKeys = keyof ErrorBoundaryTranslations;
 
 const ErrorLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
@@ -35,11 +39,21 @@ const ErrorIcon = ({ Icon }: { Icon: React.ElementType }) => (
   </div>
 );
 
-const ActionButtons = ({ reset }: { reset?: () => void }) => (
+const ActionButtons = ({
+  reset,
+  t,
+}: {
+  reset?: () => void;
+  t: (
+    key: ErrorBoundaryKeys,
+    values?: Record<string, string | number>
+  ) => string;
+}) => (
   <div className="flex flex-col space-y-4">
     {reset && (
       <Button onClick={reset} className="w-full">
-        <RefreshCcw className="mr-2 h-4 w-4" /> Try Again
+        <RefreshCcw className="mr-2 h-4 w-4" />
+        {t('tryAgain')}
       </Button>
     )}
     <Button
@@ -47,7 +61,8 @@ const ActionButtons = ({ reset }: { reset?: () => void }) => (
       variant="outline"
       className="w-full"
     >
-      <Home className="mr-2 h-4 w-4" /> Go Home
+      <Home className="mr-2 h-4 w-4" />
+      {t('goHome')}
     </Button>
   </div>
 );
@@ -61,25 +76,24 @@ const ErrorBoundary = ({
   reset?: () => void;
   statusCode?: number;
 }) => {
+  const t = useTranslations('ErrorBoundary');
+
   // React.useEffect(() => {
   //   Sentry.captureException(error);
   // }, [error]);
 
   let Icon = AlertTriangle;
-  let title = 'Oops! Something went wrong';
-  let description =
-    "We've encountered an unexpected error. Our team has been notified.";
+  let title = t('defaultTitle');
+  let description = t('defaultDescription');
 
   if (statusCode === 404) {
     Icon = FileQuestion;
-    title = 'Page Not Found';
-    description =
-      "The page you're looking for doesn't exist or has been moved.";
+    title = t('notFoundTitle');
+    description = t('notFoundDescription');
   } else if (statusCode === 500) {
     Icon = ServerCrash;
-    title = 'Server Error';
-    description =
-      "We're experiencing some server issues. Please try again later.";
+    title = t('serverErrorTitle');
+    description = t('serverErrorDescription');
   }
 
   return (
@@ -89,10 +103,10 @@ const ErrorBoundary = ({
       <ErrorDescription>{description}</ErrorDescription>
       {error.digest && (
         <p className="text-center text-sm text-muted-foreground">
-          Error ID: {error.digest}
+          {t('errorId', { id: error.digest })}
         </p>
       )}
-      <ActionButtons reset={reset} />
+      <ActionButtons reset={reset} t={t} />
     </ErrorLayout>
   );
 };
