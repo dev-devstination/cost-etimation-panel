@@ -3,6 +3,26 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    // Avoid hardcoded labels
+    "react/jsx-no-literals": "error",
+    // Consistently import navigation APIs from `@/navigation`
+    "no-restricted-imports": [
+      "error",
+      {
+        "name": "next/link",
+        "message": "Please import from `@/config/navigation` instead."
+      },
+      {
+        "name": "next/navigation",
+        "importNames": [
+          "redirect",
+          "permanentRedirect",
+          "useRouter",
+          "usePathname"
+        ],
+        "message": "Please import from `@/config/navigation` instead."
+      }
+    ]
   }
 }
