@@ -1,7 +1,7 @@
 'use client';
 
 // import * as Sentry from '@sentry/nextjs';
-
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import {
   AlertTriangle,
@@ -13,6 +13,7 @@ import {
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import logger from '@/lib/logger';
 
 type ErrorBoundaryTranslations = IntlMessages['ErrorBoundary'];
 type ErrorBoundaryKeys = keyof ErrorBoundaryTranslations;
@@ -78,9 +79,20 @@ const ErrorBoundary = ({
 }) => {
   const t = useTranslations('ErrorBoundary');
 
-  // React.useEffect(() => {
-  //   Sentry.captureException(error);
-  // }, [error]);
+  React.useEffect(() => {
+    // Log the error using our custom logger
+    logger.error('Error caught by ErrorBoundary', {
+      message: error.message,
+      stack: error.stack,
+      digest: error.digest,
+      statusCode,
+    });
+
+    // Uncomment when Sentry is set up
+    // import('@sentry/nextjs').then(Sentry => {
+    //   Sentry.captureException(error);
+    // });
+  }, [error, statusCode]);
 
   let Icon = AlertTriangle;
   let title = t('defaultTitle');
@@ -112,11 +124,11 @@ const ErrorBoundary = ({
 };
 
 export const NotFound = () => (
-  <ErrorBoundary error={{} as Error} statusCode={404} />
+  <ErrorBoundary error={new Error('Not Found')} statusCode={404} />
 );
 
 export const InternalServerError = () => (
-  <ErrorBoundary error={{} as Error} statusCode={500} />
+  <ErrorBoundary error={new Error('Internal Server Error')} statusCode={500} />
 );
 
 export default ErrorBoundary;
