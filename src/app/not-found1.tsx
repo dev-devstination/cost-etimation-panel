@@ -1,3 +1,5 @@
+'use client';
+
 import { NotFound } from '@/components/ErrorBoundary';
 
 import { inter } from '@/fonts/inter';
