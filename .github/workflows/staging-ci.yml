@@ -87,7 +87,7 @@ jobs:
         uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG_DO_STAGING }}
+          kubeconfig: ${{ secrets.KUBECONFIG_DO_DEVELOPMENT }}
 
       - name: Deploy to the DO staging cluster
         uses: azure/k8s-deploy@v1
