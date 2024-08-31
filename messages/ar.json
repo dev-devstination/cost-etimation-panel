@@ -12,5 +12,16 @@
     "errorId": "معرف الخطأ: {id}",
     "tryAgain": "حاول مرة أخرى",
     "goHome": "الذهاب إلى الصفحة الرئيسية"
+  },
+  "Auth": {
+    "welcomeBack": "مرحبًا بعودتك",
+    "welcomeBackgroundLabel": "قسم صورة الخلفية الزخرفية",
+    "logoAlt": "الشعار"
+  },
+  "Logo": {
+    "firstLetter": "C",
+    "secondLetter": "o",
+    "restOfWord": "st",
+    "subtitle": "Estimation"
   }
 }

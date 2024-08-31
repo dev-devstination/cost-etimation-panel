@@ -12,5 +12,16 @@
     "errorId": "Error ID: {id}",
     "tryAgain": "Try Again",
     "goHome": "Go Home"
+  },
+  "Auth": {
+    "welcomeBack": "Welcome Back",
+    "welcomeBackgroundLabel": "Decorative background image section",
+    "logoAlt": "Logo"
+  },
+  "Logo": {
+    "firstLetter": "C",
+    "secondLetter": "o",
+    "restOfWord": "st",
+    "subtitle": "Estimation"
   }
 }
