@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 export const Logo = () => {
-  const t = useTranslations('Logo');
+  const t = useTranslations('components.logo');
 
   return (
     <>

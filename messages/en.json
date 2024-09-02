@@ -1,27 +1,87 @@
 {
+  "common": {
+    "error": {
+      "defaultTitle": "Oops! Something went wrong",
+      "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
+      "notFound": {
+        "title": "Page Not Found",
+        "description": "The page you're looking for doesn't exist or has been moved."
+      },
+      "server": {
+        "title": "Server Error",
+        "description": "We're experiencing some server issues. Please try again later."
+      },
+      "id": "Error ID: {id}"
+    },
+    "action": {
+      "tryAgain": "Try Again",
+      "goHome": "Go Home"
+    }
+  },
   "HomePage": {
     "title": "Hello world!"
   },
-  "ErrorBoundary": {
-    "defaultTitle": "Oops! Something went wrong",
-    "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
-    "notFoundTitle": "Page Not Found",
-    "notFoundDescription": "The page you're looking for doesn't exist or has been moved.",
-    "serverErrorTitle": "Server Error",
-    "serverErrorDescription": "We're experiencing some server issues. Please try again later.",
-    "errorId": "Error ID: {id}",
-    "tryAgain": "Try Again",
-    "goHome": "Go Home"
+  "components": {
+    "toggleTheme": {
+      "ariaLabel": "Toggle theme",
+      "srText": "Toggle theme"
+    },
+    "logo": {
+      "firstLetter": "C",
+      "secondLetter": "o",
+      "restOfWord": "st",
+      "subtitle": "Estimation",
+      "alt": "Logo"
+    }
   },
-  "Auth": {
-    "welcomeBack": "Welcome Back",
+  "auth": {
+    "signInTitle": "Sign In to Your Account",
     "welcomeBackgroundLabel": "Decorative background image section",
-    "logoAlt": "Logo"
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm your password"
+      }
+    },
+    "action": {
+      "login": "Log In",
+      "forgotPassword": "Forgot Password?",
+      "register": "Register",
+      "sendResetLink": "Send Reset Link",
+      "backToLogin": "Back to Login"
+    },
+    "message": {
+      "noAccount": "Don't have an account?",
+      "haveAccount": "Already have an account?",
+      "checkEmail": "Check Your Email",
+      "passwordResetInstructions": "We've sent password reset instructions to your email."
+    }
   },
-  "Logo": {
-    "firstLetter": "C",
-    "secondLetter": "o",
-    "restOfWord": "st",
-    "subtitle": "Estimation"
+  "validation": {
+    "required": "{field} is required",
+    "minLength": "{field} must be at least {min} characters",
+    "maxLength": "{field} must be at most {max} characters",
+    "email": "Please enter a valid email address",
+    "passwordMatch": "Passwords do not match",
+    "invalidType": "Invalid type for {field}",
+    "custom": {
+      "passwordStrength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
+    }
   }
 }

@@ -1,5 +1,3 @@
-import { useTranslations } from 'next-intl';
-
 import { Logo } from '@/components/Logo';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 
@@ -8,8 +6,6 @@ export default function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const t = useTranslations('Auth');
-
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-background via-secondary/30 to-primary/20 dark:from-gray-900 dark:via-purple-900/30 dark:to-blue-900/20 overflow-hidden">
       {/* Animated background elements */}
@@ -20,22 +16,19 @@ export default function AuthLayout({
       </div>
 
       {/* Main content */}
-      <div className="relative flex flex-col items-center justify-center w-full p-8 z-10 dark:bg-gray-800/70">
-        <div className="w-full max-w-md backdrop-blur-lg bg-background/70 p-8 rounded-lg shadow-2xl border border-primary/30 dark:border-blue-500/30">
+      <div className="relative flex flex-col items-center justify-center w-full p-4 sm:p-8 z-10 dark:bg-gray-800/70">
+        <div className="w-full max-w-md backdrop-blur-lg bg-background/70 p-6 sm:p-8 rounded-lg shadow-2xl border border-primary/30 dark:border-blue-500/30">
           {/* Theme Toggle */}
           <div className="absolute top-4 right-4">
             <ToggleThemeButton />
           </div>
 
           {/* Logo */}
-          <div className="mb-12 text-center">
+          <div className="mb-8 sm:mb-12 text-center">
             <Logo />
           </div>
 
           {/* Auth form */}
-          <h2 className="text-2xl font-semibold mb-6 text-center text-card-foreground dark:text-white">
-            {t('welcomeBack')}
-          </h2>
           {children}
         </div>
       </div>

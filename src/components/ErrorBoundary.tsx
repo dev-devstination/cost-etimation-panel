@@ -15,7 +15,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import logger from '@/lib/logger';
 
-type ErrorBoundaryTranslations = IntlMessages['ErrorBoundary'];
+type ErrorBoundaryTranslations = IntlMessages['common']['action'];
 type ErrorBoundaryKeys = keyof ErrorBoundaryTranslations;
 
 const ErrorLayout = ({ children }: { children: React.ReactNode }) => (
@@ -77,7 +77,8 @@ const ErrorBoundary = ({
   reset?: () => void;
   statusCode?: number;
 }) => {
-  const t = useTranslations('ErrorBoundary');
+  const t = useTranslations('common.error');
+  const actionT = useTranslations('common.action');
 
   React.useEffect(() => {
     // Log the error using our custom logger
@@ -100,12 +101,12 @@ const ErrorBoundary = ({
 
   if (statusCode === 404) {
     Icon = FileQuestion;
-    title = t('notFoundTitle');
-    description = t('notFoundDescription');
+    title = t('notFound.title');
+    description = t('notFound.description');
   } else if (statusCode === 500) {
     Icon = ServerCrash;
-    title = t('serverErrorTitle');
-    description = t('serverErrorDescription');
+    title = t('server.title');
+    description = t('server.description');
   }
 
   return (
@@ -115,10 +116,10 @@ const ErrorBoundary = ({
       <ErrorDescription>{description}</ErrorDescription>
       {error.digest && (
         <p className="text-center text-sm text-muted-foreground">
-          {t('errorId', { id: error.digest })}
+          {t('id', { id: error.digest })}
         </p>
       )}
-      <ActionButtons reset={reset} t={t} />
+      <ActionButtons reset={reset} t={actionT} />
     </ErrorLayout>
   );
 };
