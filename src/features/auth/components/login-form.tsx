@@ -1,31 +1,45 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { LoginFormData, useLoginSchema } from '@/features/auth/schemas/login';
+import { loginAction } from '@/features/auth/actions/login';
 import { FormField } from '@/components/form-field';
 import { SubmitButton } from '@/components/submit-button';
+import { useTransition } from 'react';
+
+const initialState = {
+  errors: {},
+  message: null,
+};
 
 export const LoginForm: React.FC = () => {
   const t = useTranslations('auth');
   const tForm = useTranslations('auth.form');
   const loginSchema = useLoginSchema();
 
+  const [isPending, startTransition] = useTransition();
+  const [serverState, formAction] = useFormState(loginAction, initialState);
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: LoginFormData) => {
-    // Here you would typically handle the login logic
-    console.log(data);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+  const onSubmit = (data: LoginFormData) => {
+    startTransition(async () => {
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) =>
+        formData.append(key, value)
+      );
+      await formAction(formData);
+    });
   };
 
   return (
@@ -40,7 +54,7 @@ export const LoginForm: React.FC = () => {
           type="email"
           placeholder={tForm('email.placeholder')}
           register={register}
-          error={errors.email?.message}
+          error={errors.email?.message || serverState.errors?.email?.[0]}
         />
         <FormField
           name="password"
@@ -48,11 +62,9 @@ export const LoginForm: React.FC = () => {
           type="password"
           placeholder={tForm('password.placeholder')}
           register={register}
-          error={errors.password?.message}
+          error={errors.password?.message || serverState.errors?.password?.[0]}
         />
-        <SubmitButton isLoading={isSubmitting}>
-          {t('action.login')}
-        </SubmitButton>
+        <SubmitButton isLoading={isPending}>{t('action.login')}</SubmitButton>
         <div className="text-sm text-center">
           <a href="/forget-password" className="text-primary hover:underline">
             {t('action.forgotPassword')}
