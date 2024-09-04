@@ -1,15 +1,15 @@
 'use client';
 
+import { useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { LoginFormData, useLoginSchema } from '@/features/auth/schemas/login';
+import { AuthInput } from '@/features/auth/components/auth-input';
 import { loginAction } from '@/features/auth/actions/login';
-import { FormField } from '@/components/form-field';
 import { SubmitButton } from '@/components/submit-button';
-import { useTransition } from 'react';
 
 const initialState = {
   errors: {},
@@ -27,6 +27,7 @@ export const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -48,19 +49,17 @@ export const LoginForm: React.FC = () => {
         {t('signInTitle')}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <FormField
+        <AuthInput
           name="email"
-          label={tForm('email.label')}
           type="email"
-          placeholder={tForm('email.placeholder')}
+          label={tForm('email.label')}
           register={register}
           error={errors.email?.message || serverState.errors?.email?.[0]}
         />
-        <FormField
+        <AuthInput
           name="password"
-          label={tForm('password.label')}
           type="password"
-          placeholder={tForm('password.placeholder')}
+          label={tForm('password.label')}
           register={register}
           error={errors.password?.message || serverState.errors?.password?.[0]}
         />

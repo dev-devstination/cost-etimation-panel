@@ -6,7 +6,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>;
-  label: string;
+  label?: string;
   type: string;
   placeholder: string;
   register: UseFormRegister<T>;
@@ -23,18 +23,20 @@ export function FormField<T extends FieldValues>({
 }: FormFieldProps<T>) {
   return (
     <div className="space-y-2">
-      <Label
-        htmlFor={name}
-        className="text-sm font-medium text-muted-foreground"
-      >
-        {label}
-      </Label>
+      {label && (
+        <Label
+          htmlFor={name}
+          className="text-sm font-medium text-muted-foreground"
+        >
+          {label}
+        </Label>
+      )}
       <Input
         id={name}
         type={type}
         placeholder={placeholder}
         aria-invalid={error ? 'true' : 'false'}
-        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary hover:border-primary transition-colors"
+        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary hover:ring-primary hover:ring-1 transition-all"
         {...register(name)}
       />
       {error && (
