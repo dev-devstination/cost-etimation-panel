@@ -52,14 +52,14 @@ export const LoginForm: React.FC = () => {
         <AuthInput
           name="email"
           type="email"
-          label={tForm('email.label')}
+          placeholder={tForm('email.label')}
           register={register}
           error={errors.email?.message || serverState.errors?.email?.[0]}
         />
         <AuthInput
           name="password"
           type="password"
-          label={tForm('password.label')}
+          placeholder={tForm('password.label')}
           register={register}
           error={errors.password?.message || serverState.errors?.password?.[0]}
         />

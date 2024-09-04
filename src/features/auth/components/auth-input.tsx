@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import { Label } from '@/components/ui/label';
@@ -28,6 +28,14 @@ export function AuthInput<T extends FieldValues>({
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
+  const getIcon = () => {
+    if (type === 'email')
+      return <Mail className="h-5 w-5 text-muted-foreground" />;
+    if (type === 'password')
+      return <Lock className="h-5 w-5 text-muted-foreground" />;
+    return null;
+  };
+
   return (
     <div className="space-y-1">
       {label && (
@@ -39,11 +47,14 @@ export function AuthInput<T extends FieldValues>({
         </Label>
       )}
       <div className="relative">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          {getIcon()}
+        </div>
         <Input
           id={name}
           type={type === 'password' && showPassword ? 'text' : type}
           className={cn(
-            'pr-10 transition-all duration-200 ease-in-out',
+            'px-10 transition-all duration-200 ease-in-out',
             error && 'border-destructive focus-visible:ring-destructive'
           )}
           placeholder={placeholder}
