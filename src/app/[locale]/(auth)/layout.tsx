@@ -1,10 +1,10 @@
-import { Logo } from '@/components/Logo';
-import { ToggleThemeButton } from '@/components/ToggleThemeButton';
+import { Logo } from "@/components/Logo"
+import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 
 export default function AuthLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-background via-secondary/30 to-primary/20 dark:from-gray-900 dark:via-purple-900/30 dark:to-blue-900/20 overflow-hidden">
@@ -33,5 +33,5 @@ export default function AuthLayout({
         </div>
       </div>
     </div>
-  );
+  )
 }

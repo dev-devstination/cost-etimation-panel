@@ -1,11 +1,11 @@
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react"
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button"
 
 interface SubmitButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  isLoading: boolean;
-  children: React.ReactNode;
+  isLoading: boolean
+  children: React.ReactNode
 }
 
 export const SubmitButton: React.FC<SubmitButtonProps> = ({
@@ -23,5 +23,5 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
       {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
       {children}
     </Button>
-  );
-};
+  )
+}

@@ -36,6 +36,7 @@
   },
   "auth": {
     "signInTitle": "Sign In to Your Account",
+    "signUpTitle": "Create Your Account",
     "welcomeBackgroundLabel": "Decorative background image section",
     "form": {
       "email": {
@@ -45,6 +46,10 @@
       "password": {
         "label": "Password",
         "placeholder": "Enter your password"
+      },
+      "repeatPassword": {
+        "label": "Repeat Password",
+        "placeholder": "Repeat your password"
       },
       "firstName": {
         "label": "First Name",
@@ -81,7 +86,19 @@
     "passwordMatch": "Passwords do not match",
     "invalidType": "Invalid type for {field}",
     "custom": {
-      "passwordStrength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
+      "firstName": {
+        "min": "First name must be at least 2 characters"
+      },
+      "lastName": {
+        "min": "Last name must be at least 2 characters"
+      },
+      "password": {
+        "min": "Password must be at least 8 characters",
+        "strength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
+      },
+      "repeatPassword": {
+        "match": "Passwords must match"
+      }
     }
   }
 }

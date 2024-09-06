@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { FieldValues, Path, UseFormRegister } from 'react-hook-form';
-import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { useState } from "react"
+import { FieldValues, Path, UseFormRegister } from "react-hook-form"
+import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 
-import { cn } from '@/lib/utils';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { cn } from "@/lib/utils"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 interface FormFieldProps<T extends FieldValues> {
-  name: Path<T>;
-  label?: string;
-  type: string;
-  placeholder?: string;
-  register: UseFormRegister<T>;
-  error?: string;
+  name: Path<T>
+  label?: string
+  type: string
+  placeholder?: string
+  register: UseFormRegister<T>
+  error?: string
 }
 
 export function AuthInput<T extends FieldValues>({
@@ -24,17 +24,24 @@ export function AuthInput<T extends FieldValues>({
   register,
   error,
 }: FormFieldProps<T>) {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
-  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const togglePasswordVisibility = () => setShowPassword(!showPassword)
 
   const getIcon = () => {
-    if (type === 'email')
-      return <Mail className="h-5 w-5 text-muted-foreground" />;
-    if (type === 'password')
-      return <Lock className="h-5 w-5 text-muted-foreground" />;
-    return null;
-  };
+    switch (name) {
+      case "email":
+        return <Mail className="h-5 w-5 text-muted-foreground" />
+      case "password":
+      case "repeatPassword":
+        return <Lock className="h-5 w-5 text-muted-foreground" />
+      case "firstName":
+      case "lastName":
+        return <User className="h-5 w-5 text-muted-foreground" />
+      default:
+        return null
+    }
+  }
 
   return (
     <div className="space-y-1">
@@ -52,16 +59,16 @@ export function AuthInput<T extends FieldValues>({
         </div>
         <Input
           id={name}
-          type={type === 'password' && showPassword ? 'text' : type}
+          type={type === "password" && showPassword ? "text" : type}
           className={cn(
-            'px-10 transition-all duration-200 ease-in-out',
-            error && 'border-destructive focus-visible:ring-destructive'
+            "px-10 transition-all duration-200 ease-in-out",
+            error && "border-destructive focus-visible:ring-destructive"
           )}
           placeholder={placeholder}
-          aria-invalid={error ? 'true' : 'false'}
+          aria-invalid={error ? "true" : "false"}
           {...register(name)}
         />
-        {type === 'password' && (
+        {type === "password" && (
           <button
             type="button"
             onClick={togglePasswordVisibility}
@@ -77,5 +84,5 @@ export function AuthInput<T extends FieldValues>({
         </Alert>
       )}
     </div>
-  );
+  )
 }
