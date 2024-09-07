@@ -1,25 +1,50 @@
 # Install dependencies only when needed
-FROM node:18-alpine AS deps
+FROM node:21.1-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat curl unzip
 WORKDIR /app
 # Install Bun
-RUN curl -fsSL https://bun.sh/install/bun-linux-x64.zip -o bun-linux-x64.zip && \
-    unzip bun-linux-x64.zip && \
-    mv bun-linux-x64/bun /usr/local/bin/bun && \
-    rm -rf bun-linux-x64 bun-linux-x64.zip
+# Install Bun with error checking and fallback
+RUN set -eux; \
+    ARCH=$(uname -m); \
+    case "$ARCH" in \
+        x86_64) BINARY_ARCH='x64';; \
+        aarch64) BINARY_ARCH='aarch64';; \
+        *) echo "Unsupported architecture: $ARCH"; exit 1 ;; \
+    esac; \
+    BUN_VERSION=$(curl -sSL https://api.github.com/repos/oven-sh/bun/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/'); \
+    BUN_URL="https://github.com/oven-sh/bun/releases/download/${BUN_VERSION}/bun-linux-${BINARY_ARCH}.zip"; \
+    echo "Downloading Bun from ${BUN_URL}"; \
+    if curl -sSL -f ${BUN_URL} -o bun.zip; then \
+        unzip bun.zip; \
+        mv bun-linux-${BINARY_ARCH}/bun /usr/local/bin/bun; \
+        rm -rf bun-linux-${BINARY_ARCH} bun.zip; \
+        echo "Bun installed successfully"; \
+    else \
+        echo "Failed to download Bun. Falling back to Node.js"; \
+    fi
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* ./
-RUN \
-  if [ -f bun.lockb ]; then bun install --frozen-lockfile; \
-  elif [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+RUN set -eux; \
+    if [ -f bun.lockb ] && command -v bun > /dev/null; then \
+        echo "Installing dependencies with Bun"; \
+        bun install --frozen-lockfile; \
+    elif [ -f yarn.lock ]; then \
+        echo "Installing dependencies with Yarn"; \
+        yarn --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then \
+        echo "Installing dependencies with npm"; \
+        npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then \
+        echo "Installing dependencies with pnpm"; \
+        yarn global add pnpm && pnpm i; \
+    else \
+        echo "No lockfile found. Installing dependencies with npm"; \
+        npm install; \
+    fi
 
 # Rebuild the source code only when needed
-FROM node:18-alpine AS builder
+FROM node:21.1-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -33,7 +58,7 @@ COPY . .
 RUN NODE_ENV=production yarn build
 
 # Production image, copy all the files and run next
-FROM node:18-alpine AS runner
+FROM node:21.1-alpine AS runner
 WORKDIR /app
 
 # Install PM2 globally
