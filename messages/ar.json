@@ -108,5 +108,23 @@
         }
       }
     }
+  },
+  "layout": {
+    "skipToContent": "انتقل إلى المحتوى",
+    "toggleSidebar": "تبديل الشريط الجانبي",
+    "notifications": "الإشعارات",
+    "changeLanguage": "تغيير اللغة",
+    "userProfile": "الملف الشخصي",
+    "home": "الرئيسية",
+    "resources": "الموارد",
+    "settings": "الإعدادات",
+    "currentLanguage": "اللغة الحالية",
+    "dashboard": "لوحة التحكم",
+    "mobileNavigation": "القائمة",
+    "mobileNavigationDescription": "خيارات التصفح",
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
   }
 }

@@ -100,5 +100,23 @@
         "match": "Passwords must match"
       }
     }
+  },
+  "layout": {
+    "skipToContent": "Skip to content",
+    "toggleSidebar": "Toggle sidebar",
+    "notifications": "Notifications",
+    "changeLanguage": "Change language",
+    "userProfile": "User profile",
+    "home": "Home",
+    "resources": "Resources",
+    "settings": "Settings",
+    "currentLanguage": "Current Language",
+    "dashboard": "Dashboard",
+    "mobileNavigation": "Menu",
+    "mobileNavigationDescription": "Site navigation",
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
   }
 }

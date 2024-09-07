@@ -1,4 +1,4 @@
-import { Logo } from "@/components/Logo"
+import { AuthLogo } from "@/components/Logo"
 import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 
 export default function AuthLayout({
@@ -25,7 +25,7 @@ export default function AuthLayout({
 
           {/* Logo */}
           <div className="mb-8 sm:mb-12 text-center">
-            <Logo />
+            <AuthLogo />
           </div>
 
           {/* Auth form */}
