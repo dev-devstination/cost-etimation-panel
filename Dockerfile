@@ -5,7 +5,9 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 # Install Bun
 RUN apk add --no-cache curl unzip
-RUN curl -fsSL https://bun.sh/install | bash
+RUN curl -fsSL https://bun.sh/install | sh
+# Add Bun to PATH
+ENV PATH="/root/.bun/bin:${PATH}"
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* ./
 RUN \
@@ -20,6 +22,8 @@ RUN \
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /root/.bun /root/.bun
+ENV PATH="/root/.bun/bin:${PATH}"
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
@@ -28,7 +32,7 @@ COPY . .
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build app
-RUN NODE_ENV=production yarn build
+RUN NODE_ENV=production bun run build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
