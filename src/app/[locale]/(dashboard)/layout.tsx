@@ -1,4 +1,3 @@
-"use client"
 import { useTranslations } from "next-intl"
 import { Menu } from "lucide-react"
 
@@ -14,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 import Sidebar from "@/components/sidebar"
 import LanguageSwitcher from "@/components/language-switcher"
+import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
 
 export default function DashboardLayout({
   children,
@@ -58,9 +58,8 @@ export default function DashboardLayout({
                 <Sidebar />
               </SheetContent>
             </Sheet>
-            <h1 className="text-xl font-semibold hidden sm:block">
-              {t("dashboard")}
-            </h1>
+
+            <NavbarBreadcrumb />
           </div>
 
           {/* Right side navbar items */}

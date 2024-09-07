@@ -1,29 +1,9 @@
-import React from "react"
+"use client"
 import { useTranslations } from "next-intl"
 import { FileText, Home, Settings } from "lucide-react"
 
-import { Link } from "@/config/navigation"
 import { DashboardLogo } from "@/components/Logo"
-
-const SidebarLink = ({
-  href,
-  icon: Icon,
-  label,
-}: {
-  href: string
-  icon: React.ComponentType<any>
-  label: string
-}) => (
-  <li>
-    <Link
-      href={href}
-      className="flex items-center p-2 rounded-lg hover:bg-primary/10 transition-colors"
-    >
-      <Icon className="h-5 w-5 mr-3" />
-      <span>{label}</span>
-    </Link>
-  </li>
-)
+import { NavigationLink } from "@/components/navigation-link"
 
 const Sidebar: React.FC = () => {
   const t = useTranslations("layout")
@@ -35,13 +15,17 @@ const Sidebar: React.FC = () => {
       </div>
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
-          <SidebarLink href="/dashboard" icon={Home} label={t("home")} />
-          <SidebarLink
+          <NavigationLink href="/" icon={Home} label={t("home")} />
+          <NavigationLink
             href="/resources"
             icon={FileText}
             label={t("resources")}
           />
-          <SidebarLink href="/settings" icon={Settings} label={t("settings")} />
+          <NavigationLink
+            href="/settings"
+            icon={Settings}
+            label={t("settings")}
+          />
         </ul>
       </nav>
     </div>

@@ -1,3 +1,5 @@
+"use client"
+
 import { useTransition } from "react"
 import { useParams } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"

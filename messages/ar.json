@@ -16,7 +16,11 @@
     "action": {
       "tryAgain": "حاول مرة أخرى",
       "goHome": "العودة للرئيسية"
-    }
+    },
+    "home": "الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "resources": "الموارد",
+    "settings": "الإعدادات"
   },
   "homePage": {
     "title": "أهلاً وسهلاً!"

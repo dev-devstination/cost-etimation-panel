@@ -16,8 +16,15 @@
     "action": {
       "tryAgain": "Try Again",
       "goHome": "Go Home"
+    },
+    "pages": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "resources": "Resources",
+      "settings": "Settings"
     }
   },
+
   "HomePage": {
     "title": "Hello world!"
   },
