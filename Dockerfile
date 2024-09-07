@@ -4,9 +4,10 @@ FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat curl unzip
 WORKDIR /app
 # Install Bun
-RUN curl -fsSL https://bun.sh/install | sh
-# Add Bun to PATH
-ENV PATH="/root/.bun/bin:${PATH}"
+RUN curl -fsSL https://bun.sh/install/bun-linux-x64.zip -o bun-linux-x64.zip && \
+    unzip bun-linux-x64.zip && \
+    mv bun-linux-x64/bun /usr/local/bin/bun && \
+    rm -rf bun-linux-x64 bun-linux-x64.zip
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* ./
 RUN \
