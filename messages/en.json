@@ -1,5 +1,8 @@
 {
   "common": {
+    "noResults": "No results found",
+    "previous": "Previous",
+    "next": "Next",
     "error": {
       "defaultTitle": "Oops! Something went wrong",
       "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
@@ -27,6 +30,14 @@
 
   "HomePage": {
     "title": "Hello world!"
+  },
+  "resources": {
+    "title": "Resources",
+    "actions": {
+      "add": "Create New Resource",
+      "edit": "Edit",
+      "delete": "Delete"
+    }
   },
   "components": {
     "toggleTheme": {

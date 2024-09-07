@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb"
 import { Link, usePathname } from "@/config/navigation"
 import { useTranslations } from "next-intl"
+import { Fragment } from "react"
 
 const pathMap: Record<string, keyof IntlMessages["common"]["pages"]> = {
   dashboard: "dashboard",
@@ -22,25 +23,17 @@ export const NavbarBreadcrumb = () => {
   const t = useTranslations("common.pages")
   const pathname = usePathname()
   const pathSegments = pathname.split("/").filter((segment) => segment)
-  const isRoot = pathSegments.length === 0
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          {isRoot ? (
-            <BreadcrumbPage className="flex items-center gap-x-1">
+          <BreadcrumbLink asChild>
+            <Link href="/">
               <Home className="h-4 w-4" />
-              <span>{t("dashboard")}</span>
-            </BreadcrumbPage>
-          ) : (
-            <BreadcrumbLink asChild>
-              <Link href="/">
-                <Home className="h-4 w-4" />
-                <span className="sr-only">{t("dashboard")}</span>
-              </Link>
-            </BreadcrumbLink>
-          )}
+              <span className="sr-only">{t("dashboard")}</span>
+            </Link>
+          </BreadcrumbLink>
         </BreadcrumbItem>
         {pathSegments.map((segment, index) => {
           const href = `/${pathSegments.slice(0, index + 1).join("/")}`
@@ -51,19 +44,21 @@ export const NavbarBreadcrumb = () => {
             pathMap[segment] || (segment as keyof IntlMessages["common"])
 
           return (
-            <BreadcrumbItem key={href}>
+            <Fragment key={href}>
               <BreadcrumbSeparator />
-              {isLast ? (
-                <BreadcrumbPage>{t(translationKey)}</BreadcrumbPage>
-              ) : (
-                <>
-                  <BreadcrumbLink asChild>
-                    <Link href={href}>{t(translationKey)}</Link>
-                  </BreadcrumbLink>
-                  <BreadcrumbSeparator />
-                </>
-              )}
-            </BreadcrumbItem>
+              <BreadcrumbItem>
+                {isLast ? (
+                  <BreadcrumbPage>{t(translationKey)}</BreadcrumbPage>
+                ) : (
+                  <>
+                    <BreadcrumbLink asChild>
+                      <Link href={href}>{t(translationKey)}</Link>
+                    </BreadcrumbLink>
+                    <BreadcrumbSeparator />
+                  </>
+                )}
+              </BreadcrumbItem>
+            </Fragment>
           )
         })}
       </BreadcrumbList>
