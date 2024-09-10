@@ -3,16 +3,13 @@ FROM node:18-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-# Add Bun to PATH
-ENV PATH="/root/.bun/bin:${PATH}"
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* bun.lockb* ./
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
   elif [ -f package-lock.json ]; then npm ci; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-  elif [ -f bun.lockb ]; then bun install; \
-  else echo "Lockfile not found. Use npm" && npm install; \
+  else echo "Lockfile not found. Using pnpm as fallback." && pnpm install; \
   fi
 
 # Rebuild the source code only when needed
@@ -27,7 +24,7 @@ COPY . .
 # ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build app
-RUN NODE_ENV=production bun run build
+RUN NODE_ENV=production pnpm build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner
