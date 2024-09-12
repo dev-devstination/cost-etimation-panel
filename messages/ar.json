@@ -1,5 +1,15 @@
 {
   "common": {
+    "filterBy": "تصفية حسب {field}...",
+    "rowsSelected": "تم تحديد {selected} من أصل {total} صف.",
+    "noResults": "لم يتم العثور على نتائج",
+    "previous": "السابق",
+    "next": "التالي",
+    "clearFilters": "مسح التصفية",
+    "selectAll": "اختيار الكل",
+    "commonTableHeaders": {
+      "code": "كود"
+    },
     "error": {
       "defaultTitle": "عذراً، حدث خطأ ما",
       "defaultDescription": "واجهنا مشكلة غير متوقعة. لقد تم إبلاغ فريق الدعم الفني.",
@@ -17,6 +27,7 @@
       "tryAgain": "حاول مرة أخرى",
       "goHome": "العودة للرئيسية"
     },
+
     "home": "الرئيسية",
     "dashboard": "لوحة التحكم",
     "resources": "الموارد",
@@ -24,6 +35,21 @@
   },
   "homePage": {
     "title": "أهلاً وسهلاً!"
+  },
+  "resources": {
+    "title": "الموارد",
+    "table": {
+      "code": "الرمز",
+      "description": "الوصف",
+      "category": "الفئة",
+      "subCategory": "الفئة الفرعية",
+      "unit": "الوحدة",
+      "composite": "مركب",
+      "basicRate": "السعر الأساسي",
+      "factor": "العامل",
+      "rate": "السعر",
+      "actions": "الإجراءات"
+    }
   },
   "components": {
     "toggleTheme": {

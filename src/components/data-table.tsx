@@ -1,12 +1,17 @@
 "use client"
 
+import * as React from "react"
 import { useTranslations } from "next-intl"
 import {
   ColumnDef,
+  SortingState,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getSortedRowModel,
   getPaginationRowModel,
+  ColumnFiltersState,
+  getFilteredRowModel,
 } from "@tanstack/react-table"
 
 import {
@@ -19,21 +24,44 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 
+type AccessorKeys<T> = T extends { accessorKey: infer K }
+  ? K extends string
+    ? K
+    : never
+  : never
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  filterKeys?: AccessorKeys<ColumnDef<TData, TValue>>[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  )
+  const [rowSelection, setRowSelection] = React.useState({})
+
   const t = useTranslations("common")
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange: setRowSelection,
+    state: {
+      sorting,
+      columnFilters,
+      rowSelection,
+    },
   })
 
   return (
@@ -89,6 +117,12 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="flex-1 text-sm text-muted-foreground">
+          {t("rowsSelected", {
+            selected: table.getFilteredSelectedRowModel().rows.length,
+            total: table.getFilteredRowModel().rows.length,
+          })}
+        </div>
         <Button
           variant="outline"
           size="sm"

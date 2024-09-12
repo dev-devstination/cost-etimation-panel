@@ -5,9 +5,12 @@ export type Resource = {
   category: string
   subCategory: string
   unit: string
-  composite: boolean
+  isComposite: boolean
   basicRate: number
   factor: number
+  isMaster: boolean
+  isUsed: boolean
+  updatedDate: string
 }
 
 export const sampleResources: Resource[] = [
@@ -18,9 +21,12 @@ export const sampleResources: Resource[] = [
     category: "Labor",
     subCategory: "Skilled Labor",
     unit: "day",
-    composite: false,
+    isComposite: false,
     basicRate: 55.0,
     factor: 1.79,
+    isMaster: true,
+    isUsed: true,
+    updatedDate: "2023-09-15",
   },
   {
     id: "RES-002",
@@ -29,9 +35,12 @@ export const sampleResources: Resource[] = [
     category: "Material",
     subCategory: "Concrete Materials",
     unit: "bag",
-    composite: false,
+    isComposite: false,
     basicRate: 12.5,
     factor: 1.15,
+    isMaster: false,
+    isUsed: true,
+    updatedDate: "2023-09-10",
   },
   {
     id: "RES-003",
@@ -40,8 +49,11 @@ export const sampleResources: Resource[] = [
     category: "Equipment",
     subCategory: "Heavy Machinery",
     unit: "hour",
-    composite: true,
+    isComposite: true,
     basicRate: 150.0,
     factor: 1.25,
+    isMaster: true,
+    isUsed: false,
+    updatedDate: "2023-09-05",
   },
 ]

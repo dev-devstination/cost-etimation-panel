@@ -25,7 +25,7 @@ export default function DashboardLayout({
   return (
     <div className="min-h-screen bg-background text-foreground flex">
       {/* Sidebar for large screens */}
-      <aside className="hidden lg:block w-64 bg-card text-card-foreground border-r">
+      <aside className="hidden lg:block w-48 bg-card text-card-foreground border-r">
         <Sidebar />
       </aside>
 

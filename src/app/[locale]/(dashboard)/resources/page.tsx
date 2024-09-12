@@ -55,7 +55,11 @@ const ResourcesPage: React.FC<ResourcesPageProps> = ({
         </DropdownMenu>
       </div>
 
-      <DataTable columns={columns} data={sampleResources} />
+      <DataTable
+        columns={columns}
+        data={sampleResources}
+        filterKeys={["description"]}
+      />
     </>
   )
 }

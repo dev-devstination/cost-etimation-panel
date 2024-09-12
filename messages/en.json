@@ -1,8 +1,15 @@
 {
   "common": {
+    "clearFilters": "Clear Filters",
+    "filterBy": "Filter by {field}...",
+    "rowsSelected": "{selected} of {total} row(s) selected.",
     "noResults": "No results found",
     "previous": "Previous",
     "next": "Next",
+    "commonTableHeaders": {
+      "code": "Code"
+    },
+    "selectAll": "Select All",
     "error": {
       "defaultTitle": "Oops! Something went wrong",
       "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
@@ -33,6 +40,18 @@
   },
   "resources": {
     "title": "Resources",
+    "table": {
+      "code": "Code",
+      "description": "Description",
+      "category": "Category",
+      "subCategory": "Sub-Category",
+      "unit": "Unit",
+      "composite": "Composite",
+      "basicRate": "Basic Rate",
+      "factor": "Factor",
+      "rate": "Rate",
+      "actions": "Actions"
+    },
     "actions": {
       "add": "Create New Resource",
       "edit": "Edit",
