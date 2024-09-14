@@ -1,16 +1,174 @@
 {
-  "HomePage": {
-    "title": "مرحبا بالعالم!"
+  "common": {
+    "filterBy": "تصفية حسب {field}...",
+    "rowsSelected": "تم تحديد {selected} من أصل {total} صف.",
+    "noResults": "لم يتم العثور على نتائج",
+    "previous": "السابق",
+    "next": "التالي",
+    "clearFilters": "مسح التصفية",
+    "selectAll": "اختيار الكل",
+    "view": "عرض",
+    "delete": "حذف",
+    "priceHistory": "سجل الأسعار",
+    "more": "المزيد",
+    "close": "إغلاق",
+    "commonTableHeaders": {
+      "code": "كود",
+      "description": "الوصف",
+      "unit": "الوحده",
+      "basicRate": "المعدل الاساسي",
+      "factor": "العامل",
+      "composite": "مركب",
+      "rate": "المعدل الإجمالي",
+      "master": "رئيسي",
+      "inUse": "قيد الاستخدام",
+      "lastUpdated": "آخر تحديث"
+    },
+    "error": {
+      "defaultTitle": "عذراً، حدث خطأ ما",
+      "defaultDescription": "واجهنا مشكلة غير متوقعة. لقد تم إبلاغ فريق الدعم الفني.",
+      "notFound": {
+        "title": "الصفحة غير موجودة",
+        "description": "يبدو أن الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+      },
+      "server": {
+        "title": "خطأ في الخادم",
+        "description": "نواجه بعض المشاكل الفنية حالياً. يرجى المحاولة مرة أخرى بعد قليل."
+      },
+      "id": "رقم الخطأ: {id}"
+    },
+    "action": {
+      "tryAgain": "حاول مرة أخرى",
+      "goHome": "العودة للرئيسية"
+    },
+
+    "home": "الرئيسية",
+    "dashboard": "لوحة التحكم",
+    "resources": "الموارد",
+    "settings": "الإعدادات"
   },
-  "ErrorBoundary": {
-    "defaultTitle": "عفوًا! حدث خطأ ما",
-    "defaultDescription": "لقد واجهنا خطأ غير متوقع. تم إخطار فريقنا.",
-    "notFoundTitle": "الصفحة غير موجودة",
-    "notFoundDescription": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
-    "serverErrorTitle": "خطأ في الخادم",
-    "serverErrorDescription": "نواجه بعض المشكلات في الخادم. يرجى المحاولة مرة أخرى لاحقًا.",
-    "errorId": "معرف الخطأ: {id}",
-    "tryAgain": "حاول مرة أخرى",
-    "goHome": "الذهاب إلى الصفحة الرئيسية"
+  "homePage": {
+    "title": "أهلاً وسهلاً!"
+  },
+  "resources": {
+    "title": "الموارد",
+    "table": {
+      "code": "الرمز",
+      "description": "الوصف",
+      "category": "الفئة",
+      "subCategory": "الفئة الفرعية",
+      "unit": "الوحدة",
+      "composite": "مركب",
+      "basicRate": "السعر الأساسي",
+      "factor": "العامل",
+      "rate": "السعر",
+      "actions": "الإجراءات"
+    }
+  },
+  "components": {
+    "toggleTheme": {
+      "ariaLabel": "تغيير المظهر",
+      "srText": "تغيير المظهر"
+    },
+    "logo": {
+      "firstLetter": "C",
+      "secondLetter": "o",
+      "restOfWord": "st",
+      "subtitle": "Estimation",
+      "alt": "Logo"
+    }
+  },
+  "auth": {
+    "signInTitle": "تسجيل الدخول إلى حسابك",
+    "signUpTitle": "إنشاء حسابك",
+    "welcomeBackgroundLabel": "صورة خلفية",
+    "form": {
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور"
+      },
+      "repeatPassword": {
+        "label": "تكرار كلمة المرور",
+        "placeholder": "كرر كلمة المرور"
+      },
+      "firstName": {
+        "label": "الاسم الأول",
+        "placeholder": "أدخل اسمك الأول"
+      },
+      "lastName": {
+        "label": "اسم العائلة",
+        "placeholder": "أدخل اسم عائلتك"
+      },
+      "confirmPassword": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "أعد إدخال كلمة المرور"
+      }
+    },
+    "action": {
+      "login": "تسجيل الدخول",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "register": "إنشاء حساب جديد",
+      "sendResetLink": "إرسال رابط التفعيل",
+      "backToLogin": "العودة لتسجيل الدخول"
+    },
+    "message": {
+      "noAccount": "ليس لديك حساب؟",
+      "haveAccount": "لديك حساب بالفعل؟",
+      "checkEmail": "تفقد بريدك الإلكتروني",
+      "passwordResetInstructions": "لقد أرسلنا لك تعليمات إعادة تعيين كلمة المرور. يرجى التحقق من بريدك الإلكتروني."
+    }
+  },
+  "validation": {
+    "required": "حقل {field} مطلوب",
+    "minLength": "يجب أن يحتوي {field} على {min} أحرف على الأقل",
+    "maxLength": "يجب ألا يتجاوز {field} {max} حرفاً",
+    "email": "يرجى إدخال بريد إلكتروني صحيح",
+    "passwordMatch": "كلمتا المرور غير متطابقتين",
+    "invalidType": "قيمة غير صالحة في حقل {field}",
+    "custom": {
+      "passwordStrength": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وتتضمن حروفاً كبيرة وصغيرة وأرقاماً ورموزاً",
+      "firstName": {
+        "error": {
+          "min": "يجب أن يتكون الاسم الأول من حرفين على الأقل"
+        }
+      },
+      "lastName": {
+        "error": {
+          "min": "يجب أن يتكون اسم العائلة من حرفين على الأقل"
+        }
+      },
+      "password": {
+        "error": {
+          "min": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل"
+        }
+      },
+      "repeatPassword": {
+        "error": {
+          "match": "كلمات المرور غير متطابقة"
+        }
+      }
+    }
+  },
+  "layout": {
+    "skipToContent": "انتقل إلى المحتوى",
+    "toggleSidebar": "تبديل الشريط الجانبي",
+    "notifications": "الإشعارات",
+    "changeLanguage": "تغيير اللغة",
+    "userProfile": "الملف الشخصي",
+    "home": "الرئيسية",
+    "resources": "الموارد",
+    "settings": "الإعدادات",
+    "currentLanguage": "اللغة الحالية",
+    "dashboard": "لوحة التحكم",
+    "mobileNavigation": "القائمة",
+    "mobileNavigationDescription": "خيارات التصفح",
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
   }
 }

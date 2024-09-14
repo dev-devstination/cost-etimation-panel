@@ -1,3 +1,3 @@
-import { InternalServerError } from '@/components/ErrorBoundary';
+import { InternalServerError } from "@/components/ErrorBoundary"
 
-export default InternalServerError;
+export default InternalServerError

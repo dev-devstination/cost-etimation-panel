@@ -4,13 +4,11 @@ FROM node:18-alpine AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i; \
-  else echo "Lockfile not found. Using pnpm as fallback." && pnpm install; \
-  fi
+COPY package.json pnpm-lock.yaml* ./
+# Install pnpm globally
+RUN npm install -g pnpm
+# Install dependencies using pnpm
+RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
@@ -44,7 +42,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/next.config.mjs ./
 COPY --from=builder /app/package.json ./package.json
 
-# Automatically leverage output traces to reduce image size 
+# Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./standalone
 COPY --from=builder --chown=nextjs:nodejs /app/public ./standalone/public
@@ -60,6 +58,6 @@ CMD ["node", "./standalone/server.js"]
 # Set environment variables for PM2 monitoring
 #ENV PM2_PUBLIC_KEY a7euxzxxh2dqy2h
 #ENV PM2_SECRET_KEY c45ki6w33b4qsv4
-    
+
 # Start the Next.js app with PM2
 #CMD ["pm2-runtime", "server.js"]

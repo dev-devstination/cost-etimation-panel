@@ -1,3 +1,3 @@
-import { NotFound } from '@/components/ErrorBoundary';
+import { NotFound } from "@/components/ErrorBoundary"
 
-export default NotFound;
+export default NotFound
