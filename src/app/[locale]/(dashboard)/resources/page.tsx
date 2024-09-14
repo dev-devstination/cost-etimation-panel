@@ -8,12 +8,9 @@ import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/resources/components/columns"
 import { sampleResources } from "@/features/resources/types"
+import { LocalizedPageProps } from "@/types"
 
-interface ResourcesPageProps {
-  params: { locale: string }
-}
-
-const ResourcesPage: React.FC<ResourcesPageProps> = ({
+const ResourcesPage: React.FC<LocalizedPageProps> = ({
   params: { locale },
 }) => {
   unstable_setRequestLocale(locale)
