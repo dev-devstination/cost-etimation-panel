@@ -9,8 +9,8 @@ const Sidebar: React.FC = () => {
   const t = useTranslations("layout")
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="p-5 border-b">
+    <div className="flex h-full flex-col">
+      <div className="border-b p-5">
         <DashboardLogo />
       </div>
       <nav className="flex-1 p-4">

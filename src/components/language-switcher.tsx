@@ -47,7 +47,7 @@ const LanguageSwitcher: React.FC = () => {
           disabled={isPending}
           aria-label={t("changeLanguage")}
         >
-          <Languages className="h-5 w-5" />
+          <Languages className="size-5" />
           <span className="sr-only">{t("currentLanguage")}</span>
         </Button>
       </DropdownMenuTrigger>

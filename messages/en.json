@@ -9,6 +9,8 @@
     "view": "View",
     "delete": "Delete",
     "priceHistory": "Price History",
+    "more": "More",
+    "close": "Close",
     "commonTableHeaders": {
       "code": "Code",
       "description": "Description",

@@ -27,7 +27,7 @@ export function ColumnHeader<TData>({
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
     >
       {t(`commonTableHeaders.${title}`)}
-      <ArrowUpDown className="ltr:ml-2 rtl:mr-2 h-4 w-4" />
+      <ArrowUpDown className="size-4 ltr:ml-2 rtl:mr-2" />
     </Button>
   )
 }

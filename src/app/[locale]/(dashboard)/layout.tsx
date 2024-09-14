@@ -23,16 +23,16 @@ export default function DashboardLayout({
   const t = useTranslations("layout")
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
+    <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar for large screens */}
-      <aside className="hidden lg:block w-48 bg-card text-card-foreground border-r">
+      <aside className="hidden w-48 border-r bg-card text-card-foreground lg:block">
         <Sidebar />
       </aside>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex min-h-screen flex-1 flex-col">
         {/* Navbar */}
-        <header className="bg-card text-card-foreground border-b p-4 flex justify-between items-center sticky top-0 z-10">
+        <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-card p-4 text-card-foreground">
           <div className="flex items-center space-x-4">
             {/* Sheet component for mobile sidebar */}
             <Sheet>
@@ -43,7 +43,7 @@ export default function DashboardLayout({
                   className="lg:hidden"
                   aria-label={t("toggleSidebar")}
                 >
-                  <Menu className="h-6 w-6" />
+                  <Menu className="size-6" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="w-64 p-0">
@@ -70,7 +70,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Page content */}
-        <main id="main-content" className="flex-1 p-6 overflow-auto">
+        <main id="main-content" className="flex-1 overflow-auto p-6">
           {children}
         </main>
       </div>

@@ -17,15 +17,15 @@ import { Button } from "@/components/ui/button"
 import logger from "@/lib/logger"
 
 const ErrorLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-4">
+  <div className="flex min-h-screen items-center justify-center bg-background p-4 text-foreground">
     <Card className="w-full max-w-md">
-      <CardContent className="pt-6 space-y-8">{children}</CardContent>
+      <CardContent className="space-y-8 pt-6">{children}</CardContent>
     </Card>
   </div>
 )
 
 const ErrorTitle = ({ children }: { children: React.ReactNode }) => (
-  <h1 className="text-3xl font-bold text-center">{children}</h1>
+  <h1 className="text-center text-3xl font-bold">{children}</h1>
 )
 
 const ErrorDescription = ({ children }: { children: React.ReactNode }) => (
@@ -33,8 +33,8 @@ const ErrorDescription = ({ children }: { children: React.ReactNode }) => (
 )
 
 const ErrorIcon = ({ Icon }: { Icon: React.ElementType }) => (
-  <div className="mx-auto w-20 h-20 bg-secondary rounded-full flex items-center justify-center">
-    <Icon className="h-10 w-10 text-secondary-foreground" />
+  <div className="mx-auto flex size-20 items-center justify-center rounded-full bg-secondary">
+    <Icon className="size-10 text-secondary-foreground" />
   </div>
 )
 
@@ -45,7 +45,7 @@ const ActionButtons = ({ reset }: { reset?: () => void }) => {
     <div className="flex flex-col space-y-4">
       {reset && (
         <Button onClick={reset} className="w-full">
-          <RefreshCcw className="mr-2 h-4 w-4" />
+          <RefreshCcw className="mr-2 size-4" />
           {t("tryAgain")}
         </Button>
       )}
@@ -54,7 +54,7 @@ const ActionButtons = ({ reset }: { reset?: () => void }) => {
         variant="outline"
         className="w-full"
       >
-        <Home className="mr-2 h-4 w-4" />
+        <Home className="mr-2 size-4" />
         {t("goHome")}
       </Button>
     </div>

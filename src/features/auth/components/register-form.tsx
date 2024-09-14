@@ -48,11 +48,11 @@ export const RegisterForm: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center text-card-foreground dark:text-white">
+      <h2 className="mb-6 text-center text-xl font-semibold text-card-foreground dark:text-white sm:text-2xl">
         {t("signUpTitle")}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <AuthInput
             name="firstName"
             type="text"
@@ -102,7 +102,7 @@ export const RegisterForm: React.FC = () => {
           </SubmitButton>
         </div>
 
-        <div className="text-sm text-center mt-4">
+        <div className="mt-4 text-center text-sm">
           {t("message.haveAccount")}{" "}
           <Link href="/login" className="text-primary hover:underline">
             {t("action.login")}

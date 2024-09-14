@@ -20,8 +20,8 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
     <div className="flex items-center space-x-2">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-8 w-8">
-            <Eye className="h-4 w-4" />
+          <Button variant="ghost" size="icon" className="size-8">
+            <Eye className="size-4" />
             <span className="sr-only">{t("view")}</span>
           </Button>
         </TooltipTrigger>
@@ -32,8 +32,8 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-8 w-8">
-            <Trash2 className="h-4 w-4" />
+          <Button variant="ghost" size="icon" className="size-8">
+            <Trash2 className="size-4" />
             <span className="sr-only">{t("delete")}</span>
           </Button>
         </TooltipTrigger>
@@ -44,8 +44,8 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-8 w-8">
-            <History className="h-4 w-4" />
+          <Button variant="ghost" size="icon" className="size-8">
+            <History className="size-4" />
             <span className="sr-only">{t("priceHistory")}</span>
           </Button>
         </TooltipTrigger>

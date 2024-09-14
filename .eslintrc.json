@@ -1,14 +1,12 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "plugins": ["prettier"],
+  "extends": [
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "plugins": ["tailwindcss"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": false,
-        "semi": false
-      }
-    ],
+    "tailwindcss/classnames-order": "error",
     "no-unused-vars": "error",
     "react/no-unescaped-entities": "off",
     // Avoid hardcoded labels
@@ -31,5 +29,17 @@
         "message": "Please import from `@/config/navigation` instead."
       }
     ]
-  }
+  },
+  "settings": {
+    "tailwindcss": {
+      "callees": ["cn", "cva"],
+      "config": "tailwind.config.ts"
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parser": "@typescript-eslint/parser"
+    }
+  ]
 }

@@ -23,16 +23,16 @@ export const NavigationLink: React.FC<NavigationLinkProps> = ({
       <Link
         href={href}
         className={cn(
-          "flex items-center p-2 rounded-lg transition-colors",
+          "flex items-center rounded-lg p-2 transition-colors",
           "hover:bg-primary/10 hover:text-primary",
           "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
-          isActive && "bg-primary/15 text-primary font-medium",
+          isActive && "bg-primary/15 font-medium text-primary",
           "rtl:flex-row-reverse"
         )}
       >
         <Icon
           className={cn(
-            "h-5 w-5",
+            "size-5",
             isActive ? "text-primary" : "text-muted-foreground",
             "ltr:mr-3 rtl:ml-3"
           )}

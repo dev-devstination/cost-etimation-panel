@@ -36,7 +36,7 @@ export function FormField<T extends FieldValues>({
         type={type}
         placeholder={placeholder}
         aria-invalid={error ? "true" : "false"}
-        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary hover:ring-primary hover:ring-1 transition-all"
+        className="w-full rounded-md border px-3 py-2 transition-all hover:ring-1 hover:ring-primary focus:outline-none focus:ring-2 focus:ring-primary"
         {...register(name)}
       />
       {error && (

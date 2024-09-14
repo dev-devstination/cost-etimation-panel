@@ -10,6 +10,8 @@
     "view": "عرض",
     "delete": "حذف",
     "priceHistory": "سجل الأسعار",
+    "more": "المزيد",
+    "close": "إغلاق",
     "commonTableHeaders": {
       "code": "كود",
       "description": "الوصف",

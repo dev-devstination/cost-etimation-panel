@@ -45,7 +45,7 @@ export const LoginForm: React.FC = () => {
 
   return (
     <>
-      <h2 className="text-xl sm:text-2xl font-semibold mb-6 text-center text-card-foreground dark:text-white">
+      <h2 className="mb-6 text-center text-xl font-semibold text-card-foreground dark:text-white sm:text-2xl">
         {t("signInTitle")}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -64,7 +64,7 @@ export const LoginForm: React.FC = () => {
           error={errors.password?.message || serverState.errors?.password?.[0]}
         />
         <SubmitButton isLoading={isPending}>{t("action.login")}</SubmitButton>
-        <div className="text-sm text-center">
+        <div className="text-center text-sm">
           <Link
             href="/forget-password"
             className="text-primary hover:underline"
@@ -72,7 +72,7 @@ export const LoginForm: React.FC = () => {
             {t("action.forgotPassword")}
           </Link>
         </div>
-        <div className="text-sm text-center">
+        <div className="text-center text-sm">
           {t("message.noAccount")}{" "}
           <Link href="/register" className="text-primary hover:underline">
             {t("action.register")}

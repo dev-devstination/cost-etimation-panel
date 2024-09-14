@@ -30,7 +30,7 @@ export const NavbarBreadcrumb = () => {
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/">
-              <Home className="h-4 w-4" />
+              <Home className="size-4" />
               <span className="sr-only">{t("dashboard")}</span>
             </Link>
           </BreadcrumbLink>

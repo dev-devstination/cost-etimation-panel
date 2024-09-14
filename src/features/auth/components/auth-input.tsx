@@ -31,13 +31,13 @@ export function AuthInput<T extends FieldValues>({
   const getIcon = () => {
     switch (name) {
       case "email":
-        return <Mail className="h-5 w-5 text-muted-foreground" />
+        return <Mail className="size-5 text-muted-foreground" />
       case "password":
       case "repeatPassword":
-        return <Lock className="h-5 w-5 text-muted-foreground" />
+        return <Lock className="size-5 text-muted-foreground" />
       case "firstName":
       case "lastName":
-        return <User className="h-5 w-5 text-muted-foreground" />
+        return <User className="size-5 text-muted-foreground" />
       default:
         return null
     }
@@ -54,7 +54,7 @@ export function AuthInput<T extends FieldValues>({
         </Label>
       )}
       <div className="relative">
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+        <div className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
           {getIcon()}
         </div>
         <Input
@@ -72,7 +72,7 @@ export function AuthInput<T extends FieldValues>({
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground"
           >
             {showPassword ? <EyeOff /> : <Eye />}
           </button>
