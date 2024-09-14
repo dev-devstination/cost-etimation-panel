@@ -7,8 +7,20 @@
     "next": "التالي",
     "clearFilters": "مسح التصفية",
     "selectAll": "اختيار الكل",
+    "view": "عرض",
+    "delete": "حذف",
+    "priceHistory": "سجل الأسعار",
     "commonTableHeaders": {
-      "code": "كود"
+      "code": "كود",
+      "description": "الوصف",
+      "unit": "الوحده",
+      "basicRate": "المعدل الاساسي",
+      "factor": "العامل",
+      "composite": "مركب",
+      "rate": "المعدل الإجمالي",
+      "master": "رئيسي",
+      "inUse": "قيد الاستخدام",
+      "lastUpdated": "آخر تحديث"
     },
     "error": {
       "defaultTitle": "عذراً، حدث خطأ ما",

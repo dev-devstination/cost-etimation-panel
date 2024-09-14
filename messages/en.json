@@ -6,8 +6,20 @@
     "noResults": "No results found",
     "previous": "Previous",
     "next": "Next",
+    "view": "View",
+    "delete": "Delete",
+    "priceHistory": "Price History",
     "commonTableHeaders": {
-      "code": "Code"
+      "code": "Code",
+      "description": "Description",
+      "unit": "Unit",
+      "basicRate": "Basic Rate",
+      "factor": "Factor",
+      "composite": "Composite",
+      "rate": "Rate",
+      "master": "Master",
+      "inUse": "In Use",
+      "lastUpdated": "Last Updated"
     },
     "selectAll": "Select All",
     "error": {

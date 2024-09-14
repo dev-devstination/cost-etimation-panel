@@ -7,6 +7,7 @@ import { inter } from "@/fonts/inter"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/providers/theme-provider"
 import "@/styles/globals.css"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -47,9 +48,11 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          <TooltipProvider delayDuration={0}>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </TooltipProvider>
         </ThemeProvider>
       </body>
     </html>
