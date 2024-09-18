@@ -76,6 +76,19 @@
       "add": "Create New Resource",
       "edit": "Edit",
       "delete": "Delete"
+    },
+    "filters": {
+      "title": "Filters",
+      "description": "Apply filters to narrow down the resources",
+      "category": "Category",
+      "allCategories": "All Categories",
+      "subcategory": "Subcategory",
+      "allSubcategories": "All Subcategories",
+      "search": "Search resources...",
+      "composite": "Composite resources",
+      "inUse": "Resources in use",
+      "master": "Master resources",
+      "apply": "Apply Filters"
     }
   },
   "components": {

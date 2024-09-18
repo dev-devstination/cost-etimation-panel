@@ -69,6 +69,24 @@
       "factor": "العامل",
       "rate": "السعر",
       "actions": "الإجراءات"
+    },
+    "actions": {
+      "add": "Create New Resource",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "title": "البحث",
+      "description": "تطبيق الفلاتر لتضييق نطاق الموارد",
+      "category": "الفئة",
+      "allCategories": "جميع الفئات",
+      "subcategory": "الفئة الفرعية",
+      "allSubcategories": "جميع الفئات الفرعية",
+      "search": "البحث في الموارد...",
+      "composite": "الموارد المركبة",
+      "inUse": "الموارد المستخدمة",
+      "master": "الموارد الرئيسية",
+      "apply": "تطبيق الفلاتر"
     }
   },
   "components": {
