@@ -11,6 +11,12 @@
     "priceHistory": "Price History",
     "more": "More",
     "close": "Close",
+    "rowsPerPage": "Rows per page",
+    "pageOf": "Page {current} of {total}",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page",
     "commonTableHeaders": {
       "code": "Code",
       "description": "Description",

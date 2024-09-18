@@ -12,6 +12,12 @@
     "priceHistory": "سجل الأسعار",
     "more": "المزيد",
     "close": "إغلاق",
+    "rowsPerPage": "الصفوف لكل صفحة",
+    "pageOf": "الصفحة {current} من {total}",
+    "goToFirstPage": "الانتقال إلى الصفحة الأولى",
+    "goToPreviousPage": "الانتقال إلى الصفحة السابقة",
+    "goToNextPage": "الانتقال إلى الصفحة التالية",
+    "goToLastPage": "الانتقال إلى الصفحة الأخيرة",
     "commonTableHeaders": {
       "code": "كود",
       "description": "الوصف",

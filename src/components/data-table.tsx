@@ -22,7 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
+import { TablePagination } from "@/components/table-pagination"
 
 type AccessorKeys<T> = T extends { accessorKey: infer K }
   ? K extends string
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div>
+    <div className="space-y-3">
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -116,7 +116,8 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <TablePagination table={table} />
+      {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {t("rowsSelected", {
             selected: table.getFilteredSelectedRowModel().rows.length,
@@ -139,7 +140,7 @@ export function DataTable<TData, TValue>({
         >
           {t("next")}
         </Button>
-      </div>
+      </div> */}
     </div>
   )
 }
