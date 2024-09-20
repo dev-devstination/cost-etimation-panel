@@ -9,7 +9,7 @@
     "selectAll": "اختيار الكل",
     "view": "عرض",
     "delete": "حذف",
-    "priceHistory": "سجل الأسعار",
+    "priceHistory": "سجل الأسعار{hasColon, select, true {: } other { }}",
     "more": "المزيد",
     "close": "إغلاق",
     "rowsPerPage": "الصفوف لكل صفحة",
@@ -58,6 +58,13 @@
   },
   "resources": {
     "title": "الموارد",
+    "resourceDetails": "Resource Details",
+    "currentPricing": "Current Pricing",
+    "priceHistory": "Price History",
+    "date": "Date",
+    "projectState": "Project State",
+    "projet": "Project",
+    "user": "User",
     "table": {
       "code": "الرمز",
       "description": "الوصف",
@@ -68,6 +75,7 @@
       "basicRate": "السعر الأساسي",
       "factor": "العامل",
       "rate": "السعر",
+      "lastUpdated": "Last Updated",
       "actions": "الإجراءات"
     },
     "actions": {

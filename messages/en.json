@@ -60,6 +60,13 @@
   },
   "resources": {
     "title": "Resources",
+    "resourceDetails": "Resource Details",
+    "currentPricing": "Current Pricing",
+    "priceHistory": "Price History",
+    "date": "Date",
+    "projectState": "Project State",
+    "projet": "Project",
+    "user": "User",
     "table": {
       "code": "Code",
       "description": "Description",
@@ -70,6 +77,7 @@
       "basicRate": "Basic Rate",
       "factor": "Factor",
       "rate": "Rate",
+      "lastUpdated": "Last Updated",
       "actions": "Actions"
     },
     "actions": {
