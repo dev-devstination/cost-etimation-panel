@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/resources/components/columns"
 import { sampleResources } from "@/features/resources/types"
+import { Popover } from "@/features/resources/components/popover"
 import { LocalizedPageProps } from "@/types"
 
 const ResourcesPage: React.FC<LocalizedPageProps> = ({
@@ -34,6 +35,7 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
         columns={columns}
         data={sampleResources}
         filterKeys={["description"]}
+        PopoverContent={Popover}
       />
     </>
   )

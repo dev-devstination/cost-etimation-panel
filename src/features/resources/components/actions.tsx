@@ -17,7 +17,7 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
   const t = useTranslations("common")
   console.log("Resource: ", resource)
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center space-x-2" data-actions-column>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" className="size-8">

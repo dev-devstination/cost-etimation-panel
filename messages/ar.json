@@ -61,8 +61,8 @@
     "table": {
       "code": "الرمز",
       "description": "الوصف",
-      "category": "الفئة",
-      "subCategory": "الفئة الفرعية",
+      "category": "الفئة:",
+      "subCategory": "الفئة الفرعية:",
       "unit": "الوحدة",
       "composite": "مركب",
       "basicRate": "السعر الأساسي",

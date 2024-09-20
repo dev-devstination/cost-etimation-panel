@@ -63,8 +63,8 @@
     "table": {
       "code": "Code",
       "description": "Description",
-      "category": "Category",
-      "subCategory": "Sub-Category",
+      "category": "Category:",
+      "subCategory": "Sub-Category:",
       "unit": "Unit",
       "composite": "Composite",
       "basicRate": "Basic Rate",
