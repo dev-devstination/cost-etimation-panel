@@ -74,8 +74,13 @@ export function DataTable<TData, TValue>({
   })
 
   const handleRowClick = (e: React.MouseEvent, row: Row<TData>) => {
+    const target = e.target as HTMLElement
+    const isActionColumn = target.closest("[data-actions-column]")
+    const isDialog = target.closest("[role='dialog']")
+    const isOverlay = target.closest("[data-overlay]")
+
     // Check if the click target is within the actions column
-    if (!(e.target as HTMLElement).closest("[data-actions-column]")) {
+    if (!isActionColumn && !isDialog && !isOverlay) {
       setOpenPopoverId(openPopoverId === row.id ? null : row.id)
     }
   }
