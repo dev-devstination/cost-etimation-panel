@@ -9,9 +9,15 @@
     "selectAll": "اختيار الكل",
     "view": "عرض",
     "delete": "حذف",
-    "priceHistory": "سجل الأسعار",
+    "priceHistory": "سجل الأسعار{hasColon, select, true {: } other { }}",
     "more": "المزيد",
     "close": "إغلاق",
+    "rowsPerPage": "الصفوف لكل صفحة",
+    "pageOf": "الصفحة {current} من {total}",
+    "goToFirstPage": "الانتقال إلى الصفحة الأولى",
+    "goToPreviousPage": "الانتقال إلى الصفحة السابقة",
+    "goToNextPage": "الانتقال إلى الصفحة التالية",
+    "goToLastPage": "الانتقال إلى الصفحة الأخيرة",
     "commonTableHeaders": {
       "code": "كود",
       "description": "الوصف",
@@ -52,17 +58,43 @@
   },
   "resources": {
     "title": "الموارد",
+    "resourceDetails": "Resource Details",
+    "currentPricing": "Current Pricing",
+    "priceHistory": "Price History",
+    "date": "Date",
+    "projectState": "Project State",
+    "projet": "Project",
+    "user": "User",
     "table": {
       "code": "الرمز",
       "description": "الوصف",
-      "category": "الفئة",
-      "subCategory": "الفئة الفرعية",
+      "category": "الفئة:",
+      "subCategory": "الفئة الفرعية:",
       "unit": "الوحدة",
       "composite": "مركب",
       "basicRate": "السعر الأساسي",
       "factor": "العامل",
       "rate": "السعر",
+      "lastUpdated": "Last Updated",
       "actions": "الإجراءات"
+    },
+    "actions": {
+      "add": "Create New Resource",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "title": "البحث",
+      "description": "تطبيق الفلاتر لتضييق نطاق الموارد",
+      "category": "الفئة",
+      "allCategories": "جميع الفئات",
+      "subcategory": "الفئة الفرعية",
+      "allSubcategories": "جميع الفئات الفرعية",
+      "search": "البحث في الموارد...",
+      "composite": "الموارد المركبة",
+      "inUse": "الموارد المستخدمة",
+      "master": "الموارد الرئيسية",
+      "apply": "تطبيق الفلاتر"
     }
   },
   "components": {

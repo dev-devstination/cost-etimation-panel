@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/resources/components/columns"
 import { sampleResources } from "@/features/resources/types"
+import { Popover } from "@/features/resources/components/popover"
 import { LocalizedPageProps } from "@/types"
 
 const ResourcesPage: React.FC<LocalizedPageProps> = ({
@@ -18,22 +19,23 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
   const t = useTranslations("resources")
   return (
     <>
-      <div className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <div className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
-        <Button asChild>
-          <Link href="/resources/new">
-            <Plus className="size-4 ltr:mr-2 rtl:ml-2" /> {t("actions.add")}
-          </Link>
-        </Button>
-      </div>
-      <div className="mb-4 flex gap-x-2">
-        <Filters />
+        <div className="flex items-center space-x-2 rtl:space-x-reverse">
+          <Filters />
+          <Button asChild>
+            <Link href="/resources/new">
+              <Plus className="size-4 ltr:mr-2 rtl:ml-2" /> {t("actions.add")}
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <DataTable
         columns={columns}
         data={sampleResources}
         filterKeys={["description"]}
+        PopoverContent={Popover}
       />
     </>
   )

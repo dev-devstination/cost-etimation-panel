@@ -11,6 +11,12 @@
     "priceHistory": "Price History",
     "more": "More",
     "close": "Close",
+    "rowsPerPage": "Rows per page",
+    "pageOf": "Page {current} of {total}",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page",
     "commonTableHeaders": {
       "code": "Code",
       "description": "Description",
@@ -54,22 +60,43 @@
   },
   "resources": {
     "title": "Resources",
+    "resourceDetails": "Resource Details",
+    "currentPricing": "Current Pricing",
+    "priceHistory": "Price History",
+    "date": "Date",
+    "projectState": "Project State",
+    "projet": "Project",
+    "user": "User",
     "table": {
       "code": "Code",
       "description": "Description",
-      "category": "Category",
-      "subCategory": "Sub-Category",
+      "category": "Category:",
+      "subCategory": "Sub-Category:",
       "unit": "Unit",
       "composite": "Composite",
       "basicRate": "Basic Rate",
       "factor": "Factor",
       "rate": "Rate",
+      "lastUpdated": "Last Updated",
       "actions": "Actions"
     },
     "actions": {
       "add": "Create New Resource",
       "edit": "Edit",
       "delete": "Delete"
+    },
+    "filters": {
+      "title": "Filters",
+      "description": "Apply filters to narrow down the resources",
+      "category": "Category",
+      "allCategories": "All Categories",
+      "subcategory": "Subcategory",
+      "allSubcategories": "All Subcategories",
+      "search": "Search resources...",
+      "composite": "Composite resources",
+      "inUse": "Resources in use",
+      "master": "Master resources",
+      "apply": "Apply Filters"
     }
   },
   "components": {

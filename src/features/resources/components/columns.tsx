@@ -1,6 +1,8 @@
 "use client"
 
+import { CalendarIcon } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table"
+import { format } from "date-fns"
 
 import { Resource } from "@/features/resources/types"
 import { Actions } from "@/features/resources/components/actions"
@@ -8,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
+import { InputCell } from "@/components/input-cell"
 
 export const columns: ColumnDef<Resource>[] = [
   {
@@ -51,7 +54,7 @@ export const columns: ColumnDef<Resource>[] = [
     cell: ({ row }) => {
       const amount = row.original.basicRate
       const formatted = amount.toFixed(2)
-      return <div className="text-center font-medium">{formatted}</div>
+      return <InputCell defaultValue={formatted} />
     },
   },
   {
@@ -62,7 +65,7 @@ export const columns: ColumnDef<Resource>[] = [
     cell: ({ row }) => {
       const amount = row.original.factor
       const formatted = amount.toFixed(2)
-      return <div className="text-center">{formatted}</div>
+      return <InputCell defaultValue={formatted} />
     },
   },
   {
@@ -99,6 +102,21 @@ export const columns: ColumnDef<Resource>[] = [
       return <ColumnHeader column={column} title="inUse" />
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.isUsed} />,
+  },
+  {
+    accessorKey: "updatedDate",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="lastUpdated" sortable />
+    },
+    cell: ({ row }) => {
+      const date = new Date(row.original.updatedDate)
+      return (
+        <div className="flex items-center">
+          <CalendarIcon className="mr-2 size-4 opacity-50" />
+          <span className="text-sm">{format(date, "MMM dd, yyyy")}</span>
+        </div>
+      )
+    },
   },
   {
     id: "actions",
