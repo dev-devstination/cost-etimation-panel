@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: cost-estimation
+  name: cost-estimation
+  namespace: devstination
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    spec:
+      containers:
+      - name: cost-estimation
+        env:
+        - name: ENVIRONMENT
+          value: staging
+        image: registry.digitalocean.com/devstination/cost-estimation-staging:${SHORT_SHA}
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1000Mi

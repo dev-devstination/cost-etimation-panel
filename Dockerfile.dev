@@ -1,0 +1,16 @@
+# Dockerfile for DEV environment -- Use Docker.prod instead when moving to prod
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+RUN npm run build
+
+CMD [ "npm", "run", "start" ]

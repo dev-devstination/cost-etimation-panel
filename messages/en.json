@@ -1,16 +1,200 @@
 {
+  "common": {
+    "clearFilters": "Clear Filters",
+    "filterBy": "Filter by {field}...",
+    "rowsSelected": "{selected} of {total} row(s) selected.",
+    "noResults": "No results found",
+    "previous": "Previous",
+    "next": "Next",
+    "view": "View",
+    "delete": "Delete",
+    "priceHistory": "Price History",
+    "more": "More",
+    "close": "Close",
+    "rowsPerPage": "Rows per page",
+    "pageOf": "Page {current} of {total}",
+    "goToFirstPage": "Go to first page",
+    "goToPreviousPage": "Go to previous page",
+    "goToNextPage": "Go to next page",
+    "goToLastPage": "Go to last page",
+    "commonTableHeaders": {
+      "code": "Code",
+      "description": "Description",
+      "unit": "Unit",
+      "basicRate": "Basic Rate",
+      "factor": "Factor",
+      "composite": "Composite",
+      "rate": "Rate",
+      "master": "Master",
+      "inUse": "In Use",
+      "lastUpdated": "Last Updated"
+    },
+    "selectAll": "Select All",
+    "error": {
+      "defaultTitle": "Oops! Something went wrong",
+      "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
+      "notFound": {
+        "title": "Page Not Found",
+        "description": "The page you're looking for doesn't exist or has been moved."
+      },
+      "server": {
+        "title": "Server Error",
+        "description": "We're experiencing some server issues. Please try again later."
+      },
+      "id": "Error ID: {id}"
+    },
+    "action": {
+      "tryAgain": "Try Again",
+      "goHome": "Go Home"
+    },
+    "pages": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "resources": "Resources",
+      "settings": "Settings"
+    }
+  },
+
   "HomePage": {
     "title": "Hello world!"
   },
-  "ErrorBoundary": {
-    "defaultTitle": "Oops! Something went wrong",
-    "defaultDescription": "We've encountered an unexpected error. Our team has been notified.",
-    "notFoundTitle": "Page Not Found",
-    "notFoundDescription": "The page you're looking for doesn't exist or has been moved.",
-    "serverErrorTitle": "Server Error",
-    "serverErrorDescription": "We're experiencing some server issues. Please try again later.",
-    "errorId": "Error ID: {id}",
-    "tryAgain": "Try Again",
-    "goHome": "Go Home"
+  "resources": {
+    "title": "Resources",
+    "resourceDetails": "Resource Details",
+    "currentPricing": "Current Pricing",
+    "priceHistory": "Price History",
+    "date": "Date",
+    "projectState": "Project State",
+    "projet": "Project",
+    "user": "User",
+    "table": {
+      "code": "Code",
+      "description": "Description",
+      "category": "Category:",
+      "subCategory": "Sub-Category:",
+      "unit": "Unit",
+      "composite": "Composite",
+      "basicRate": "Basic Rate",
+      "factor": "Factor",
+      "rate": "Rate",
+      "lastUpdated": "Last Updated",
+      "actions": "Actions"
+    },
+    "actions": {
+      "add": "Create New Resource",
+      "edit": "Edit",
+      "delete": "Delete"
+    },
+    "filters": {
+      "title": "Filters",
+      "description": "Apply filters to narrow down the resources",
+      "category": "Category",
+      "allCategories": "All Categories",
+      "subcategory": "Subcategory",
+      "allSubcategories": "All Subcategories",
+      "search": "Search resources...",
+      "composite": "Composite resources",
+      "inUse": "Resources in use",
+      "master": "Master resources",
+      "apply": "Apply Filters"
+    }
+  },
+  "components": {
+    "toggleTheme": {
+      "ariaLabel": "Toggle theme",
+      "srText": "Toggle theme"
+    },
+    "logo": {
+      "firstLetter": "C",
+      "secondLetter": "o",
+      "restOfWord": "st",
+      "subtitle": "Estimation",
+      "alt": "Logo"
+    }
+  },
+  "auth": {
+    "signInTitle": "Sign In to Your Account",
+    "signUpTitle": "Create Your Account",
+    "welcomeBackgroundLabel": "Decorative background image section",
+    "form": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "repeatPassword": {
+        "label": "Repeat Password",
+        "placeholder": "Repeat your password"
+      },
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "confirmPassword": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm your password"
+      }
+    },
+    "action": {
+      "login": "Log In",
+      "forgotPassword": "Forgot Password?",
+      "register": "Register",
+      "sendResetLink": "Send Reset Link",
+      "backToLogin": "Back to Login"
+    },
+    "message": {
+      "noAccount": "Don't have an account?",
+      "haveAccount": "Already have an account?",
+      "checkEmail": "Check Your Email",
+      "passwordResetInstructions": "We've sent password reset instructions to your email."
+    }
+  },
+  "validation": {
+    "required": "{field} is required",
+    "minLength": "{field} must be at least {min} characters",
+    "maxLength": "{field} must be at most {max} characters",
+    "email": "Please enter a valid email address",
+    "passwordMatch": "Passwords do not match",
+    "invalidType": "Invalid type for {field}",
+    "custom": {
+      "firstName": {
+        "min": "First name must be at least 2 characters"
+      },
+      "lastName": {
+        "min": "Last name must be at least 2 characters"
+      },
+      "password": {
+        "min": "Password must be at least 8 characters",
+        "strength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
+      },
+      "repeatPassword": {
+        "match": "Passwords must match"
+      }
+    }
+  },
+  "layout": {
+    "skipToContent": "Skip to content",
+    "toggleSidebar": "Toggle sidebar",
+    "notifications": "Notifications",
+    "changeLanguage": "Change language",
+    "userProfile": "User profile",
+    "home": "Home",
+    "resources": "Resources",
+    "settings": "Settings",
+    "currentLanguage": "Current Language",
+    "dashboard": "Dashboard",
+    "mobileNavigation": "Menu",
+    "mobileNavigationDescription": "Site navigation",
+    "language": {
+      "en": "English",
+      "ar": "العربية"
+    }
   }
 }
