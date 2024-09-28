@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from "next-intl"
-import { Filter } from "lucide-react"
+import { Filter, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,6 +24,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 export const Filters = () => {
   const t = useTranslations("resources")
   const locale = useLocale()
+
   const isRTL = locale === "ar"
 
   return (
@@ -63,6 +64,18 @@ export const Filters = () => {
               {/* Add more subcategories here */}
             </SelectContent>
           </Select>
+
+          <Select>
+            <SelectTrigger>
+              <SelectValue placeholder={t("filters.resouceType")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">
+                {t("filters.allResourceTypes")}
+              </SelectItem>
+              {/* Add more categories here */}
+            </SelectContent>
+          </Select>
           <Input placeholder={t("filters.search")} />
           <div className="flex items-center space-x-2 rtl:space-x-reverse">
             <Checkbox id="composite" />
@@ -96,6 +109,14 @@ export const Filters = () => {
               {t("filters.apply")}
             </Button>
           </SheetClose>
+          <Button
+            type="button"
+            variant="outline"
+            className="flex-1 gap-2 transition-all duration-300 ease-in-out hover:bg-destructive hover:text-destructive-foreground"
+          >
+            <X className="size-4" />
+            {t("filters.clear")}
+          </Button>
         </div>
       </SheetContent>
     </Sheet>

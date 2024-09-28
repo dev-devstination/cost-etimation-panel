@@ -17,6 +17,12 @@
     "goToPreviousPage": "Go to previous page",
     "goToNextPage": "Go to next page",
     "goToLastPage": "Go to last page",
+    "factorDialog": {
+      "title": "Factor",
+      "description": "Set factor for all selected items",
+      "actionButton": "Set Factor",
+      "cancel": "Cancel"
+    },
     "commonTableHeaders": {
       "code": "Code",
       "description": "Description",
@@ -92,11 +98,14 @@
       "allCategories": "All Categories",
       "subcategory": "Subcategory",
       "allSubcategories": "All Subcategories",
+      "resouceType": "Resource Type",
+      "allResourceTypes": "All Resource Types",
       "search": "Search resources...",
       "composite": "Composite resources",
       "inUse": "Resources in use",
       "master": "Master resources",
-      "apply": "Apply Filters"
+      "apply": "Apply Filters",
+      "clear": "Clear Filters"
     }
   },
   "components": {

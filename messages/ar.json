@@ -73,7 +73,11 @@
       "unit": "الوحدة",
       "composite": "مركب",
       "basicRate": "السعر الأساسي",
-      "factor": "العامل",
+      "factor": {
+        "label": "Factor",
+        "title": "Factor",
+        "description": "Set factor for all selected items"
+      },
       "rate": "السعر",
       "lastUpdated": "Last Updated",
       "actions": "الإجراءات"
@@ -90,11 +94,14 @@
       "allCategories": "جميع الفئات",
       "subcategory": "الفئة الفرعية",
       "allSubcategories": "جميع الفئات الفرعية",
+      "resouceType": "نوع المورد",
+      "allResourceTypes": "جميع أنواع الموارد",
       "search": "البحث في الموارد...",
       "composite": "الموارد المركبة",
       "inUse": "الموارد المستخدمة",
       "master": "الموارد الرئيسية",
-      "apply": "تطبيق الفلاتر"
+      "apply": "تطبيق الفلاتر",
+      "clear": "مسح الفلاتر"
     }
   },
   "components": {

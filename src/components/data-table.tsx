@@ -75,7 +75,7 @@ export function DataTable<TData, TValue>({
 
   const handleRowClick = (e: React.MouseEvent, row: Row<TData>) => {
     const target = e.target as HTMLElement
-    const isActionColumn = target.closest("[data-actions-column]")
+    const isActionColumn = target.closest("[data-prevent-propagation]")
     const isDialog = target.closest("[role='dialog']")
     const isOverlay = target.closest("[data-overlay]")
 

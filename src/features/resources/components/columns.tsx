@@ -11,6 +11,7 @@ import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
 import { InputCell } from "@/components/input-cell"
+import { FactorColumn } from "./factor-column"
 
 export const columns: ColumnDef<Resource>[] = [
   {
@@ -19,7 +20,7 @@ export const columns: ColumnDef<Resource>[] = [
       return <SelectAllColumn table={table} title="code" />
     },
     cell: ({ row }) => (
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2" data-prevent-propagation>
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
@@ -40,7 +41,7 @@ export const columns: ColumnDef<Resource>[] = [
   {
     accessorKey: "unit",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="unit" />
+      return <ColumnHeader column={column} title="unit" sortable />
     },
     cell: ({ row }) => {
       return <div className="text-center">{row.original.unit}</div>
@@ -49,7 +50,7 @@ export const columns: ColumnDef<Resource>[] = [
   {
     accessorKey: "basicRate",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="basicRate" />
+      return <ColumnHeader column={column} title="basicRate" sortable />
     },
     cell: ({ row }) => {
       const amount = row.original.basicRate
@@ -59,8 +60,8 @@ export const columns: ColumnDef<Resource>[] = [
   },
   {
     accessorKey: "factor",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="factor" />
+    header: () => {
+      return <FactorColumn />
     },
     cell: ({ row }) => {
       const amount = row.original.factor
@@ -70,8 +71,13 @@ export const columns: ColumnDef<Resource>[] = [
   },
   {
     accessorKey: "rate",
+    accessorFn: (resource) => {
+      const basicRate = resource.basicRate
+      const factor = resource.factor
+      return basicRate * factor
+    },
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="rate" />
+      return <ColumnHeader column={column} title="rate" sortable />
     },
     cell: ({ row }) => {
       const basicRate = row.original.basicRate
@@ -82,9 +88,9 @@ export const columns: ColumnDef<Resource>[] = [
     },
   },
   {
-    accessorKey: "composite",
+    accessorKey: "isComposite",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="composite" />
+      return <ColumnHeader column={column} title="composite" sortable />
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.isComposite} />,
   },
@@ -92,14 +98,14 @@ export const columns: ColumnDef<Resource>[] = [
   {
     accessorKey: "isMaster",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="master" />
+      return <ColumnHeader column={column} title="master" sortable />
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.isMaster} />,
   },
   {
     accessorKey: "isUsed",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="inUse" />
+      return <ColumnHeader column={column} title="inUse" sortable />
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.isUsed} />,
   },
