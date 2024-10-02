@@ -5,7 +5,6 @@ import { Eye, EyeOff, Mail, Lock, User } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { Alert, AlertDescription } from "@/components/ui/alert"
 
 interface FormFieldProps<T extends FieldValues> {
   name: Path<T>
@@ -33,7 +32,7 @@ export function AuthInput<T extends FieldValues>({
       case "email":
         return <Mail className="size-5 text-muted-foreground" />
       case "password":
-      case "repeatPassword":
+      case "password_confirmation":
         return <Lock className="size-5 text-muted-foreground" />
       case "firstName":
       case "lastName":
@@ -79,9 +78,9 @@ export function AuthInput<T extends FieldValues>({
         )}
       </div>
       {error && (
-        <Alert variant="destructive" role="alert" className="mt-2">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
+        <p role="alert" className="text-xs text-destructive">
+          {error}
+        </p>
       )}
     </div>
   )

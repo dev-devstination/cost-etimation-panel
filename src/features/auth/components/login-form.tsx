@@ -11,6 +11,7 @@ import { LoginFormData, useLoginSchema } from "@/features/auth/schemas/login"
 import { AuthInput } from "@/features/auth/components/auth-input"
 import { loginAction } from "@/features/auth/actions/login"
 import { SubmitButton } from "@/components/submit-button"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 const initialState = {
   errors: {},
@@ -20,6 +21,7 @@ const initialState = {
 export const LoginForm: React.FC = () => {
   const t = useTranslations("auth")
   const tForm = useTranslations("auth.form")
+  const tError = useTranslations("apiErrors")
   const loginSchema = useLoginSchema()
 
   const [isPending, startTransition] = useTransition()
@@ -63,6 +65,15 @@ export const LoginForm: React.FC = () => {
           register={register}
           error={errors.password?.message || serverState.errors?.password?.[0]}
         />
+
+        {serverState.message && (
+          <Alert variant="destructive" className="text-center">
+            <AlertDescription>
+              {tError(serverState.message as "default")}
+            </AlertDescription>
+          </Alert>
+        )}
+
         <SubmitButton isLoading={isPending}>{t("action.login")}</SubmitButton>
         <div className="text-center text-sm">
           <Link

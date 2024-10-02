@@ -4,6 +4,10 @@ import { cookies } from "next/headers"
 import { z } from "zod"
 
 import { redirect } from "@/config/navigation"
+import { ApiError, fetcher } from "@/lib/api/fetcher"
+import { COOKIES } from "@/constants"
+import logger from "@/lib/logger"
+import { LoginResponse } from "../interfaces/login"
 
 // Note: This schema should match the client-side schema
 const loginSchema = z.object({
@@ -38,24 +42,35 @@ export async function loginAction(
   const { email, password } = validatedFields.data
 
   try {
-    // Here you would typically handle the authentication logic
-    // For example, calling an API or checking against a database
-    console.log("Login attempt:", email, password)
+    const { data } = await fetcher<LoginResponse>("/users/signin", {
+      method: "POST",
+      body: { email, password },
+    })
 
-    // Simulate successful login
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    // Set a cookie or token upon successful login
-    cookies().set("auth_token", "dummy_token", {
+    cookies().set(COOKIES.AUTH_TOKEN, data.token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 7, // 1 week
     })
   } catch (error) {
-    return {
-      message: "Login failed. Please check your credentials and try again.",
+    if (error instanceof ApiError) {
+      logger.error("Register error", {
+        error: error.message,
+        statusCode: error.statusCode,
+        email,
+      })
+
+      switch (error.statusCode) {
+        case 401:
+          return { message: "invalidCredentials" }
+        default:
+          return { message: "default" }
+      }
     }
   }
 
+  logger.info("User logged in successfully", { email })
   // Redirect to dashboard or home page after successful login
-  return redirect("/dashboard")
+  return redirect("/")
 }

@@ -14,6 +14,7 @@ import {
 import { AuthInput } from "@/features/auth/components/auth-input"
 import { registerAction } from "@/features/auth/actions/register"
 import { SubmitButton } from "@/components/submit-button"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 const initialState = {
   errors: {},
@@ -23,6 +24,7 @@ const initialState = {
 export const RegisterForm: React.FC = () => {
   const t = useTranslations("auth")
   const tForm = useTranslations("auth.form")
+  const tError = useTranslations("apiErrors")
   const registerSchema = useRegisterSchema()
 
   const [isPending, startTransition] = useTransition()
@@ -52,26 +54,6 @@ export const RegisterForm: React.FC = () => {
         {t("signUpTitle")}
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <AuthInput
-            name="firstName"
-            type="text"
-            placeholder={tForm("firstName.label")}
-            register={register}
-            error={
-              errors.firstName?.message || serverState.errors?.firstName?.[0]
-            }
-          />
-          <AuthInput
-            name="lastName"
-            type="text"
-            placeholder={tForm("lastName.label")}
-            register={register}
-            error={
-              errors.lastName?.message || serverState.errors?.lastName?.[0]
-            }
-          />
-        </div>
         <AuthInput
           name="email"
           type="email"
@@ -87,15 +69,24 @@ export const RegisterForm: React.FC = () => {
           error={errors.password?.message || serverState.errors?.password?.[0]}
         />
         <AuthInput
-          name="repeatPassword"
+          name="password_confirmation"
           type="password"
           placeholder={tForm("repeatPassword.label")}
           register={register}
           error={
-            errors.repeatPassword?.message ||
-            serverState.errors?.repeatPassword?.[0]
+            errors.password_confirmation?.message ||
+            serverState.errors?.password_confirmation?.[0]
           }
         />
+
+        {serverState.message && (
+          <Alert variant="destructive" className="text-center">
+            <AlertDescription>
+              {tError(serverState.message as "default")}
+            </AlertDescription>
+          </Alert>
+        )}
+
         <div className="mt-6">
           <SubmitButton isLoading={isPending} className="w-full">
             {t("action.register")}

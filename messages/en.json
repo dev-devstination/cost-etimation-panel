@@ -173,12 +173,6 @@
     "passwordMatch": "Passwords do not match",
     "invalidType": "Invalid type for {field}",
     "custom": {
-      "firstName": {
-        "min": "First name must be at least 2 characters"
-      },
-      "lastName": {
-        "min": "Last name must be at least 2 characters"
-      },
       "password": {
         "min": "Password must be at least 8 characters",
         "strength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
@@ -205,5 +199,10 @@
       "en": "English",
       "ar": "العربية"
     }
+  },
+  "apiErrors": {
+    "default": "Oops! Something went wrong. Please try again later.",
+    "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
+    "invalidCredentials": "Invalid email or password. Please try again."
   }
 }

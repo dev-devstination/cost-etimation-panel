@@ -2,28 +2,27 @@
 
 import { z } from "zod"
 
+import logger from "@/lib/logger"
+import { RegisterResponse } from "@/features/auth/interfaces/register"
 import { redirect } from "@/config/navigation"
+import { ApiError, fetcher } from "@/lib/api/fetcher"
 
 // Note: This schema should match the client-side schema
 const registerSchema = z
   .object({
-    firstName: z.string().min(2),
-    lastName: z.string().min(2),
     email: z.string().email(),
     password: z.string().min(8),
-    repeatPassword: z.string(),
+    password_confirmation: z.string(),
   })
-  .refine((data) => data.password === data.repeatPassword, {
+  .refine((data) => data.password === data.password_confirmation, {
     path: ["repeatPassword"],
   })
 
 export type RegisterActionState = {
   errors?: {
-    firstName?: string[]
-    lastName?: string[]
     email?: string[]
     password?: string[]
-    repeatPassword?: string[]
+    password_confirmation?: string[]
   }
   message?: string | null
 }
@@ -33,11 +32,9 @@ export async function registerAction(
   formData: FormData
 ): Promise<RegisterActionState> {
   const validatedFields = registerSchema.safeParse({
-    firstName: formData.get("firstName"),
-    lastName: formData.get("lastName"),
     email: formData.get("email"),
     password: formData.get("password"),
-    repeatPassword: formData.get("repeatPassword"),
+    password_confirmation: formData.get("password_confirmation"),
   })
 
   if (!validatedFields.success) {
@@ -47,35 +44,36 @@ export async function registerAction(
     }
   }
 
-  const { email, password, firstName, lastName, repeatPassword } =
-    validatedFields.data
+  const { email, password, password_confirmation } = validatedFields.data
 
   try {
-    // Here you would typically handle the authentication logic
-    // For example, calling an API or checking against a database
-    console.log(
-      "Register attempt:",
-      email,
-      password,
-      firstName,
-      lastName,
-      repeatPassword
-    )
-
-    // Simulate successful login
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-
-    // Set a cookie or token upon successful login
-    // cookies().set('auth_token', 'dummy_token', {
-    //   httpOnly: true,
-    //   secure: true,
-    // });
+    await fetcher<RegisterResponse>("/users/signup", {
+      method: "POST",
+      body: { email, password, password_confirmation },
+    })
   } catch (error) {
-    return {
-      message: "Register failed. Please check your credentials and try again.",
+    if (error instanceof ApiError) {
+      logger.error("Register error", {
+        error: error.message,
+        statusCode: error.statusCode,
+        email,
+      })
+
+      switch (error.statusCode) {
+        case 409:
+          return {
+            message: "emailAlreadyExists",
+          }
+        default:
+          return { message: "default" }
+      }
     }
+
+    logger.error("Unexpected register error", { error, email })
+    return { message: "An unexpected error occurred. Please try again later." }
   }
 
+  logger.info("User registered successfully", { email })
   // Redirect to dashboard or home page after successful login
   return redirect("/login")
 }

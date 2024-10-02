@@ -6,13 +6,11 @@ export const useRegisterSchema = () => {
 
   return z
     .object({
-      firstName: z.string().min(2, t("custom.firstName.min")),
-      lastName: z.string().min(2, t("custom.lastName.min")),
       email: z.string().email(t("email")),
       password: z.string().min(8, t("custom.password.min")),
-      repeatPassword: z.string(),
+      password_confirmation: z.string(),
     })
-    .refine((data) => data.password === data.repeatPassword, {
+    .refine((data) => data.password === data.password_confirmation, {
       message: t("custom.repeatPassword.match"),
       path: ["repeatPassword"],
     })
