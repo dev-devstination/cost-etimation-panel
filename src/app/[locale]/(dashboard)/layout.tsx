@@ -14,6 +14,7 @@ import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 import Sidebar from "@/components/sidebar"
 import LanguageSwitcher from "@/components/language-switcher"
 import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
+import { UserProfile } from "@/components/user-profile"
 
 export default function DashboardLayout({
   children,
@@ -66,6 +67,7 @@ export default function DashboardLayout({
           <div className="flex items-center space-x-4">
             <ToggleThemeButton />
             <LanguageSwitcher />
+            <UserProfile />
           </div>
         </header>
 

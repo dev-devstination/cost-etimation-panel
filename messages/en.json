@@ -1,5 +1,8 @@
 {
   "common": {
+    "accountSettings": "Account Settings",
+    "companySetting": "Company Settings",
+    "logout": "Logout",
     "clearFilters": "Clear Filters",
     "filterBy": "Filter by {field}...",
     "rowsSelected": "{selected} of {total} row(s) selected.",

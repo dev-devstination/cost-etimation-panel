@@ -55,7 +55,7 @@ export async function loginAction(
     })
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Register error", {
+      logger.error("Login error", {
         error: error.message,
         statusCode: error.statusCode,
         email,
