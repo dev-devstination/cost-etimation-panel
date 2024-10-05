@@ -40,11 +40,11 @@ export const UserProfile = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align={isRTL ? "start" : "end"}>
-        <DropdownMenuItem onClick={() => redirect("/account/settings")}>
-          {t("accountSettings")}
+        <DropdownMenuItem onClick={() => redirect("/account")}>
+          {t("account")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => redirect("/company/settings")}>
-          {t("companySetting")}
+        <DropdownMenuItem onClick={() => redirect("/settings")}>
+          {t("settings")}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem disabled={isPending} onClick={logout}>

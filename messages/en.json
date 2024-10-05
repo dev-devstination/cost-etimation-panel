@@ -1,7 +1,7 @@
 {
   "common": {
-    "accountSettings": "Account Settings",
-    "companySetting": "Company Settings",
+    "account": "Account",
+    "settings": "Settings",
     "logout": "Logout",
     "clearFilters": "Clear Filters",
     "filterBy": "Filter by {field}...",

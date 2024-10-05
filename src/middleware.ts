@@ -58,23 +58,23 @@ export default async function middleware(request: NextRequest) {
   const response = intlMiddleware(request)
 
   // For non-public routes, check for authentication
-  // if (!isPublicRoute) {
-  //   const token = request.cookies.get(COOKIES.AUTH_TOKEN)?.value
+  if (!isPublicRoute) {
+    const token = request.cookies.get(COOKIES.AUTH_TOKEN)?.value
 
-  //   if (token) {
-  //     const isValidToken = await validateToken(token)
+    if (token) {
+      const isValidToken = await validateToken(token)
 
-  //     if (!isValidToken) {
-  //       logger.warn("Invalid token detected", { path: pathname })
-  //       const locale = pathname.split("/")[1] || defaultLocale
-  //       return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
-  //     }
-  //   } else {
-  //     logger.warn("No token found for protected route", { path: pathname })
-  //     const locale = pathname.split("/")[1] || defaultLocale
-  //     return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
-  //   }
-  // }
+      if (!isValidToken) {
+        logger.warn("Invalid token detected", { path: pathname })
+        const locale = pathname.split("/")[1] || defaultLocale
+        return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+      }
+    } else {
+      logger.warn("No token found for protected route", { path: pathname })
+      const locale = pathname.split("/")[1] || defaultLocale
+      return NextResponse.redirect(new URL(`/${locale}/login`, request.url))
+    }
+  }
 
   const duration = Date.now() - start
   logger.logPerformance(`Request to ${pathname}`, duration)
