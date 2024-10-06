@@ -60,7 +60,8 @@
       "home": "Home",
       "dashboard": "Dashboard",
       "resources": "Resources",
-      "settings": "Settings"
+      "settings": "Settings",
+      "account": "Account"
     }
   },
 
@@ -201,11 +202,65 @@
     "language": {
       "en": "English",
       "ar": "العربية"
+    },
+    "navlinks": {
+      "home": "Home",
+      "resources": "Resources",
+      "accountInformation": "Account Information",
+      "companyInformation": "Company Information",
+      "members": "Members",
+      "billingPlans": "Billing and Plans",
+      "security": "Security"
+    }
+  },
+
+  "AccountPage": {
+    "title": "Account Settings",
+    "form": {
+      "title": "Personal Information",
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "surName": {
+        "label": "Sur Name",
+        "placeholder": "Enter your sur name"
+      },
+      "email": {
+        "label": "Email",
+        "description": "Your email address cannot be changed",
+        "validation": {
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "position": {
+        "label": "Position",
+        "placeholder": "Enter your position"
+      },
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "validation": {
+          "invalid": "Please enter a valid phone number"
+        }
+      },
+      "image": {
+        "label": "Profile Image",
+        "description": "Upload a profile picture (optional)"
+      },
+      "save": "Save Changes"
     }
   },
   "apiErrors": {
     "default": "Oops! Something went wrong. Please try again later.",
     "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
     "invalidCredentials": "Invalid email or password. Please try again."
+  },
+  "apiSuccess": {
+    "accountUpdated": "Account updated successfully"
   }
 }

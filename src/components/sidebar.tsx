@@ -1,12 +1,16 @@
 "use client"
 import { useTranslations } from "next-intl"
-import { FileText, Home, Settings } from "lucide-react"
 
 import { DashboardLogo } from "@/components/Logo"
 import { NavigationLink } from "@/components/navigation-link"
+import { NavigationLink as INavigationLink } from "@/types"
 
-const Sidebar: React.FC = () => {
-  const t = useTranslations("layout")
+interface SidebarProps {
+  navLinks: INavigationLink[]
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ navLinks }) => {
+  const t = useTranslations("layout.navlinks")
 
   return (
     <div className="flex h-full flex-col">
@@ -15,17 +19,9 @@ const Sidebar: React.FC = () => {
       </div>
       <nav className="flex-1 p-4">
         <ul className="space-y-2">
-          <NavigationLink href="/" icon={Home} label={t("home")} />
-          <NavigationLink
-            href="/resources"
-            icon={FileText}
-            label={t("resources")}
-          />
-          <NavigationLink
-            href="/settings"
-            icon={Settings}
-            label={t("settings")}
-          />
+          {navLinks.map(({ url, label, icon }) => (
+            <NavigationLink key={url} href={url} label={t(label)} icon={icon} />
+          ))}
         </ul>
       </nav>
     </div>

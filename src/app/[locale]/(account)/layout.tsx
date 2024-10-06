@@ -1,13 +1,13 @@
 import { AuthenticatedLayout } from "@/components/layouts/authintecated-layout"
-import { MainSidebar } from "@/components/sidebars/main-sidebar"
+import { AccountSidebar } from "@/components/sidebars/account-sidebar"
 
-export default function DashboardLayout({
+export default function AccountLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <AuthenticatedLayout sidebar={<MainSidebar />}>
+    <AuthenticatedLayout sidebar={<AccountSidebar />}>
       {children}
     </AuthenticatedLayout>
   )

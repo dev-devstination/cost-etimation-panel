@@ -12,12 +12,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useIsRTLLanguage } from "@/config/locales"
-import { redirect } from "@/config/navigation"
+import { useRouter } from "@/config/navigation"
 import { useTransition } from "react"
 import { logoutAction } from "@/features/auth/actions/logout"
 
 export const UserProfile = () => {
   const t = useTranslations("common")
+  const router = useRouter()
   const [isPending, startTransiton] = useTransition()
 
   const isRTL = useIsRTLLanguage()
@@ -40,10 +41,10 @@ export const UserProfile = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align={isRTL ? "start" : "end"}>
-        <DropdownMenuItem onClick={() => redirect("/account")}>
+        <DropdownMenuItem onClick={() => router.push("/account")}>
           {t("account")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => redirect("/settings")}>
+        <DropdownMenuItem onClick={() => router.push("/settings")}>
           {t("settings")}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
