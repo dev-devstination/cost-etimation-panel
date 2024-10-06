@@ -68,13 +68,37 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Avatar className="size-32">
+            <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-12">
+              <Avatar className="col-span-3 size-32">
                 <AvatarImage alt="" src={form.watch("image")} />
                 <AvatarFallback>
                   <UserIcon className="size-16" />
                 </AvatarFallback>
               </Avatar>
+              <div className="sm:col-span-9">
+                <FormField
+                  control={form.control}
+                  name="image"
+                  render={({ field }) => (
+                    <Input
+                      label={t("image.label")}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0]
+                        if (file) {
+                          const reader = new FileReader()
+                          reader.onloadend = () => {
+                            field.onChange(reader.result as string)
+                          }
+                          reader.readAsDataURL(file)
+                        }
+                      }}
+                      description={t("image.description")}
+                    />
+                  )}
+                />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -148,29 +172,6 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
                   label={t("phoneNumber.label")}
                   placeholder={t("phoneNumber.placeholder")}
                   {...field}
-                />
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="image"
-              render={({ field }) => (
-                <Input
-                  label={t("image.label")}
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0]
-                    if (file) {
-                      const reader = new FileReader()
-                      reader.onloadend = () => {
-                        field.onChange(reader.result as string)
-                      }
-                      reader.readAsDataURL(file)
-                    }
-                  }}
-                  description={t("image.description")}
                 />
               )}
             />

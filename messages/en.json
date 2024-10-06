@@ -206,8 +206,8 @@
     "navlinks": {
       "home": "Home",
       "resources": "Resources",
-      "accountInformation": "Account Information",
-      "companyInformation": "Company Information",
+      "accountInformation": "User",
+      "companyInformation": "Company",
       "members": "Members",
       "billingPlans": "Billing and Plans",
       "security": "Security"

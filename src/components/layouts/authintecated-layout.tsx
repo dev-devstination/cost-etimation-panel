@@ -14,6 +14,7 @@ import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
 import { UserProfile } from "@/components/user-profile"
 import LanguageSwitcher from "@/components/language-switcher"
+import { DashboardLogo } from "../Logo"
 
 interface AuthenticatedLayoutProps {
   children: React.ReactNode
@@ -29,7 +30,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar for large screens */}
-      <aside className="hidden w-64 border-r bg-card text-card-foreground lg:block">
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-card text-card-foreground lg:block">
         {sidebar}
       </aside>
 
@@ -37,7 +38,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
       <div className="flex min-h-screen flex-1 flex-col">
         {/* Navbar */}
         <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-card p-4 text-card-foreground">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-x-4">
             {/* Sheet component for mobile sidebar */}
             <Sheet>
               <SheetTrigger asChild>
@@ -63,7 +64,10 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
               </SheetContent>
             </Sheet>
 
-            <NavbarBreadcrumb />
+            <DashboardLogo />
+            <div className="hidden lg:flex lg:ltr:ml-44 lg:rtl:mr-44">
+              <NavbarBreadcrumb />
+            </div>
           </div>
 
           {/* Right side navbar items */}
@@ -75,7 +79,10 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
         </header>
 
         {/* Page content */}
-        <main id="main-content" className="flex-1 overflow-auto p-6">
+        <main
+          id="main-content"
+          className="flex-1 overflow-auto p-6 lg:ltr:ml-64 lg:rtl:mr-64"
+        >
           {children}
         </main>
       </div>
