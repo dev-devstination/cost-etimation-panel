@@ -13,8 +13,8 @@ export const MAIN_NAVLINKS: NavigationLink[] = [
 
 export const ACCOUNT_NAVLINKS: NavigationLink[] = [
   { url: "/account", label: "accountInformation", icon: User },
-  { url: "/account/company", label: "companyInformation", icon: Building },
-  { url: "/account/members", label: "members", icon: Users },
-  { url: "/account/billing", label: "billingPlans", icon: FileText },
-  { url: "/account/security", label: "security", icon: Lock },
+  { url: "/company", label: "companyInformation", icon: Building },
+  { url: "/members", label: "members", icon: Users },
+  { url: "/billing", label: "billingPlans", icon: FileText },
+  { url: "/security", label: "security", icon: Lock },
 ]

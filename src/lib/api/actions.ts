@@ -6,7 +6,8 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "@/config/navigation"
 import { COOKIES } from "@/constants"
 
-import { fetcher } from "./fetcher"
+import { fetcher } from "@/lib/api/fetcher"
+import logger from "@/lib/logger"
 
 type ActionOptions = {
   revalidatePaths?: string[]
@@ -48,7 +49,7 @@ export async function serverAction(
       redirect("/login")
     }
 
-    console.error("Server action error:", error)
+    logger.error("Server action error:", { error })
     return { success: false, error: "An error occurred" }
   }
 }

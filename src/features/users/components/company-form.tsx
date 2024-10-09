@@ -9,19 +9,19 @@ import { UserIcon } from "lucide-react"
 
 import { SubmitButton } from "@/components/submit-button"
 import {
-  AccountFormData,
-  useAccountSchema,
-} from "@/features/users/schemas/account"
+  CompanyFormData,
+  useCompanySchema,
+} from "@/features/users/schemas/company"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormField } from "@/components/ui/form"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Input } from "@/components/form/input"
 import { SubmitMessage } from "@/components/form/submit-message"
-import { User } from "@/features/users/interfaces/user"
-import { accountAction } from "@/features/users/actions/account"
+import { Company } from "@/features/users/interfaces/company"
+import { companyAction } from "@/features/users/actions/company"
 
-interface AccountFormProps {
-  user: User
+interface CompanyFormProps {
+  company: Company
 }
 
 const initialState = {
@@ -29,27 +29,23 @@ const initialState = {
   status: undefined,
 }
 
-export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
-  const t = useTranslations("AccountPage.form")
+export const CompanyForm: React.FC<CompanyFormProps> = ({ company }) => {
+  const t = useTranslations("CompanyPage.form")
 
-  const accountSchema = useAccountSchema()
+  const companySchema = useCompanySchema()
   const [isPending, startTransition] = useTransition()
 
-  const [serverState, formAction] = useFormState(accountAction, initialState)
+  const [serverState, formAction] = useFormState(companyAction, initialState)
 
-  const form = useForm<AccountFormData>({
-    resolver: zodResolver(accountSchema),
+  const form = useForm<CompanyFormData>({
+    resolver: zodResolver(companySchema),
     defaultValues: {
-      first_name: user.first_name,
-      last_name: user.last_name,
-      sur_name: user.sur_name,
-      email: user.email,
-      position: user.position,
-      mobile: user.mobile,
+      name: company.name,
+      location: company.location,
     },
   })
 
-  const onSubmit = (data: AccountFormData) => {
+  const onSubmit = (data: CompanyFormData) => {
     startTransition(() => {
       formAction(data)
     })
@@ -65,7 +61,7 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-12">
               <Avatar className="col-span-3 size-32">
-                <AvatarImage alt="" src={form.watch("image")} />
+                <AvatarImage alt="" src={form.watch("logo")} />
                 <AvatarFallback>
                   <UserIcon className="size-16" />
                 </AvatarFallback>
@@ -73,10 +69,10 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
               <div className="sm:col-span-9">
                 <FormField
                   control={form.control}
-                  name="image"
+                  name="logo"
                   render={({ field }) => (
                     <Input
-                      label={t("image.label")}
+                      label={t("logo.label")}
                       type="file"
                       accept="image/*"
                       onChange={(e) => {
@@ -89,59 +85,20 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
                           reader.readAsDataURL(file)
                         }
                       }}
-                      description={t("image.description")}
+                      description={t("logo.description")}
                     />
                   )}
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-              <FormField
-                control={form.control}
-                name="first_name"
-                render={({ field }) => (
-                  <Input
-                    label={t("firstName.label")}
-                    placeholder={t("firstName.placeholder")}
-                    {...field}
-                  />
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="last_name"
-                render={({ field }) => (
-                  <Input
-                    label={t("lastName.label")}
-                    placeholder={t("lastName.placeholder")}
-                    {...field}
-                  />
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="sur_name"
-                render={({ field }) => (
-                  <Input
-                    label={t("surName.label")}
-                    placeholder={t("surName.placeholder")}
-                    {...field}
-                  />
-                )}
-              />
-            </div>
-
             <FormField
               control={form.control}
-              name="email"
+              name="name"
               render={({ field }) => (
                 <Input
-                  disabled
-                  label={t("email.label")}
-                  description={t("email.description")}
+                  label={t("name.label")}
+                  placeholder={t("name.placeholder")}
                   {...field}
                 />
               )}
@@ -149,23 +106,11 @@ export const AccountForm: React.FC<AccountFormProps> = ({ user }) => {
 
             <FormField
               control={form.control}
-              name="position"
+              name="location"
               render={({ field }) => (
                 <Input
-                  label={t("position.label")}
-                  placeholder={t("position.placeholder")}
-                  {...field}
-                />
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="mobile"
-              render={({ field }) => (
-                <Input
-                  label={t("phoneNumber.label")}
-                  placeholder={t("phoneNumber.placeholder")}
+                  label={t("location.label")}
+                  placeholder={t("location.placeholder")}
                   {...field}
                 />
               )}

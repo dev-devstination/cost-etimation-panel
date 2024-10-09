@@ -61,7 +61,8 @@
       "dashboard": "Dashboard",
       "resources": "Resources",
       "settings": "Settings",
-      "account": "Account"
+      "account": "Account",
+      "company": "Company"
     }
   },
 
@@ -213,7 +214,32 @@
       "security": "Security"
     }
   },
-
+  "CompanyPage": {
+    "title": "Company Settings",
+    "form": {
+      "title": "Company Information",
+      "name": {
+        "label": "Company Name",
+        "placeholder": "Enter your company name",
+        "validation": {
+          "required": "Company name is required"
+        }
+      },
+      "location": {
+        "label": "Company Location",
+        "placeholder": "Enter your company location",
+        "validation": {
+          "required": "Company location is required"
+        }
+      },
+      "logo": {
+        "label": "Company Logo",
+        "description": "Upload a logo for your company",
+        "placeholder": "Upload your company logo"
+      },
+      "save": "Save Changes"
+    }
+  },
   "AccountPage": {
     "title": "Account Settings",
     "form": {
@@ -261,6 +287,7 @@
     "invalidCredentials": "Invalid email or password. Please try again."
   },
   "apiSuccess": {
-    "accountUpdated": "Account updated successfully"
+    "accountUpdated": "Account updated successfully",
+    "companyUpdated": "Company updated successfully"
   }
 }

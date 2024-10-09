@@ -94,7 +94,7 @@ export async function fetcher<T>(
 }
 
 export function fetcherSSR<T>(url: string, options: FetchOptions = {}) {
-  return fetcher<T>(url, { ...options, cache: "force-cache" })
+  return fetcher<T>(url, { ...options })
 }
 
 export function fetcherISR<T>(

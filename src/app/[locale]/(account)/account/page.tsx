@@ -12,7 +12,7 @@ export default async function AccountPage({
 
   const t = await getTranslations("AccountPage")
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4">
       <h1 className="mb-6 text-3xl font-bold">{t("title")}</h1>
       <AccountForm user={user} />
     </div>
