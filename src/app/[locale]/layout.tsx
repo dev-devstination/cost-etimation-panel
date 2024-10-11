@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { getMessages, unstable_setRequestLocale } from "next-intl/server"
 
 import { getLocaleDirection, Locale, locales } from "@/config/locales"
+import { Toaster } from "@/components/ui/toaster"
 import { inter } from "@/fonts/inter"
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/providers/theme-provider"
@@ -51,6 +52,7 @@ export default async function RootLayout({
           <TooltipProvider delayDuration={0}>
             <NextIntlClientProvider messages={messages}>
               {children}
+              <Toaster />
             </NextIntlClientProvider>
           </TooltipProvider>
         </ThemeProvider>

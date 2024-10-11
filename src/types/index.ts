@@ -14,3 +14,8 @@ export type ActionState = {
   status?: "destructive" | "success"
   message?: keyof IntlMessages["apiErrors"] | keyof IntlMessages["apiSuccess"]
 }
+
+export type SelectOption = {
+  label: string
+  value: string
+}

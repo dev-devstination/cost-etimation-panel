@@ -36,7 +36,10 @@
       "rate": "Rate",
       "master": "Master",
       "inUse": "In Use",
-      "lastUpdated": "Last Updated"
+      "lastUpdated": "Last Updated",
+      "email": "Email",
+      "role": "Role",
+      "active": "Active"
     },
     "selectAll": "Select All",
     "error": {
@@ -62,7 +65,8 @@
       "resources": "Resources",
       "settings": "Settings",
       "account": "Account",
-      "company": "Company"
+      "company": "Company",
+      "members": "Members"
     }
   },
 
@@ -281,6 +285,56 @@
       "save": "Save Changes"
     }
   },
+  "MembersPage": {
+    "title": "Members",
+    "memberRole": {
+      "admin": "Admin",
+      "writer": "Writer",
+      "reader": "Reader"
+    },
+    "dialog": {
+      "add": "Add Member",
+      "title": "Add New Member",
+      "description": "Add a new member to your company"
+    },
+    "form": {
+      "title": "Add Member",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter the member's email",
+        "validation": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Select a role",
+        "validation": {
+          "required": "Please select a role"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter the member's password",
+        "validation": {
+          "min": "Password must be at least 8 characters",
+          "max": "Password must be at most 72 characters",
+          "required": "Password is required"
+        }
+      },
+      "password_confirmation": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm the member's password",
+        "validation": {
+          "match": "Passwords must match",
+          "required": "Password confirmation is required"
+        }
+      },
+      "save": "Add Member",
+      "cancel": "Cancel"
+    }
+  },
   "apiErrors": {
     "default": "Oops! Something went wrong. Please try again later.",
     "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
@@ -288,6 +342,7 @@
   },
   "apiSuccess": {
     "accountUpdated": "Account updated successfully",
-    "companyUpdated": "Company updated successfully"
+    "companyUpdated": "Company updated successfully",
+    "memberAdded": "Member added successfully"
   }
 }

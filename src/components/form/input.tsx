@@ -1,3 +1,5 @@
+import React from "react"
+
 import {
   FormControl,
   FormDescription,
@@ -12,19 +14,19 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   description?: string
 }
 
-export const Input: React.FC<InputProps> = ({
-  label,
-  description,
-  ...props
-}) => {
-  return (
-    <FormItem>
-      {label && <FormLabel>{label}</FormLabel>}
-      <FormControl>
-        <InputUI {...props} />
-      </FormControl>
-      {description && <FormDescription>{description}</FormDescription>}
-      <FormMessage />
-    </FormItem>
-  )
-}
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, description, ...props }, ref) => {
+    return (
+      <FormItem>
+        {label && <FormLabel>{label}</FormLabel>}
+        <FormControl>
+          <InputUI {...props} ref={ref} />
+        </FormControl>
+        {description && <FormDescription>{description}</FormDescription>}
+        <FormMessage />
+      </FormItem>
+    )
+  }
+)
+
+Input.displayName = "Input"
