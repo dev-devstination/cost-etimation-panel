@@ -39,7 +39,8 @@
       "lastUpdated": "Last Updated",
       "email": "Email",
       "role": "Role",
-      "active": "Active"
+      "active": "Active",
+      "name": "Name"
     },
     "selectAll": "Select All",
     "error": {
@@ -66,7 +67,9 @@
       "settings": "Settings",
       "account": "Account",
       "company": "Company",
-      "members": "Members"
+      "members": "Members",
+      "activities": "Activities",
+      "categories": "Categories"
     }
   },
 
@@ -215,7 +218,9 @@
       "companyInformation": "Company",
       "members": "Members",
       "billingPlans": "Billing and Plans",
-      "security": "Security"
+      "security": "Security",
+      "activityCategories": "Activity Categories",
+      "settings": "Settings"
     }
   },
   "CompanyPage": {
@@ -335,6 +340,25 @@
       "cancel": "Cancel"
     }
   },
+  "ActivitiesCategoriesPage": {
+    "title": "Activity Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "save": "Add Category",
+      "cancel": "Cancel"
+    }
+  },
   "apiErrors": {
     "default": "Oops! Something went wrong. Please try again later.",
     "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
@@ -345,6 +369,10 @@
     "companyUpdated": "Company updated successfully",
     "memberAdded": "Member added successfully",
     "memberActivated": "Member activated successfully",
-    "memberDeactivated": "Member deactivated successfully"
+    "memberDeactivated": "Member deactivated successfully",
+    "categoryActivated": "Category activated successfully",
+    "categoryDeactivated": "Category deactivated successfully",
+    "categoryAdded": "Category added successfully",
+    "categoryUpdated": "Category updated successfully"
   }
 }

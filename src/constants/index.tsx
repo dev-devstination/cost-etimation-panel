@@ -1,4 +1,13 @@
-import { Building, FileText, Home, Lock, User, Users } from "lucide-react"
+import {
+  Building,
+  FileText,
+  Home,
+  List,
+  Lock,
+  Settings,
+  User,
+  Users,
+} from "lucide-react"
 
 import { NavigationLink } from "@/types"
 
@@ -9,6 +18,7 @@ export const COOKIES = {
 export const MAIN_NAVLINKS: NavigationLink[] = [
   { url: "/", label: "home", icon: Home },
   { url: "/resources", label: "resources", icon: FileText },
+  { url: "/activities/categories", label: "settings", icon: Settings },
 ]
 
 export const ACCOUNT_NAVLINKS: NavigationLink[] = [
@@ -17,4 +27,8 @@ export const ACCOUNT_NAVLINKS: NavigationLink[] = [
   { url: "/members", label: "members", icon: Users },
   { url: "/billing", label: "billingPlans", icon: FileText },
   { url: "/security", label: "security", icon: Lock },
+]
+
+export const SETTINGS_NAVLINKS: NavigationLink[] = [
+  { url: "/activities/categories", label: "activityCategories", icon: List },
 ]

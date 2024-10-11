@@ -54,7 +54,6 @@ export const NavbarBreadcrumb = () => {
                     <BreadcrumbLink asChild>
                       <Link href={href}>{t(translationKey)}</Link>
                     </BreadcrumbLink>
-                    <BreadcrumbSeparator />
                   </>
                 )}
               </BreadcrumbItem>

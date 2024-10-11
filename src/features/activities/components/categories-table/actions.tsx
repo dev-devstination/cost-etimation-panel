@@ -5,12 +5,12 @@ import { useTranslations } from "next-intl"
 import { useFormState } from "react-dom"
 
 import { Switch } from "@/components/ui/switch"
-import { MemberRow } from "@/features/users/components/members-table/columns"
-import { memberActivationAction } from "@/features/users/actions/member"
 import { useToast } from "@/hooks/use-toast"
+import { ActivityCategory } from "@/features/activities/interfaces/activity-category"
+import { categoryStateAction } from "@/features/activities/actions/category"
 
 interface ActionsProps {
-  member: MemberRow
+  category: ActivityCategory
 }
 
 const initialState = {
@@ -18,14 +18,14 @@ const initialState = {
   status: undefined,
 }
 
-export const Actions: React.FC<ActionsProps> = ({ member }) => {
+export const Actions: React.FC<ActionsProps> = ({ category }) => {
   const tSuccess = useTranslations("apiSuccess")
   const tError = useTranslations("apiErrors")
 
   const { toast } = useToast()
   const [isPending, startTransition] = useTransition()
   const [serverState, formAction] = useFormState(
-    memberActivationAction,
+    categoryStateAction,
     initialState
   )
 
@@ -43,21 +43,17 @@ export const Actions: React.FC<ActionsProps> = ({ member }) => {
     }
   }, [serverState, tError, tSuccess, toast])
 
-  const handleMemberState = (state: boolean) => {
+  const handleCategoryState = (state: boolean) => {
     startTransition(() => {
-      formAction({ id: member.id, active: state })
+      formAction({ id: category.id, state })
     })
-  }
-
-  if (member.id === member.currentUserId) {
-    return null
   }
 
   return (
     <Switch
-      defaultChecked={member.active}
+      defaultChecked={category.active}
       disabled={isPending}
-      onCheckedChange={handleMemberState}
+      onCheckedChange={handleCategoryState}
     />
   )
 }
