@@ -343,6 +343,8 @@
   "apiSuccess": {
     "accountUpdated": "Account updated successfully",
     "companyUpdated": "Company updated successfully",
-    "memberAdded": "Member added successfully"
+    "memberAdded": "Member added successfully",
+    "memberActivated": "Member activated successfully",
+    "memberDeactivated": "Member deactivated successfully"
   }
 }

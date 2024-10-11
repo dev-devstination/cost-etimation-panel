@@ -6,6 +6,7 @@ import { Member } from "@/features/users/interfaces/member"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/users/components/members-table/columns"
 import { AddMemberDialog } from "@/features/users/components/add-member-dialog"
+import { User } from "@/features/users/interfaces/user"
 
 export default async function MembersPage({
   params: { locale },
@@ -13,6 +14,12 @@ export default async function MembersPage({
   unstable_setRequestLocale(locale)
   const t = await getTranslations("MembersPage")
   const { data: members } = await fetcherSSR<Member[]>("/companies/members")
+  const { data: user } = await fetcherSSR<User>("/users/whoami")
+
+  const membersWithCurrentUserId = members.map((member) => ({
+    ...member,
+    currentUserId: user.id,
+  }))
 
   return (
     <div className="container mx-auto px-4">
@@ -24,7 +31,7 @@ export default async function MembersPage({
       </div>
 
       {/* Members Table */}
-      <DataTable columns={columns} data={members} filterKeys={["email"]} />
+      <DataTable columns={columns} data={membersWithCurrentUserId} />
     </div>
   )
 }

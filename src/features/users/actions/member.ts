@@ -45,3 +45,48 @@ export async function addMemberAction(
     }
   }
 }
+
+export async function memberActivationAction(
+  _: ActionState,
+  data: { id: string; active: boolean }
+): Promise<ActionState> {
+  try {
+    if (data.active) {
+      await fetcher(`/companies/members/${data.id}/activate`, {
+        method: "PATCH",
+      })
+
+      logger.info("Member activated successfully", { data })
+      revalidatePath("/members")
+
+      return { status: "success", message: "memberActivated" }
+    }
+
+    await fetcher(`/companies/members/${data.id}/deactivate`, {
+      method: "PATCH",
+    })
+
+    logger.info("Member deactivated successfully", { data })
+    revalidatePath("/members")
+
+    return { status: "success", message: "memberDeactivated" }
+  } catch (error) {
+    if (error instanceof ApiError) {
+      logger.error("Member activation/deactivation error", {
+        error: error.message,
+        statusCode: error.statusCode,
+        body: data,
+      })
+
+      switch (error.statusCode) {
+        default:
+          return { status: "destructive", message: "default" }
+      }
+    }
+
+    return {
+      message: "default",
+      status: "destructive",
+    }
+  }
+}

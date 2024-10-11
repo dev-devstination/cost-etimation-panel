@@ -30,16 +30,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-type AccessorKeys<T> = T extends { accessorKey: infer K }
-  ? K extends string
-    ? K
-    : never
-  : never
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  filterKeys?: AccessorKeys<ColumnDef<TData, TValue>>[]
   PopoverContent?: React.ComponentType<{ data: TData }>
 }
 
@@ -164,30 +157,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <TablePagination table={table} />
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {t("rowsSelected", {
-            selected: table.getFilteredSelectedRowModel().rows.length,
-            total: table.getFilteredRowModel().rows.length,
-          })}
-        </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {t("previous")}
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {t("next")}
-        </Button>
-      </div> */}
     </div>
   )
 }
