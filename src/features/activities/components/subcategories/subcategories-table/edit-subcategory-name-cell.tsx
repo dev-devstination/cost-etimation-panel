@@ -6,18 +6,19 @@ import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { ActivityCategory } from "@/features/activities/interfaces/activity-category"
-import {
-  CategoryFormData,
-  useCategorySchema,
-} from "@/features/activities/schemas/category"
-import { updateCategoryAction } from "@/features/activities/actions/category"
 import { useToast } from "@/hooks/use-toast"
 import { FormField, Form } from "@/components/ui/form"
 import { Input } from "@/components/form/input"
+import { Subcategory } from "@/features/activities/interfaces/subcategory"
+import {
+  SubcategoryNameFormData,
+  useSubcategoryNameSchema,
+} from "@/features/activities/schemas/subcategory"
+import { updateSubcategoryAction } from "@/features/activities/actions/subcategory"
+import { SubcategoriesRow } from "@/features/activities/components/subcategories/subcategories-table/columns"
 
-interface EditCategoryCellProps {
-  category: ActivityCategory
+interface EditSubcategoryNameCellProps {
+  subcategory: SubcategoriesRow
 }
 
 const initialState = {
@@ -25,26 +26,26 @@ const initialState = {
   status: undefined,
 }
 
-export const EditCategoryCell: React.FC<EditCategoryCellProps> = ({
-  category,
-}) => {
+export const EditSubcategoryNameCell: React.FC<
+  EditSubcategoryNameCellProps
+> = ({ subcategory }) => {
   const { toast } = useToast()
-  const t = useTranslations("ActivitiesCategoriesPage.form")
+  const t = useTranslations("ActivitiesSubcategoriesPage.form")
   const tSuccess = useTranslations("apiSuccess")
   const tError = useTranslations("apiErrors")
 
-  const categorySchema = useCategorySchema()
+  const subcategoryNameSchema = useSubcategoryNameSchema()
   const [isPending, startTransition] = useTransition()
 
   const [serverState, formAction] = useFormState(
-    updateCategoryAction,
+    updateSubcategoryAction,
     initialState
   )
 
-  const form = useForm<CategoryFormData>({
-    resolver: zodResolver(categorySchema),
+  const form = useForm<SubcategoryNameFormData>({
+    resolver: zodResolver(subcategoryNameSchema),
     defaultValues: {
-      name: category.name,
+      name: subcategory.name,
     },
   })
 
@@ -62,9 +63,9 @@ export const EditCategoryCell: React.FC<EditCategoryCellProps> = ({
     }
   }, [serverState, tError, tSuccess, toast])
 
-  const onSubmit = (data: CategoryFormData) => {
+  const onSubmit = (data: SubcategoryNameFormData) => {
     startTransition(() => {
-      formAction({ ...data, id: category.id })
+      formAction({ ...data, id: subcategory.id })
     })
   }
 

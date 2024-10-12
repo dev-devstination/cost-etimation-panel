@@ -1,0 +1,45 @@
+"use client"
+
+import { ColumnDef } from "@tanstack/react-table"
+
+import { ColumnHeader } from "@/components/column-header"
+import { FlaggedCell } from "@/components/flagged-cell"
+import { Actions } from "@/features/activities/components/subcategories/subcategories-table/actions"
+import { Subcategory } from "@/features/activities/interfaces/subcategory"
+import { EditSubcategoryNameCell } from "@/features/activities/components/subcategories/subcategories-table/edit-subcategory-name-cell"
+import { Category } from "@/features/activities/interfaces/category"
+import { EditSubcategoryCategoryCell } from "./edit-subcategory-category-cell"
+
+export interface SubcategoriesRow extends Subcategory {
+  categories: Category[]
+}
+
+export const columns: ColumnDef<SubcategoriesRow>[] = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="name" sortable />
+    },
+    cell: ({ row }) => <EditSubcategoryNameCell subcategory={row.original} />,
+  },
+  {
+    accessorKey: "category_id",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="category" sortable />
+    },
+    cell: ({ row }) => (
+      <EditSubcategoryCategoryCell subcategory={row.original} />
+    ),
+  },
+  {
+    accessorKey: "isActive",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="active" />
+    },
+    cell: ({ row }) => <FlaggedCell checked={row.original.active} />,
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <Actions subcategory={row.original} />,
+  },
+]

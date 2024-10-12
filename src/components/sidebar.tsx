@@ -6,7 +6,7 @@ import { NavigationLink } from "@/components/navigation-link"
 import { NavigationLink as INavigationLink } from "@/types"
 
 interface SidebarProps {
-  navLinks: INavigationLink[]
+  navLinks: INavigationLink
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ navLinks }) => {
@@ -18,11 +18,25 @@ const Sidebar: React.FC<SidebarProps> = ({ navLinks }) => {
         <DashboardLogo />
       </div>
       <nav className="flex-1 p-4">
-        <ul className="space-y-2">
-          {navLinks.map(({ url, label, icon }) => (
-            <NavigationLink key={url} href={url} label={t(label)} icon={icon} />
-          ))}
-        </ul>
+        {Object.entries(navLinks).map(([title, links]) => (
+          <div key={title} className="mb-4">
+            {title !== "default" && (
+              <h3 className="mb-2 px-2 text-sm font-semibold text-muted-foreground">
+                {t(title as keyof IntlMessages["layout"]["navlinks"])}
+              </h3>
+            )}
+            <ul className="space-y-2">
+              {links.map(({ url, label, icon }) => (
+                <NavigationLink
+                  key={url}
+                  href={url}
+                  label={t(label)}
+                  icon={icon}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
       </nav>
     </div>
   )

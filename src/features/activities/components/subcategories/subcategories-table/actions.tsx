@@ -6,11 +6,11 @@ import { useFormState } from "react-dom"
 
 import { Switch } from "@/components/ui/switch"
 import { useToast } from "@/hooks/use-toast"
-import { ActivityCategory } from "@/features/activities/interfaces/activity-category"
-import { categoryStateAction } from "@/features/activities/actions/category"
+import { Subcategory } from "@/features/activities/interfaces/subcategory"
+import { subcategoryStateAction } from "@/features/activities/actions/subcategory"
 
 interface ActionsProps {
-  category: ActivityCategory
+  subcategory: Subcategory
 }
 
 const initialState = {
@@ -18,14 +18,14 @@ const initialState = {
   status: undefined,
 }
 
-export const Actions: React.FC<ActionsProps> = ({ category }) => {
+export const Actions: React.FC<ActionsProps> = ({ subcategory }) => {
   const tSuccess = useTranslations("apiSuccess")
   const tError = useTranslations("apiErrors")
 
   const { toast } = useToast()
   const [isPending, startTransition] = useTransition()
   const [serverState, formAction] = useFormState(
-    categoryStateAction,
+    subcategoryStateAction,
     initialState
   )
 
@@ -43,17 +43,17 @@ export const Actions: React.FC<ActionsProps> = ({ category }) => {
     }
   }, [serverState, tError, tSuccess, toast])
 
-  const handleCategoryState = (state: boolean) => {
+  const handleSubcategoryState = (state: boolean) => {
     startTransition(() => {
-      formAction({ id: category.id, state })
+      formAction({ id: subcategory.id, state })
     })
   }
 
   return (
     <Switch
-      defaultChecked={category.active}
+      defaultChecked={subcategory.active}
       disabled={isPending}
-      onCheckedChange={handleCategoryState}
+      onCheckedChange={handleSubcategoryState}
     />
   )
 }

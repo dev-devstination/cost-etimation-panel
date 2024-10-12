@@ -3,18 +3,27 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 import { LocalizedPageProps } from "@/types"
 import { fetcherSSR } from "@/lib/api/fetcher"
 import { DataTable } from "@/components/data-table"
-import { columns } from "@/features/activities/components/categories/categories-table/columns"
+import { AddSubcategoryDialog } from "@/features/activities/components/subcategories/add-subcategory-dialog"
+import { Subcategory } from "@/features/activities/interfaces/subcategory"
+import { columns } from "@/features/activities/components/subcategories/subcategories-table/columns"
 import { Category } from "@/features/activities/interfaces/category"
-import { AddCategoryDialog } from "@/features/activities/components/categories/add-category-dialog"
 
-export default async function CategoriesPage({
+export default async function SubcategoriesPage({
   params: { locale },
 }: LocalizedPageProps) {
   unstable_setRequestLocale(locale)
-  const t = await getTranslations("ActivitiesCategoriesPage")
+  const t = await getTranslations("ActivitiesSubcategoriesPage")
+  const { data: subcategories } = await fetcherSSR<Subcategory[]>(
+    "/activities/subcategories"
+  )
   const { data: categories } = await fetcherSSR<Category[]>(
     "/activities/categories"
   )
+
+  const data = subcategories.map((subcategory) => ({
+    ...subcategory,
+    categories,
+  }))
 
   return (
     <div className="container mx-auto px-4">
@@ -22,11 +31,11 @@ export default async function CategoriesPage({
         <h1 className="text-3xl font-bold">{t("title")}</h1>
 
         {/* Add Category Modal */}
-        <AddCategoryDialog />
+        <AddSubcategoryDialog />
       </div>
 
       {/* Categories Table */}
-      <DataTable columns={columns} data={categories} />
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }

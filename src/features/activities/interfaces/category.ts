@@ -1,4 +1,4 @@
-export interface ActivityCategory {
+export interface Category {
   id: string
   name: string
   active: boolean

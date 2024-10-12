@@ -4,26 +4,30 @@ import { revalidatePath } from "next/cache"
 import logger from "@/lib/logger"
 import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
-import { CategoryFormData } from "@/features/activities/schemas/category"
+import {
+  SubcategoryNameFormData,
+  SubcategoryFormData,
+  SubcategoryCategoryFormData,
+} from "@/features/activities/schemas/subcategory"
 
-export async function updateCategoryAction(
+export async function updateSubcategoryAction(
   _: ActionState,
-  data: CategoryFormData & { id: string }
+  data: (SubcategoryNameFormData | SubcategoryCategoryFormData) & { id: string }
 ): Promise<ActionState> {
   const { id, ...body } = data
   try {
-    await fetcher(`/activities/categories/${id}`, {
+    await fetcher(`/activities/subcategories/${id}`, {
       method: "PATCH",
       body,
     })
 
-    logger.info("Category updated successfully", { data })
-    revalidatePath("/activities/categories")
+    logger.info("Subcategory updated successfully", { data })
+    revalidatePath("/activities/subcategories")
 
-    return { status: "success", message: "categoryUpdated" }
+    return { status: "success", message: "subcategoryUpdated" }
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Category update error", {
+      logger.error("Subcategory update error", {
         error: error.message,
         statusCode: error.statusCode,
         body: data,
@@ -42,23 +46,23 @@ export async function updateCategoryAction(
   }
 }
 
-export async function addCategoryAction(
+export async function addSubcategoryAction(
   _: ActionState,
-  data: CategoryFormData
+  data: SubcategoryFormData
 ): Promise<ActionState> {
   try {
-    await fetcher("/activities/categories", {
+    await fetcher("/activities/subcategories", {
       method: "POST",
       body: data,
     })
 
-    logger.info("Category added successfully", { data })
-    revalidatePath("/activities/categories")
+    logger.info("Subcategory added successfully", { data })
+    revalidatePath("/activities/subcategories")
 
-    return { status: "success", message: "categoryAdded" }
+    return { status: "success", message: "subcategoryAdded" }
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Category add error", {
+      logger.error("Subcategory add error", {
         error: error.message,
         statusCode: error.statusCode,
         body: data,
@@ -77,33 +81,33 @@ export async function addCategoryAction(
   }
 }
 
-export async function categoryStateAction(
+export async function subcategoryStateAction(
   _: ActionState,
   data: { id: string; state: boolean }
 ): Promise<ActionState> {
   try {
     if (data.state) {
-      await fetcher(`/activities/categories/${data.id}/activate`, {
+      await fetcher(`/activities/subcategories/${data.id}/activate`, {
         method: "PATCH",
       })
 
-      logger.info("Category activated successfully", { data })
-      revalidatePath("/activities/categories")
+      logger.info("Subcategory activated successfully", { data })
+      revalidatePath("/activities/subcategories")
 
-      return { status: "success", message: "categoryActivated" }
+      return { status: "success", message: "subcategoryActivated" }
     }
 
-    await fetcher(`/activities/categories/${data.id}/deactivate`, {
+    await fetcher(`/activities/subcategories/${data.id}/deactivate`, {
       method: "PATCH",
     })
 
-    logger.info("Category deactivated successfully", { data })
-    revalidatePath("/activities/categories")
+    logger.info("Subcategory deactivated successfully", { data })
+    revalidatePath("/activities/subcategories")
 
-    return { status: "success", message: "categoryDeactivated" }
+    return { status: "success", message: "subcategoryDeactivated" }
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Category activation/deactivation error", {
+      logger.error("Subcategory activation/deactivation error", {
         error: error.message,
         statusCode: error.statusCode,
         body: data,

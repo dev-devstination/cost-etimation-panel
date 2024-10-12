@@ -5,9 +5,11 @@ export interface LocalizedPageProps {
 }
 
 export interface NavigationLink {
-  icon: LucideIcon
-  label: keyof IntlMessages["layout"]["navlinks"]
-  url: string
+  [k: string]: {
+    icon: LucideIcon
+    label: keyof IntlMessages["layout"]["navlinks"]
+    url: string
+  }[]
 }
 
 export type ActionState = {

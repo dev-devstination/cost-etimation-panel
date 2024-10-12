@@ -2,9 +2,10 @@ import {
   Building,
   FileText,
   Home,
-  List,
   Lock,
   Settings,
+  Tag,
+  Tags,
   User,
   Users,
 } from "lucide-react"
@@ -15,20 +16,35 @@ export const COOKIES = {
   AUTH_TOKEN: "authToken",
 }
 
-export const MAIN_NAVLINKS: NavigationLink[] = [
-  { url: "/", label: "home", icon: Home },
-  { url: "/resources", label: "resources", icon: FileText },
-  { url: "/activities/categories", label: "settings", icon: Settings },
-]
+export const MAIN_NAVLINKS: NavigationLink = {
+  default: [
+    { url: "/", label: "home", icon: Home },
+    { url: "/resources", label: "resources", icon: FileText },
+    { url: "/activities/categories", label: "settings", icon: Settings },
+  ],
+}
 
-export const ACCOUNT_NAVLINKS: NavigationLink[] = [
-  { url: "/account", label: "accountInformation", icon: User },
-  { url: "/company", label: "companyInformation", icon: Building },
-  { url: "/members", label: "members", icon: Users },
-  { url: "/billing", label: "billingPlans", icon: FileText },
-  { url: "/security", label: "security", icon: Lock },
-]
+export const ACCOUNT_NAVLINKS: NavigationLink = {
+  default: [
+    { url: "/account", label: "accountInformation", icon: User },
+    { url: "/company", label: "companyInformation", icon: Building },
+    { url: "/members", label: "members", icon: Users },
+    { url: "/billing", label: "billingPlans", icon: FileText },
+    { url: "/security", label: "security", icon: Lock },
+  ],
+}
 
-export const SETTINGS_NAVLINKS: NavigationLink[] = [
-  { url: "/activities/categories", label: "activityCategories", icon: List },
-]
+export const SETTINGS_NAVLINKS: NavigationLink = {
+  activity: [
+    {
+      url: "/activities/categories",
+      label: "categories",
+      icon: Tag,
+    },
+    {
+      url: "/activities/subcategories",
+      label: "subcategories",
+      icon: Tags,
+    },
+  ],
+}

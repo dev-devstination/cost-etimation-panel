@@ -40,7 +40,8 @@
       "email": "Email",
       "role": "Role",
       "active": "Active",
-      "name": "Name"
+      "name": "Name",
+      "category": "Category"
     },
     "selectAll": "Select All",
     "error": {
@@ -69,7 +70,8 @@
       "company": "Company",
       "members": "Members",
       "activities": "Activities",
-      "categories": "Categories"
+      "categories": "Categories",
+      "subcategories": "Subcategories"
     }
   },
 
@@ -219,8 +221,10 @@
       "members": "Members",
       "billingPlans": "Billing and Plans",
       "security": "Security",
-      "activityCategories": "Activity Categories",
-      "settings": "Settings"
+      "categories": "Categories",
+      "settings": "Settings",
+      "subcategories": "Subcategories",
+      "activity": "Activity"
     }
   },
   "CompanyPage": {
@@ -359,6 +363,32 @@
       "cancel": "Cancel"
     }
   },
+  "ActivitiesSubcategoriesPage": {
+    "title": "Activity Subcategories",
+    "dialog": {
+      "add": "Add Subcategory",
+      "title": "Add New Subcategory",
+      "description": "Add a new subcategory to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the subcategory name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "save": "Add Subcategory",
+      "cancel": "Cancel"
+    }
+  },
   "apiErrors": {
     "default": "Oops! Something went wrong. Please try again later.",
     "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
@@ -373,6 +403,10 @@
     "categoryActivated": "Category activated successfully",
     "categoryDeactivated": "Category deactivated successfully",
     "categoryAdded": "Category added successfully",
-    "categoryUpdated": "Category updated successfully"
+    "categoryUpdated": "Category updated successfully",
+    "subcategoryAdded": "Subcategory added successfully",
+    "subcategoryUpdated": "Subcategory updated successfully",
+    "subcategoryDeactivated": "Subcategory deactivated successfully",
+    "subcategoryActivated": "Subcategory activated successfully"
   }
 }

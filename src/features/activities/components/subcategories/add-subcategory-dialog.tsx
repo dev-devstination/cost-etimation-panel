@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react"
-import { useTranslations } from "next-intl"
+import { getTranslations } from "next-intl/server"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -10,10 +10,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { AddCategoryForm } from "@/features/activities/components/add-category-form"
+import { AddSubcategoryForm } from "@/features/activities/components/subcategories/add-subcategory-form"
+import { fetcherSSR } from "@/lib/api/fetcher"
+import { Category } from "@/features/activities/interfaces/category"
 
-export const AddCategoryDialog = () => {
-  const t = useTranslations("ActivitiesCategoriesPage.dialog")
+export const AddSubcategoryDialog = async () => {
+  const t = await getTranslations("ActivitiesSubcategoriesPage.dialog")
+  const { data: categories } = await fetcherSSR<Category[]>(
+    "/activities/categories"
+  )
 
   return (
     <Dialog>
@@ -28,7 +33,7 @@ export const AddCategoryDialog = () => {
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
-        <AddCategoryForm />
+        <AddSubcategoryForm categories={categories} />
       </DialogContent>
     </Dialog>
   )
