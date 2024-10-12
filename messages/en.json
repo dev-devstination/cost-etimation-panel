@@ -407,6 +407,7 @@
     "subcategoryAdded": "Subcategory added successfully",
     "subcategoryUpdated": "Subcategory updated successfully",
     "subcategoryDeactivated": "Subcategory deactivated successfully",
-    "subcategoryActivated": "Subcategory activated successfully"
+    "subcategoryActivated": "Subcategory activated successfully",
+    "memberUpdated": "Member updated successfully"
   }
 }

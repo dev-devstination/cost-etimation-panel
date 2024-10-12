@@ -29,5 +29,13 @@ export const useMemberSchema = () => {
     })
 }
 
+export const useMemberRoleSchema = () => {
+  const schema = useMemberSchema()
+  return schema.innerType().pick({ role: true })
+}
+
 export type MemberSchema = ReturnType<typeof useMemberSchema>
 export type MemberFormData = z.infer<MemberSchema>
+
+export type MemberRoleSchema = ReturnType<typeof useMemberRoleSchema>
+export type MemberRoleFormData = z.infer<MemberRoleSchema>

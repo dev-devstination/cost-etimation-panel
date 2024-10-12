@@ -4,11 +4,13 @@ import { ColumnDef } from "@tanstack/react-table"
 
 import { ColumnHeader } from "@/components/column-header"
 import { Member } from "@/features/users/interfaces/member"
-import { FlaggedCell } from "@/components/flagged-cell"
 import { Actions } from "@/features/users/components/members-table/actions"
+import { RoleResponse } from "@/features/users/interfaces/role"
+import { EditRoleCell } from "@/features/users/components/members-table/edit-role-cell"
 
 export interface MemberRow extends Member {
   currentUserId: string
+  roles: RoleResponse[]
 }
 
 export const columns: ColumnDef<MemberRow>[] = [
@@ -23,13 +25,7 @@ export const columns: ColumnDef<MemberRow>[] = [
     header: ({ column }) => {
       return <ColumnHeader column={column} title="role" sortable />
     },
-  },
-  {
-    accessorKey: "isActive",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="active" />
-    },
-    cell: ({ row }) => <FlaggedCell checked={row.original.active} />,
+    cell: ({ row }) => <EditRoleCell member={row.original} />,
   },
   {
     id: "actions",

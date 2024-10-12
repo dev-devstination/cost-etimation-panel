@@ -32,13 +32,6 @@ export const columns: ColumnDef<SubcategoriesRow>[] = [
     ),
   },
   {
-    accessorKey: "isActive",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="active" />
-    },
-    cell: ({ row }) => <FlaggedCell checked={row.original.active} />,
-  },
-  {
     id: "actions",
     cell: ({ row }) => <Actions subcategory={row.original} />,
   },

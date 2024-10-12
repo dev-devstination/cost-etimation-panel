@@ -7,6 +7,7 @@ import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/users/components/members-table/columns"
 import { AddMemberDialog } from "@/features/users/components/add-member-dialog"
 import { User } from "@/features/users/interfaces/user"
+import { RoleResponse } from "@/features/users/interfaces/role"
 
 export default async function MembersPage({
   params: { locale },
@@ -15,10 +16,14 @@ export default async function MembersPage({
   const t = await getTranslations("MembersPage")
   const { data: members } = await fetcherSSR<Member[]>("/companies/members")
   const { data: user } = await fetcherSSR<User>("/users/whoami")
+  const { data: roles } = await fetcherSSR<RoleResponse[]>(
+    "/setting/roles/company"
+  )
 
-  const membersWithCurrentUserId = members.map((member) => ({
+  const data = members.map((member) => ({
     ...member,
     currentUserId: user.id,
+    roles,
   }))
 
   return (
@@ -31,7 +36,7 @@ export default async function MembersPage({
       </div>
 
       {/* Members Table */}
-      <DataTable columns={columns} data={membersWithCurrentUserId} />
+      <DataTable columns={columns} data={data} />
     </div>
   )
 }

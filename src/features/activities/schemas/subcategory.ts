@@ -19,8 +19,18 @@ export const useSubcategoryNameSchema = () => {
   return schema.pick({ name: true })
 }
 
+export const useSubcategoryCategorySchema = () => {
+  const schema = useSubcategorySchema()
+  return schema.pick({ category_id: true })
+}
+
 export type SubcategorySchema = ReturnType<typeof useSubcategorySchema>
 export type SubcategoryFormData = z.infer<SubcategorySchema>
 
 export type SubcategoryNameSchema = ReturnType<typeof useSubcategoryNameSchema>
 export type SubcategoryNameFormData = z.infer<SubcategoryNameSchema>
+
+export type SubcategoryCategorySchema = ReturnType<
+  typeof useSubcategoryCategorySchema
+>
+export type SubcategoryCategoryFormData = z.infer<SubcategoryCategorySchema>
