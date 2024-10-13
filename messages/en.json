@@ -71,7 +71,8 @@
       "members": "Members",
       "activities": "Activities",
       "categories": "Categories",
-      "subcategories": "Subcategories"
+      "subcategories": "Subcategories",
+      "projects": "Projects"
     }
   },
 
@@ -224,7 +225,8 @@
       "categories": "Categories",
       "settings": "Settings",
       "subcategories": "Subcategories",
-      "activity": "Activity"
+      "activity": "Activity",
+      "projects": "Projects"
     }
   },
   "CompanyPage": {
@@ -387,6 +389,34 @@
       },
       "save": "Add Subcategory",
       "cancel": "Cancel"
+    }
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "overview": "Overview",
+    "dialog": {
+      "create": "Create Project",
+      "title": "Create New Project",
+      "description": "Create a new project to your projects"
+    }
+  },
+  "ProjectsCategoriesPage": {
+    "title": "Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your projects"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "cancel": "Cancel",
+      "save": "Add Category"
     }
   },
   "apiErrors": {

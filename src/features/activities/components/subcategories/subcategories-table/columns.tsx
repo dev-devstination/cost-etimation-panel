@@ -5,9 +5,9 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
 import { Actions } from "@/features/activities/components/subcategories/subcategories-table/actions"
-import { Subcategory } from "@/features/activities/interfaces/subcategory"
+import { Subcategory } from "@/types"
 import { EditSubcategoryNameCell } from "@/features/activities/components/subcategories/subcategories-table/edit-subcategory-name-cell"
-import { Category } from "@/features/activities/interfaces/category"
+import { Category } from "@/types"
 import { EditSubcategoryCategoryCell } from "./edit-subcategory-category-cell"
 
 export interface SubcategoriesRow extends Subcategory {

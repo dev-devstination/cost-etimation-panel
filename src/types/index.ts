@@ -21,3 +21,16 @@ export type SelectOption = {
   label: string
   value: string
 }
+
+export interface Category {
+  id: string
+  name: string
+  active: boolean
+}
+
+export interface Subcategory {
+  id: string
+  name: string
+  active: boolean
+  category_id: string
+}

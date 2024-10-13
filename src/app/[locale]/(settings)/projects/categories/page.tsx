@@ -3,17 +3,17 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 import { LocalizedPageProps } from "@/types"
 import { fetcherSSR } from "@/lib/api/fetcher"
 import { DataTable } from "@/components/data-table"
-import { columns } from "@/features/activities/components/categories/categories-table/columns"
-import { AddCategoryDialog } from "@/features/activities/components/categories/add-category-dialog"
+import { columns } from "@/features/projects/components/categories/categories-table/columns"
+import { AddCategoryDialog } from "@/features/projects/components/categories/add-category-dialog"
 import { Category } from "@/types"
 
-export default async function CategoriesPage({
+export default async function ProjectsCategoriesPage({
   params: { locale },
 }: LocalizedPageProps) {
   unstable_setRequestLocale(locale)
-  const t = await getTranslations("ActivitiesCategoriesPage")
+  const t = await getTranslations("ProjectsCategoriesPage")
   const { data: categories } = await fetcherSSR<Category[]>(
-    "/activities/categories"
+    "/projects/categories"
   )
 
   return (

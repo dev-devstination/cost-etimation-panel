@@ -14,6 +14,7 @@ import { NavigationLink } from "@/types"
 
 export const COOKIES = {
   AUTH_TOKEN: "authToken",
+  CURRENT_PROJECT_ID: "currentProjectId",
 }
 
 export const MAIN_NAVLINKS: NavigationLink = {
@@ -35,6 +36,18 @@ export const ACCOUNT_NAVLINKS: NavigationLink = {
 }
 
 export const SETTINGS_NAVLINKS: NavigationLink = {
+  projects: [
+    {
+      url: "/projects",
+      label: "projects",
+      icon: Building,
+    },
+    {
+      url: "/projects/categories",
+      label: "categories",
+      icon: Tag,
+    },
+  ],
   activity: [
     {
       url: "/activities/categories",

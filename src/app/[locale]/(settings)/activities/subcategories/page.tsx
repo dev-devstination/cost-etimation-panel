@@ -4,9 +4,8 @@ import { LocalizedPageProps } from "@/types"
 import { fetcherSSR } from "@/lib/api/fetcher"
 import { DataTable } from "@/components/data-table"
 import { AddSubcategoryDialog } from "@/features/activities/components/subcategories/add-subcategory-dialog"
-import { Subcategory } from "@/features/activities/interfaces/subcategory"
 import { columns } from "@/features/activities/components/subcategories/subcategories-table/columns"
-import { Category } from "@/features/activities/interfaces/category"
+import { Subcategory, Category } from "@/types"
 
 export default async function SubcategoriesPage({
   params: { locale },
