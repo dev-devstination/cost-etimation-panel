@@ -398,6 +398,81 @@
       "create": "Create Project",
       "title": "Create New Project",
       "description": "Create a new project to your projects"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the project name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "client_name": {
+        "label": "Client Name",
+        "placeholder": "Enter the client name",
+        "validation": {
+          "required": "Client name is required"
+        }
+      },
+      "consultant_name": {
+        "label": "Consultant Name",
+        "placeholder": "Enter the consultant name",
+        "validation": {
+          "required": "Consultant name is required"
+        }
+      },
+      "currency_id": {
+        "label": "Currency",
+        "placeholder": "Select a currency",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "queries_dead_line_date": {
+        "label": "Queries Deadline Date",
+        "placeholder": "Enter the queries deadline date",
+        "validation": {
+          "required": "Queries deadline date is required"
+        }
+      },
+      "release_date": {
+        "label": "Release Date",
+        "placeholder": "Enter the release date",
+        "validation": {
+          "required": "Release date is required"
+        }
+      },
+      "site_visit_date": {
+        "label": "Site Visit Date",
+        "placeholder": "Enter the site visit date",
+        "validation": {
+          "required": "Site visit date is required"
+        }
+      },
+      "submission_date": {
+        "label": "Submission Date",
+        "placeholder": "Enter the submission date",
+        "validation": {
+          "required": "Submission date is required"
+        }
+      },
+      "area": {
+        "label": "Area",
+        "placeholder": "Enter the area",
+        "validation": {
+          "required": "Area is required",
+          "invalid": "Please enter a valid area"
+        }
+      },
+      "save": "Create Project",
+      "cancel": "Cancel"
     }
   },
   "ProjectsCategoriesPage": {
@@ -438,6 +513,10 @@
     "subcategoryUpdated": "Subcategory updated successfully",
     "subcategoryDeactivated": "Subcategory deactivated successfully",
     "subcategoryActivated": "Subcategory activated successfully",
-    "memberUpdated": "Member updated successfully"
+    "memberUpdated": "Member updated successfully",
+    "projectCreated": "Project created successfully",
+    "projectUpdated": "Project updated successfully",
+    "projectActivated": "Project activated successfully",
+    "projectDeactivated": "Project deactivated successfully"
   }
 }

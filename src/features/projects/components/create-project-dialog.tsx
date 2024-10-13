@@ -10,6 +10,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { CreateProjectForm } from "@/features/projects/components/create-project-form"
 
 export const CreateProjectDialog = () => {
   const t = useTranslations("ProjectsPage.dialog")
@@ -27,7 +28,7 @@ export const CreateProjectDialog = () => {
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
-        {/* <AddMemberForm roles={data} /> */}
+        <CreateProjectForm />
       </DialogContent>
     </Dialog>
   )

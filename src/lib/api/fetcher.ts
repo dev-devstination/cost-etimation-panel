@@ -11,7 +11,7 @@ const API_BASE_URL =
 type FetchOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
   headers?: Record<string, string>
-  body?: Record<string, string> | null
+  body?: Record<string, string | number> | null
   cache?: RequestCache
   next?: NextFetchRequestConfig
 }
