@@ -41,7 +41,9 @@
       "role": "Role",
       "active": "Active",
       "name": "Name",
-      "category": "Category"
+      "category": "Category",
+      "currency": "Currency",
+      "exchange_rate": "Exchange Rate"
     },
     "selectAll": "Select All",
     "error": {
@@ -72,10 +74,61 @@
       "activities": "Activities",
       "categories": "Categories",
       "subcategories": "Subcategories",
-      "projects": "Projects"
+      "projects": "Projects",
+      "currencies": "Currencies"
     }
   },
-
+  "CurrenciesPage": {
+    "title": "Currencies",
+    "dialog": {
+      "add": "Add Currency",
+      "title": "Add New Currency",
+      "description": "Add a new currency to your currencies"
+    },
+    "form": {
+      "currencyInformation": "Currency Information",
+      "exchangeRates": "Exchange Rates",
+      "code": {
+        "label": "Code",
+        "placeholder": "Enter the currency code",
+        "validation": {
+          "required": "Code is required"
+        }
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Enter the currency country",
+        "validation": {
+          "required": "Country is required"
+        }
+      },
+      "currency": {
+        "label": "Currency",
+        "placeholder": "Enter the currency name",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "exchange_rate": {
+        "label": "Exchange Rate",
+        "placeholder": "Enter the exchange rate",
+        "validation": {
+          "required": "Exchange rate is required",
+          "invalid": "Please enter a valid exchange rate"
+        }
+      },
+      "rate": {
+        "label": "Rate",
+        "placeholder": "Enter the rate",
+        "validation": {
+          "required": "Rate is required",
+          "invalid": "Please enter a valid rate"
+        }
+      },
+      "save": "Add Currency",
+      "cancel": "Cancel"
+    }
+  },
   "HomePage": {
     "title": "Hello world!"
   },
@@ -226,7 +279,8 @@
       "settings": "Settings",
       "subcategories": "Subcategories",
       "activity": "Activity",
-      "projects": "Projects"
+      "projects": "Projects",
+      "currencies": "Currencies"
     }
   },
   "CompanyPage": {
@@ -517,6 +571,10 @@
     "projectCreated": "Project created successfully",
     "projectUpdated": "Project updated successfully",
     "projectActivated": "Project activated successfully",
-    "projectDeactivated": "Project deactivated successfully"
+    "projectDeactivated": "Project deactivated successfully",
+    "currencyAdded": "Currency added successfully",
+    "currencyUpdated": "Currency updated successfully",
+    "currencyActivated": "Currency activated successfully",
+    "currencyDeactivated": "Currency deactivated successfully"
   }
 }

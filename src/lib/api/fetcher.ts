@@ -11,7 +11,7 @@ const API_BASE_URL =
 type FetchOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
   headers?: Record<string, string>
-  body?: Record<string, string | number> | null
+  body?: Record<string, string | number | boolean> | null
   cache?: RequestCache
   next?: NextFetchRequestConfig
 }
@@ -64,7 +64,8 @@ export async function fetcher<T>(
     if (!res.ok) {
       logger.error(`API error: ${res.status}`, { url, status: res.status })
 
-      let errorMessage = `API error: ${res.status}`
+      let errorMessage = `API error: ${res.statusText}`
+
       try {
         const errorData = await res.json()
         errorMessage = errorData.message || errorMessage

@@ -1,5 +1,6 @@
 import {
   Building,
+  DollarSign,
   FileText,
   Home,
   Lock,
@@ -36,6 +37,7 @@ export const ACCOUNT_NAVLINKS: NavigationLink = {
 }
 
 export const SETTINGS_NAVLINKS: NavigationLink = {
+  default: [{ url: "/currencies", label: "currencies", icon: DollarSign }],
   projects: [
     {
       url: "/projects",
