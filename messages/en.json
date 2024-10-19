@@ -270,6 +270,11 @@
       "en": "English",
       "ar": "العربية"
     },
+    "projectSelector": {
+      "selectProject": "Select Project",
+      "noCurrentProject": "No project",
+      "currentProject": "Current Project: "
+    },
     "navlinks": {
       "home": "Home",
       "resources": "Resources",
@@ -295,6 +300,13 @@
         "placeholder": "Enter your company name",
         "validation": {
           "required": "Company name is required"
+        }
+      },
+      "currency_id": {
+        "label": "Currency",
+        "placeholder": "Select a currency",
+        "validation": {
+          "required": "Currency is required"
         }
       },
       "location": {
@@ -454,6 +466,19 @@
     "current": "Current Project",
     "projectsList": {
       "title": "Projects List"
+    },
+    "currentProject": {
+      "noCurrentProject": "No project selected",
+      "projectInfo": "Project Info",
+      "client_name": "Client Name: ",
+      "consultant_name": "Consultant Name: ",
+      "area": "Area: ",
+      "category": "Category: ",
+      "projectDates": "Project Dates",
+      "queries_dead_line_date": "Queries Deadline Date: ",
+      "release_date": "Release Date: ",
+      "site_visit_date": "Site Visit Date: ",
+      "submission_date": "Submission Date: "
     },
     "noCurrentProject": "No current project",
     "dialog": {

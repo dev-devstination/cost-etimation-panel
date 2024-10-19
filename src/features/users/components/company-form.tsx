@@ -19,9 +19,12 @@ import { Input } from "@/components/form/input"
 import { SubmitMessage } from "@/components/form/submit-message"
 import { Company } from "@/features/users/interfaces/company"
 import { companyAction } from "@/features/users/actions/company"
+import { Currency } from "@/features/currencies/interfaces/currency"
+import { Select } from "@/components/form/select"
 
 interface CompanyFormProps {
   company: Company
+  currencies: Currency[]
 }
 
 const initialState = {
@@ -29,7 +32,10 @@ const initialState = {
   status: undefined,
 }
 
-export const CompanyForm: React.FC<CompanyFormProps> = ({ company }) => {
+export const CompanyForm: React.FC<CompanyFormProps> = ({
+  company,
+  currencies,
+}) => {
   const t = useTranslations("CompanyPage.form")
 
   const companySchema = useCompanySchema()
@@ -42,6 +48,7 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({ company }) => {
     defaultValues: {
       name: company.name,
       location: company.location,
+      currency_id: company.currency_id,
     },
   })
 
@@ -50,6 +57,11 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({ company }) => {
       formAction(data)
     })
   }
+
+  const currenciesOptions = currencies.map(({ id, currency }) => ({
+    label: currency,
+    value: id,
+  }))
 
   return (
     <Card className="w-full max-w-xl">
@@ -113,6 +125,22 @@ export const CompanyForm: React.FC<CompanyFormProps> = ({ company }) => {
                   placeholder={t("location.placeholder")}
                   {...field}
                 />
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="currency_id"
+              render={({ field }) => (
+                <div className="col-span-8">
+                  <Select
+                    label={t("currency_id.label")}
+                    placeholder={t("currency_id.placeholder")}
+                    options={currenciesOptions}
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  />
+                </div>
               )}
             />
 

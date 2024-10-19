@@ -1,4 +1,4 @@
-import { AuthLogo } from "@/components/Logo"
+import { AuthLogo } from "@/components/logo"
 import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 
 export default function AuthLayout({

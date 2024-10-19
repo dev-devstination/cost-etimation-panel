@@ -13,8 +13,9 @@ import { Button } from "@/components/ui/button"
 import { ToggleThemeButton } from "@/components/ToggleThemeButton"
 import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
 import { UserProfile } from "@/components/user-profile"
+import { DashboardLogo } from "@/components/logo"
+import { ProjectSelector } from "@/features/projects/components/project-switcher"
 import LanguageSwitcher from "@/components/language-switcher"
-import { DashboardLogo } from "../Logo"
 
 interface AuthenticatedLayoutProps {
   children: React.ReactNode
@@ -30,8 +31,12 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       {/* Sidebar for large screens */}
-      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-card text-card-foreground lg:block">
-        {sidebar}
+      <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-card text-card-foreground lg:flex lg:flex-col lg:justify-between">
+        <div>{sidebar}</div>
+
+        <div className="p-4">
+          <ProjectSelector />
+        </div>
       </aside>
 
       {/* Main content area */}
@@ -60,7 +65,13 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
                     {t("mobileNavigationDescription")}
                   </SheetDescription>
                 </SheetHeader>
-                {sidebar}
+                <div className="flex h-full flex-col justify-between">
+                  <div>{sidebar}</div>
+
+                  <div className="p-4">
+                    <ProjectSelector />
+                  </div>
+                </div>
               </SheetContent>
             </Sheet>
 

@@ -44,9 +44,6 @@ export const UserProfile = () => {
         <DropdownMenuItem onClick={() => router.push("/account")}>
           {t("account")}
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => router.push("/settings")}>
-          {t("settings")}
-        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem disabled={isPending} onClick={logout}>
           {t("logout")}

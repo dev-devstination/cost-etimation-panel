@@ -5,6 +5,7 @@ import { fetcherSSR } from "@/lib/api/fetcher"
 import { Project } from "@/features/projects/interfaces/project"
 import { getCurrentProject } from "@/features/projects/lib/get-current-project"
 import { ProjectsOverview } from "@/features/projects/components/project-overview"
+import { CreateProjectDialog } from "@/features/projects/components/create-project-dialog"
 
 export default async function ProjectsPage({
   params: { locale },
@@ -17,7 +18,12 @@ export default async function ProjectsPage({
 
   return (
     <div className="container mx-auto px-4">
-      <h1 className="mb-6 text-3xl font-bold">{t("title")}</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="mb-6 text-3xl font-bold">{t("title")}</h1>
+
+        <CreateProjectDialog />
+      </div>
+
       <ProjectsOverview
         currentProject={currentProject}
         otherProjects={otherProjects}

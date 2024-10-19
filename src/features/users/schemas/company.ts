@@ -7,6 +7,9 @@ export const useCompanySchema = () => {
   return z.object({
     name: z.string().min(1, t("name.validation.required")),
     location: z.string().min(1, t("location.validation.required")),
+    currency_id: z.string({
+      required_error: t("currency_id.validation.required"),
+    }),
     logo: z.string().optional(),
   })
 }

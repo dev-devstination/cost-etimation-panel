@@ -1,10 +1,12 @@
 "use server"
 import { revalidatePath } from "next/cache"
+import { cookies } from "next/headers"
 
 import logger from "@/lib/logger"
 import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
 import { ProjectFormData } from "@/features/projects/schemas/project"
+import { COOKIES } from "@/constants"
 
 export async function projectAction(
   _: ActionState,
@@ -106,4 +108,12 @@ export async function projectStateAction(
       status: "destructive",
     }
   }
+}
+
+export async function changeCurrentProjectAction(projectId: string) {
+  const cookieStore = cookies()
+
+  cookieStore.set(COOKIES.CURRENT_PROJECT_ID, projectId)
+
+  revalidatePath("/")
 }
