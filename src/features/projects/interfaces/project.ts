@@ -8,7 +8,7 @@ export interface Project {
   id: string
   name: string
   queries_dead_line_date: number
-  release_data: number
+  release_date: number
   site_visit_date: number
   submission_date: number
 }

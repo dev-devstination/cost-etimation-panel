@@ -19,7 +19,7 @@ import {
 } from "@/features/activities/schemas/subcategory"
 import { addSubcategoryAction } from "@/features/activities/actions/subcategory"
 import { Select } from "@/components/form/select"
-import { Category } from "@/features/activities/interfaces/category"
+import { Category } from "@/types"
 
 interface AddSubcategoryFormProps {
   categories: Category[]

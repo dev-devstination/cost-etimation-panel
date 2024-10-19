@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { AddSubcategoryForm } from "@/features/activities/components/subcategories/add-subcategory-form"
 import { fetcherSSR } from "@/lib/api/fetcher"
-import { Category } from "@/features/activities/interfaces/category"
+import { Category } from "@/types"
 
 export const AddSubcategoryDialog = async () => {
   const t = await getTranslations("ActivitiesSubcategoriesPage.dialog")

@@ -1,8 +1,10 @@
 import { useTranslations } from "next-intl"
 
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Project } from "@/features/projects/interfaces/project"
 import { CreateProjectDialog } from "@/features/projects/components/create-project-dialog"
+import { ProjectsList } from "@/features/projects/components/projects-list"
 
 interface ProjectsOverviewProps {
   currentProject?: Project
@@ -21,6 +23,24 @@ export const ProjectsOverview = ({
         <CardTitle>{t("overview")}</CardTitle>
         <CreateProjectDialog />
       </CardHeader>
+      <CardContent>
+        <Tabs defaultValue={currentProject ? "current" : "list"}>
+          <TabsList>
+            <TabsTrigger value="current" disabled={!currentProject}>
+              {t("current")}
+            </TabsTrigger>
+            <TabsTrigger value="list">{t("projectsList.title")}</TabsTrigger>
+          </TabsList>
+          <TabsContent value="current">
+            {currentProject ? null : ( // /> //   isCurrent={true} //   project={currentProject} // <ProjectDetails
+              <p>{t("noCurrentProject")}</p>
+            )}
+          </TabsContent>
+          <TabsContent value="list">
+            <ProjectsList projects={otherProjects} />
+          </TabsContent>
+        </Tabs>
+      </CardContent>
     </Card>
   )
 }

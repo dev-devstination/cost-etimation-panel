@@ -43,7 +43,10 @@
       "name": "Name",
       "category": "Category",
       "currency": "Currency",
-      "exchange_rate": "Exchange Rate"
+      "exchange_rate": "Exchange Rate",
+      "clientName": "Client Name",
+      "consultantName": "Consultant Name",
+      "area": "Area"
     },
     "selectAll": "Select All",
     "error": {
@@ -448,12 +451,20 @@
   "ProjectsPage": {
     "title": "Projects",
     "overview": "Overview",
+    "current": "Current Project",
+    "projectsList": {
+      "title": "Projects List"
+    },
+    "noCurrentProject": "No current project",
     "dialog": {
       "create": "Create Project",
+      "edit": "Edit Project",
       "title": "Create New Project",
       "description": "Create a new project to your projects"
     },
     "form": {
+      "basicInfo": "Basic Info",
+      "dates": "Dates",
       "name": {
         "label": "Name",
         "placeholder": "Enter the project name",
@@ -482,37 +493,30 @@
           "required": "Consultant name is required"
         }
       },
-      "currency_id": {
-        "label": "Currency",
-        "placeholder": "Select a currency",
-        "validation": {
-          "required": "Currency is required"
-        }
-      },
       "queries_dead_line_date": {
-        "label": "Queries Deadline Date",
-        "placeholder": "Enter the queries deadline date",
+        "label": "Deadline Date",
+        "placeholder": "Select the deadline date",
         "validation": {
-          "required": "Queries deadline date is required"
+          "required": "Deadline date is required"
         }
       },
       "release_date": {
         "label": "Release Date",
-        "placeholder": "Enter the release date",
+        "placeholder": "Select the release date",
         "validation": {
           "required": "Release date is required"
         }
       },
       "site_visit_date": {
         "label": "Site Visit Date",
-        "placeholder": "Enter the site visit date",
+        "placeholder": "Select the site visit date",
         "validation": {
           "required": "Site visit date is required"
         }
       },
       "submission_date": {
         "label": "Submission Date",
-        "placeholder": "Enter the submission date",
+        "placeholder": "Select the submission date",
         "validation": {
           "required": "Submission date is required"
         }
@@ -525,7 +529,8 @@
           "invalid": "Please enter a valid area"
         }
       },
-      "save": "Create Project",
+      "create": "Create Project",
+      "update": "Update Project",
       "cancel": "Cancel"
     }
   },

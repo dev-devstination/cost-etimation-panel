@@ -6,63 +6,49 @@ import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
 import { ProjectFormData } from "@/features/projects/schemas/project"
 
-export async function updateProjectAction(
+export async function projectAction(
   _: ActionState,
-  data: ProjectFormData & { id: string }
+  data: ProjectFormData & { id?: string }
 ): Promise<ActionState> {
   const { id, ...body } = data
   try {
-    await fetcher(`/projects/${id}`, {
-      method: "PATCH",
-      body,
-    })
+    if (id) {
+      await fetcher(`/projects/${id}`, {
+        method: "PATCH",
+        body,
+      })
 
-    logger.info("Project updated successfully", { data })
-    revalidatePath("/projects")
-
-    return { status: "success", message: "projectUpdated" }
-  } catch (error) {
-    if (error instanceof ApiError) {
-      logger.error("Project update error", {
-        error: error.message,
-        statusCode: error.statusCode,
+      logger.info("Project updated successfully", { data })
+    } else {
+      await fetcher("/projects", {
+        method: "POST",
         body: data,
       })
 
-      switch (error.statusCode) {
-        default:
-          return { status: "destructive", message: "default" }
-      }
+      logger.info("Project added successfully", { data })
     }
+
+    revalidatePath("/projects")
 
     return {
-      message: "default",
-      status: "destructive",
+      status: "success",
+      message: id ? "projectUpdated" : "projectCreated",
     }
-  }
-}
-
-export async function createProjectAction(
-  _: ActionState,
-  data: ProjectFormData
-): Promise<ActionState> {
-  try {
-    await fetcher("/projects", {
-      method: "POST",
-      body: data,
-    })
-
-    logger.info("Project added successfully", { data })
-    revalidatePath("/projects")
-
-    return { status: "success", message: "projectCreated" }
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Project create error", {
-        error: error.message,
-        statusCode: error.statusCode,
-        body: data,
-      })
+      if (id) {
+        logger.error("Project update error", {
+          error: error.message,
+          statusCode: error.statusCode,
+          body: data,
+        })
+      } else {
+        logger.error("Project create error", {
+          error: error.message,
+          statusCode: error.statusCode,
+          body: data,
+        })
+      }
 
       switch (error.statusCode) {
         default:

@@ -18,9 +18,6 @@ export const useProjectSchema = () => {
     consultant_name: z
       .string()
       .min(1, t("consultant_name.validation.required")),
-    currency_id: z.string({
-      required_error: t("currency_id.validation.required"),
-    }),
     name: z.string().min(1, t("name.validation.required")),
     queries_dead_line_date: z
       .number()
