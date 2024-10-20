@@ -4,6 +4,7 @@ import {
   FileText,
   Home,
   Lock,
+  Scale,
   Settings,
   Tag,
   Tags,
@@ -22,7 +23,7 @@ export const MAIN_NAVLINKS: NavigationLink = {
   default: [
     { url: "/", label: "home", icon: Home },
     { url: "/resources", label: "resources", icon: FileText },
-    { url: "/activities/categories", label: "settings", icon: Settings },
+    { url: "/units", label: "settings", icon: Settings },
   ],
 }
 
@@ -37,7 +38,10 @@ export const ACCOUNT_NAVLINKS: NavigationLink = {
 }
 
 export const SETTINGS_NAVLINKS: NavigationLink = {
-  default: [{ url: "/currencies", label: "currencies", icon: DollarSign }],
+  default: [
+    { url: "/currencies", label: "currencies", icon: DollarSign },
+    { url: "/units", label: "units", icon: Scale },
+  ],
   projects: [
     {
       url: "/projects",

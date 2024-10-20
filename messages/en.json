@@ -78,7 +78,8 @@
       "categories": "Categories",
       "subcategories": "Subcategories",
       "projects": "Projects",
-      "currencies": "Currencies"
+      "currencies": "Currencies",
+      "units": "Units"
     }
   },
   "CurrenciesPage": {
@@ -288,7 +289,8 @@
       "subcategories": "Subcategories",
       "activity": "Activity",
       "projects": "Projects",
-      "currencies": "Currencies"
+      "currencies": "Currencies",
+      "units": "Units"
     }
   },
   "CompanyPage": {
@@ -322,6 +324,32 @@
         "placeholder": "Upload your company logo"
       },
       "save": "Save Changes"
+    }
+  },
+  "UnitsPage": {
+    "title": "Units",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the unit name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the unit description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "save": "Add Unit",
+      "cancel": "Cancel"
+    },
+    "dialog": {
+      "add": "Add Unit",
+      "title": "Add New Unit",
+      "description": "Add a new unit to your units"
     }
   },
   "AccountPage": {
@@ -605,6 +633,10 @@
     "currencyAdded": "Currency added successfully",
     "currencyUpdated": "Currency updated successfully",
     "currencyActivated": "Currency activated successfully",
-    "currencyDeactivated": "Currency deactivated successfully"
+    "currencyDeactivated": "Currency deactivated successfully",
+    "unitAdded": "Unit added successfully",
+    "unitUpdated": "Unit updated successfully",
+    "unitActivated": "Unit activated successfully",
+    "unitDeactivated": "Unit deactivated successfully"
   }
 }
