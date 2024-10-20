@@ -8,7 +8,6 @@ import { Currency } from "@/features/currencies/interfaces/currency"
 import { EditCodeCell } from "@/features/currencies/components/currencies-table/edit-code-cell"
 import { EditCurrencyCell } from "@/features/currencies/components/currencies-table/edit-currency-cell"
 import { EditCountryCell } from "@/features/currencies/components/currencies-table/edit-country-cell"
-import { EditRateCell } from "@/features/currencies/components/currencies-table/edit-rate-cell"
 import { EditExchangeRateCell } from "@/features/currencies/components/currencies-table/edit-exchange-rate-cell"
 
 export const columns: ColumnDef<Currency>[] = [
@@ -32,13 +31,6 @@ export const columns: ColumnDef<Currency>[] = [
       return <ColumnHeader column={column} title="description" sortable />
     },
     cell: ({ row }) => <EditCountryCell currency={row.original} />,
-  },
-  {
-    accessorKey: "rate",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="rate" sortable />
-    },
-    cell: ({ row }) => <EditRateCell currency={row.original} />,
   },
   {
     accessorKey: "exchange_rate",

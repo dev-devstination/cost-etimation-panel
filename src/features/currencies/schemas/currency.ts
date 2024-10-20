@@ -21,13 +21,6 @@ export const useCurrencySchema = () => {
         message: t("exchange_rate.validation.invalid"),
       })
       .transform((val) => parseFloat(parseFloat(val).toFixed(2))),
-    rate: z
-      .string({ required_error: t("rate.validation.required") })
-      .min(1, t("rate.validation.required"))
-      .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-        message: t("rate.validation.invalid"),
-      })
-      .transform((val) => parseFloat(parseFloat(val).toFixed(2))),
   })
 }
 
@@ -56,11 +49,6 @@ export const useCurrencyExchangeRateSchema = () => {
   return schema.pick({ exchange_rate: true })
 }
 
-export const useCurrencyRateSchema = () => {
-  const schema = useCurrencySchema()
-  return schema.pick({ rate: true })
-}
-
 export type CurrencyCodeSchema = ReturnType<typeof useCurrencyCodeSchema>
 export type CurrencyCodeFormData = z.infer<CurrencyCodeSchema>
 
@@ -76,9 +64,6 @@ export type CurrencyExchangeRateSchema = ReturnType<
   typeof useCurrencyExchangeRateSchema
 >
 export type CurrencyExchangeRateFormData = z.infer<CurrencyExchangeRateSchema>
-
-export type CurrencyRateSchema = ReturnType<typeof useCurrencyRateSchema>
-export type CurrencyRateFormData = z.infer<CurrencyRateSchema>
 
 export type CurrencySchema = ReturnType<typeof useCurrencySchema>
 export type CurrencyInputFormData = z.input<CurrencySchema>

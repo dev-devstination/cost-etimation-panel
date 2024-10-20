@@ -5,5 +5,4 @@ export interface Currency {
   description: string
   exchange_rate: number
   id: string
-  rate: number
 }

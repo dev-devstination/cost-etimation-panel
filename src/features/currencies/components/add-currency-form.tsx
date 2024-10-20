@@ -14,7 +14,6 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { SubmitMessage } from "@/components/form/submit-message"
 import {
-  CurrencyFormData,
   CurrencyInputFormData,
   useCurrencySchema,
 } from "@/features/currencies/schemas/currency"
@@ -42,7 +41,6 @@ export const AddCurrencyForm = () => {
     resolver: zodResolver(currencySchema),
     defaultValues: {
       code: "",
-      rate: "",
       country: "",
       currency: "",
       exchange_rate: "",
@@ -60,7 +58,6 @@ export const AddCurrencyForm = () => {
   const onSubmit = (data: CurrencyInputFormData) => {
     const values = {
       ...data,
-      rate: parseFloat(parseFloat(data.rate).toFixed(2)),
       exchange_rate: parseFloat(parseFloat(data.exchange_rate).toFixed(2)),
     }
 
@@ -115,18 +112,6 @@ export const AddCurrencyForm = () => {
 
           <div className="space-y-4">
             <h3 className="text-lg font-medium">{t("exchangeRates")}</h3>
-
-            <FormField
-              control={form.control}
-              name="rate"
-              render={({ field }) => (
-                <Input
-                  label={t("rate.label")}
-                  placeholder={t("rate.placeholder")}
-                  {...field}
-                />
-              )}
-            />
 
             <FormField
               control={form.control}
