@@ -23,7 +23,7 @@ export const MAIN_NAVLINKS: NavigationLink = {
   default: [
     { url: "/", label: "home", icon: Home },
     { url: "/resources", label: "resources", icon: FileText },
-    { url: "/units", label: "settings", icon: Settings },
+    { url: "/currencies", label: "settings", icon: Settings },
   ],
 }
 

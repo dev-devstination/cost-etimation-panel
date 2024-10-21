@@ -44,7 +44,7 @@ export const ProjectSelect = ({
     <div className="space-y-2 rounded-lg bg-gradient-to-r from-primary/5 to-secondary/5 p-4 shadow-sm">
       <div className="flex items-center gap-x-2">
         <Select
-          defaultValue={currentProject?.id}
+          value={currentProject?.id}
           onValueChange={handleProjectChange}
           disabled={isPending}
         >
