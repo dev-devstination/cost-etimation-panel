@@ -29,10 +29,10 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
   const t = useTranslations("layout")
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen overflow-hidden bg-background text-foreground">
       {/* Sidebar for large screens */}
       <aside className="fixed inset-y-0 left-0 hidden w-64 border-r bg-card text-card-foreground lg:flex lg:flex-col lg:justify-between">
-        <div>{sidebar}</div>
+        <div className="flex-1 overflow-y-auto">{sidebar}</div>
 
         <div className="p-4">
           <ProjectSelector />
@@ -40,7 +40,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
       </aside>
 
       {/* Main content area */}
-      <div className="flex min-h-screen flex-1 flex-col">
+      <div className="flex min-h-screen flex-1 flex-col overflow-hidden">
         {/* Navbar */}
         <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-card p-4 text-card-foreground">
           <div className="flex items-center gap-x-4">

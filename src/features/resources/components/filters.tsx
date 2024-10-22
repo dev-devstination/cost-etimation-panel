@@ -22,7 +22,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 
 export const Filters = () => {
-  const t = useTranslations("resources")
+  const t = useTranslations("ResourcesPage")
   const locale = useLocale()
 
   const isRTL = locale === "ar"

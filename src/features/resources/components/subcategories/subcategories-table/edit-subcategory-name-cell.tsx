@@ -13,9 +13,9 @@ import { Subcategory } from "@/types"
 import {
   SubcategoryNameFormData,
   useSubcategoryNameSchema,
-} from "@/features/activities/schemas/subcategory"
-import { updateSubcategoryAction } from "@/features/activities/actions/subcategory"
-import { SubcategoriesRow } from "@/features/activities/components/subcategories/subcategories-table/columns"
+} from "@/features/resources/schemas/subcategory"
+import { updateSubcategoryAction } from "@/features/resources/actions/subcategory"
+import { SubcategoriesRow } from "@/features/resources/components/subcategories/subcategories-table/columns"
 
 interface EditSubcategoryNameCellProps {
   subcategory: SubcategoriesRow
@@ -30,7 +30,7 @@ export const EditSubcategoryNameCell: React.FC<
   EditSubcategoryNameCellProps
 > = ({ subcategory }) => {
   const { toast } = useToast()
-  const t = useTranslations("ActivitiesSubcategoriesPage.form")
+  const t = useTranslations("ResourcesSubcategoriesPage.form")
   const tSuccess = useTranslations("apiSuccess")
   const tError = useTranslations("apiErrors")
 

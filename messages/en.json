@@ -79,7 +79,8 @@
       "subcategories": "Subcategories",
       "projects": "Projects",
       "currencies": "Currencies",
-      "units": "Units"
+      "units": "Units",
+      "new": "New"
     }
   },
   "CurrenciesPage": {
@@ -136,7 +137,10 @@
   "HomePage": {
     "title": "Hello world!"
   },
-  "resources": {
+  "CreateResourcePage": {
+    "title": "Create New Resource"
+  },
+  "ResourcesPage": {
     "title": "Resources",
     "resourceDetails": "Resource Details",
     "currentPricing": "Current Pricing",
@@ -464,6 +468,51 @@
   },
   "ActivitiesSubcategoriesPage": {
     "title": "Activity Subcategories",
+    "dialog": {
+      "add": "Add Subcategory",
+      "title": "Add New Subcategory",
+      "description": "Add a new subcategory to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the subcategory name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "save": "Add Subcategory",
+      "cancel": "Cancel"
+    }
+  },
+  "ResourcesCategoriesPage": {
+    "title": "Resources Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "save": "Add Category",
+      "cancel": "Cancel"
+    }
+  },
+  "ResourcesSubcategoriesPage": {
+    "title": "Resources Subcategories",
     "dialog": {
       "add": "Add Subcategory",
       "title": "Add New Subcategory",

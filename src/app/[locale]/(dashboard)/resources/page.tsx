@@ -16,7 +16,7 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
 }) => {
   unstable_setRequestLocale(locale)
 
-  const t = useTranslations("resources")
+  const t = useTranslations("ResourcesPage")
   return (
     <>
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
@@ -34,7 +34,6 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
       <DataTable
         columns={columns}
         data={sampleResources}
-        filterKeys={["description"]}
         PopoverContent={Popover}
       />
     </>

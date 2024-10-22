@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
-import { Category } from "@/features/activities/interfaces/category"
+import { Category } from "@/types"
 import {
   CategoryFormData,
   useCategorySchema,

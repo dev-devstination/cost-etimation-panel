@@ -10,7 +10,7 @@ interface PopoverProps {
 }
 
 export const Popover: React.FC<PopoverProps> = ({ data }) => {
-  const t = useTranslations("resources.table")
+  const t = useTranslations("ResourcesPage.table")
 
   return (
     <div className="space-y-4">

@@ -54,6 +54,18 @@ export const SETTINGS_NAVLINKS: NavigationLink = {
       icon: Tag,
     },
   ],
+  resources: [
+    {
+      url: "/resources/categories",
+      label: "categories",
+      icon: Tag,
+    },
+    {
+      url: "/resources/subcategories",
+      label: "subcategories",
+      icon: Tags,
+    },
+  ],
   activity: [
     {
       url: "/activities/categories",

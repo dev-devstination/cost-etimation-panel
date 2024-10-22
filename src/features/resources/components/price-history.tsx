@@ -17,7 +17,7 @@ interface PriceHistoryProps {
 }
 
 export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
-  const t = useTranslations("resources")
+  const t = useTranslations("ResourcesPage")
 
   return (
     <div className="space-y-6">

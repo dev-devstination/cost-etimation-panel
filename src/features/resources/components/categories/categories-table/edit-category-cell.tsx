@@ -6,19 +6,18 @@ import { useTranslations } from "next-intl"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 
+import { Category } from "@/types"
+import {
+  CategoryFormData,
+  useCategorySchema,
+} from "@/features/resources/schemas/category"
+import { updateCategoryAction } from "@/features/resources/actions/category"
 import { useToast } from "@/hooks/use-toast"
 import { FormField, Form } from "@/components/ui/form"
 import { Input } from "@/components/form/input"
-import { Subcategory } from "@/types"
-import {
-  SubcategoryNameFormData,
-  useSubcategoryNameSchema,
-} from "@/features/activities/schemas/subcategory"
-import { updateSubcategoryAction } from "@/features/activities/actions/subcategory"
-import { SubcategoriesRow } from "@/features/activities/components/subcategories/subcategories-table/columns"
 
-interface EditSubcategoryNameCellProps {
-  subcategory: SubcategoriesRow
+interface EditCategoryCellProps {
+  category: Category
 }
 
 const initialState = {
@@ -26,26 +25,26 @@ const initialState = {
   status: undefined,
 }
 
-export const EditSubcategoryNameCell: React.FC<
-  EditSubcategoryNameCellProps
-> = ({ subcategory }) => {
+export const EditCategoryCell: React.FC<EditCategoryCellProps> = ({
+  category,
+}) => {
   const { toast } = useToast()
-  const t = useTranslations("ActivitiesSubcategoriesPage.form")
+  const t = useTranslations("ResourcesCategoriesPage.form")
   const tSuccess = useTranslations("apiSuccess")
   const tError = useTranslations("apiErrors")
 
-  const subcategoryNameSchema = useSubcategoryNameSchema()
+  const categorySchema = useCategorySchema()
   const [isPending, startTransition] = useTransition()
 
   const [serverState, formAction] = useFormState(
-    updateSubcategoryAction,
+    updateCategoryAction,
     initialState
   )
 
-  const form = useForm<SubcategoryNameFormData>({
-    resolver: zodResolver(subcategoryNameSchema),
+  const form = useForm<CategoryFormData>({
+    resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: subcategory.name,
+      name: category.name,
     },
   })
 
@@ -63,9 +62,9 @@ export const EditSubcategoryNameCell: React.FC<
     }
   }, [serverState, tError, tSuccess, toast])
 
-  const onSubmit = (data: SubcategoryNameFormData) => {
+  const onSubmit = (data: CategoryFormData) => {
     startTransition(() => {
-      formAction({ ...data, id: subcategory.id })
+      formAction({ ...data, id: category.id })
     })
   }
 

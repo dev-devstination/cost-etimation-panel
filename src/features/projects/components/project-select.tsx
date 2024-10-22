@@ -13,8 +13,6 @@ import {
 } from "@/components/ui/select"
 import { Project } from "@/features/projects/interfaces/project"
 import { changeCurrentProjectAction } from "@/features/projects/actions/project"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
 
 interface ProjectSelectProps {
   projects: Project[]

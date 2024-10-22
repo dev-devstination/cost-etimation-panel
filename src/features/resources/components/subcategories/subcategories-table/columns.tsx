@@ -3,11 +3,11 @@
 import { ColumnDef } from "@tanstack/react-table"
 
 import { ColumnHeader } from "@/components/column-header"
-import { Actions } from "@/features/activities/components/subcategories/subcategories-table/actions"
+import { Actions } from "@/features/resources/components/subcategories/subcategories-table/actions"
 import { Subcategory } from "@/types"
-import { EditSubcategoryNameCell } from "@/features/activities/components/subcategories/subcategories-table/edit-subcategory-name-cell"
+import { EditSubcategoryNameCell } from "@/features/resources/components/subcategories/subcategories-table/edit-subcategory-name-cell"
 import { Category } from "@/types"
-import { EditSubcategoryCategoryCell } from "./edit-subcategory-category-cell"
+import { EditSubcategoryCategoryCell } from "@/features/resources/components/subcategories/subcategories-table/edit-subcategory-category-cell"
 
 export interface SubcategoriesRow extends Subcategory {
   categories: Category[]
