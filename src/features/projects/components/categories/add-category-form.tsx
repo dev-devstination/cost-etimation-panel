@@ -65,13 +65,11 @@ export const AddCategoryForm = () => {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <div className="col-span-8">
-              <Input
-                label={t("name.label")}
-                placeholder={t("name.placeholder")}
-                {...field}
-              />
-            </div>
+            <Input
+              label={t("name.label")}
+              placeholder={t("name.placeholder")}
+              {...field}
+            />
           )}
         />
 

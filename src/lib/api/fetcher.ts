@@ -11,7 +11,7 @@ const API_BASE_URL =
 type FetchOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
   headers?: Record<string, string>
-  body?: Record<string, string | number | boolean> | null
+  body?: Record<string, string | number | boolean | object> | null
   cache?: RequestCache
   next?: NextFetchRequestConfig
 }
@@ -62,22 +62,39 @@ export async function fetcher<T>(
     })
 
     if (!res.ok) {
-      logger.error(`API error: ${res.status}`, { url, status: res.status })
-
       let errorMessage = `API error: ${res.statusText}`
-
-      try {
-        const errorData = await res.json()
-        errorMessage = errorData.message || errorMessage
-      } catch (e) {
-        throw new ApiError(res.status, errorMessage)
-      }
+      let validations: Record<string, string> = {}
 
       if (res.status === 404) {
         notFound()
       }
 
-      throw new ApiError(res.status, errorMessage)
+      try {
+        const errorData = await res.json()
+
+        if ("validations" in errorData) {
+          validations = errorData.validations
+        }
+
+        errorMessage = errorData.message || errorMessage
+
+        logger.error(`API error: ${res.status}`, {
+          url,
+          status: res.status,
+          errorMessage,
+          validations:
+            Object.keys(validations).length > 0 ? validations : undefined,
+        })
+
+        throw new ApiError(res.status, errorMessage)
+      } catch (e) {
+        logger.error(`API error: ${res.status}`, {
+          url,
+          status: res.status,
+          errorMessage,
+        })
+        throw new ApiError(res.status, errorMessage)
+      }
     }
 
     const data = await res.json()

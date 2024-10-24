@@ -138,7 +138,93 @@
     "title": "Hello world!"
   },
   "CreateResourcePage": {
-    "title": "Create New Resource"
+    "title": "Create New Resource",
+    "form": {
+      "title": "Resource Information",
+      "basic_rate": {
+        "label": "Basic Rate",
+        "placeholder": "Enter the basic rate",
+        "validation": {
+          "required": "Basic rate is required",
+          "positive": "Basic rate must be positive"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "code": {
+        "label": "Code",
+        "placeholder": "Enter the code",
+        "validation": {
+          "required": "Code is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "factor": {
+        "label": "Factor",
+        "placeholder": "Enter the factor",
+        "validation": {
+          "positive": "Factor must be positive"
+        }
+      },
+      "output": {
+        "label": "Output",
+        "placeholder": "Enter the output",
+        "validation": {
+          "number": "Output must be a number"
+        }
+      },
+      "resource_compositions": {
+        "child_resource_id": {
+          "label": "Child Resource",
+          "validation": {
+            "required": "Child resource is required"
+          }
+        },
+        "qty": {
+          "label": "Quantity",
+          "validation": {
+            "required": "Quantity is required",
+            "positive_integer": "Quantity must be a positive integer"
+          }
+        }
+      },
+      "sub_category_id": {
+        "label": "Subcategory",
+        "validation": {
+          "required": "Subcategory is required"
+        }
+      },
+      "unit_id": {
+        "label": "Unit",
+        "validation": {
+          "required": "Unit is required"
+        }
+      },
+      "currency_id": {
+        "label": "Currency",
+        "placeholder": "Default is the company currency",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "remarks": {
+        "label": "Remarks",
+        "placeholder": "Enter the remarks"
+      },
+      "save": "Create Resource",
+      "cancel": "Cancel"
+    }
   },
   "ResourcesPage": {
     "title": "Resources",
@@ -686,6 +772,8 @@
     "unitAdded": "Unit added successfully",
     "unitUpdated": "Unit updated successfully",
     "unitActivated": "Unit activated successfully",
-    "unitDeactivated": "Unit deactivated successfully"
+    "unitDeactivated": "Unit deactivated successfully",
+    "resourceAdded": "Resource added successfully",
+    "resourceUpdated": "Resource updated successfully"
   }
 }
