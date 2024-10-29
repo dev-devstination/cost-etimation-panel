@@ -18,14 +18,18 @@ import { SubmitMessage } from "@/components/form/submit-message"
 import { SubmitButton } from "@/components/submit-button"
 import { Textarea } from "@/components/form/textarea"
 import { Select } from "@/components/form/select"
+import { Currency } from "@/features/currencies/interfaces/currency"
 
 import { createResourceAction } from "../actions/resource"
+import { ResourceCompositionInput } from "./resource-composition-input"
+import { Resource } from "../types"
+import { generateSelectOptions } from "@/lib/utils"
 
 interface CreateResourceFormProps {
-  resources: SelectOption[]
+  resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
-  currencies: SelectOption[]
+  currencies: Currency[]
   units: SelectOption[]
 }
 
@@ -43,7 +47,7 @@ export const CreateResourceForm = ({
 }: CreateResourceFormProps) => {
   const t = useTranslations("CreateResourcePage.form")
   const router = useRouter()
-  console.log("resources", resources)
+
   const resourceSchema = useResourceSchema()
   const [isPending, startTransition] = useTransition()
 
@@ -72,19 +76,59 @@ export const CreateResourceForm = ({
     },
   })
 
+  const {
+    basic_rate,
+    factor,
+    currency_id,
+    category_id,
+    resource_compositions,
+  } = form.watch()
+
+  const totalCost =
+    resource_compositions?.reduce((total, comp) => {
+      const resource = resources.find(({ id }) => id === comp.child_resource_id)
+      if (!resource) return total
+      const rate = resource.basic_rate * resource.factor
+      return total + Number(comp.qty) * rate
+    }, 0) || 0
+
+  useEffect(() => {}, [])
+  const exchange_rate =
+    currencies.find(({ id }) => id === currency_id)?.exchange_rate || 1
+
   const onSubmit = (data: ResourceFormData) => {
     startTransition(() => {
       formAction(data)
     })
   }
 
-  const [category_id, resource_compositions] = form.watch([
-    "category_id",
-    "resource_compositions",
-  ])
   const subcategoryOptions = subcategories.filter(
     (subcategory) => subcategory.category_id === category_id
   )
+
+  const handleBasicRateChange = (value: string) => {
+    if (!totalCost) return
+
+    const newOutput = totalCost / (Number(value) || 1)
+    if (!isNaN(newOutput) && isFinite(newOutput)) {
+      form.setValue("output", newOutput.toFixed(2), {
+        shouldValidate: true,
+        shouldDirty: true,
+      })
+    }
+  }
+
+  const handleOutputChange = (value: string) => {
+    if (!totalCost) return
+
+    const newBasicRate = totalCost / (Number(value) || 1)
+    if (!isNaN(newBasicRate) && isFinite(newBasicRate)) {
+      form.setValue("basic_rate", newBasicRate.toFixed(2), {
+        shouldValidate: true,
+        shouldDirty: true,
+      })
+    }
+  }
 
   return (
     <Form {...form}>
@@ -138,6 +182,7 @@ export const CreateResourceForm = ({
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-4">
                 <Select
+                  disabled={!subcategoryOptions.length}
                   label={t("sub_category_id.label")}
                   options={subcategoryOptions}
                   onValueChange={field.onChange}
@@ -170,8 +215,15 @@ export const CreateResourceForm = ({
             control={form.control}
             name="basic_rate"
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-3">
-                <Input label={t("basic_rate.label")} {...field} />
+              <div className="col-span-12 lg:col-span-2">
+                <Input
+                  label={t("basic_rate.label")}
+                  {...field}
+                  onChange={(e) => {
+                    field.onChange(e.target.value)
+                    handleBasicRateChange(e.target.value)
+                  }}
+                />
               </div>
             )}
           />
@@ -181,11 +233,14 @@ export const CreateResourceForm = ({
             control={form.control}
             name="currency_id"
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-3">
+              <div className="col-span-12 lg:col-span-2">
                 <Select
                   label={t("currency_id.label")}
                   placeholder={t("currency_id.placeholder")}
-                  options={currencies}
+                  options={generateSelectOptions(currencies, {
+                    label: "currency",
+                    value: "id",
+                  })}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 />
@@ -193,27 +248,49 @@ export const CreateResourceForm = ({
             )}
           />
 
+          {/* Currency Exchange Rate */}
+          <div className="col-span-12 lg:col-span-2">
+            <Input
+              label={t("exchange_rate.label")}
+              disabled
+              value={exchange_rate}
+            />
+          </div>
+
           {/* factor */}
           <FormField
             control={form.control}
             name="factor"
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-3">
+              <div className="col-span-12 lg:col-span-2">
                 <Input label={t("factor.label")} {...field} />
               </div>
             )}
           />
+
+          {/* Rate */}
+          <div className="col-span-12 lg:col-span-2">
+            <Input
+              label={t("rate.label")}
+              disabled
+              value={Number(basic_rate || 0) * Number(factor || 1)}
+            />
+          </div>
 
           {/* output */}
           <FormField
             control={form.control}
             name="output"
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-3">
+              <div className="col-span-12 lg:col-span-2">
                 <Input
                   label={t("output.label")}
                   {...field}
                   disabled={!resource_compositions?.length}
+                  onChange={(e) => {
+                    field.onChange(e.target.value)
+                    handleOutputChange(e.target.value)
+                  }}
                 />
               </div>
             )}
@@ -231,7 +308,13 @@ export const CreateResourceForm = ({
           )}
         />
 
-        {/* resource_compositions */}
+        <div className="col-span-12">
+          <ResourceCompositionInput
+            resources={resources}
+            categories={categories}
+            subcategories={subcategories}
+          />
+        </div>
 
         <SubmitMessage
           status={serverState.status}

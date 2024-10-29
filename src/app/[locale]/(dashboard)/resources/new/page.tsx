@@ -16,9 +16,9 @@ const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
 
   const { categoriesOptions } = await getResourceCategories()
   const { subcategoriesOptions } = await getResourceSubcategories()
-  const { currenciesOptions } = await getCurrencies()
+  const { currencies } = await getCurrencies()
   const { unitsOptions } = await getUnits()
-  const { resourcesOptions } = await getResources()
+  const { resources } = await getResources()
 
   return (
     <>
@@ -26,10 +26,10 @@ const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
         <h1 className="text-2xl font-bold">{t("title")}</h1>
       </div>
       <CreateResourceForm
-        resources={resourcesOptions}
+        resources={resources}
         categories={categoriesOptions}
         subcategories={subcategoriesOptions}
-        currencies={currenciesOptions}
+        currencies={currencies}
         units={unitsOptions}
       />
     </>

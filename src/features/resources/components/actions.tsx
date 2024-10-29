@@ -24,7 +24,7 @@ interface ActionsProps {
 
 export const Actions: React.FC<ActionsProps> = ({ resource }) => {
   const t = useTranslations("common")
-  console.log("Resource: ", resource)
+
   return (
     <div className="flex items-center space-x-2" data-prevent-propagation>
       <Tooltip>

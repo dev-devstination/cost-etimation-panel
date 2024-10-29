@@ -1,22 +1,23 @@
 import { Plus } from "lucide-react"
-import { unstable_setRequestLocale } from "next-intl/server"
-import { useTranslations } from "next-intl"
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 
 import { Link } from "@/config/navigation"
 import { Filters } from "@/features/resources/components/filters"
 import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/data-table"
 import { columns } from "@/features/resources/components/columns"
-import { sampleResources } from "@/features/resources/types"
 import { Popover } from "@/features/resources/components/popover"
 import { LocalizedPageProps } from "@/types"
+import { getResources } from "@/features/resources/lib/get-resources"
 
-const ResourcesPage: React.FC<LocalizedPageProps> = ({
+const ResourcesPage: React.FC<LocalizedPageProps> = async ({
   params: { locale },
 }) => {
   unstable_setRequestLocale(locale)
+  const t = await getTranslations("ResourcesPage")
 
-  const t = useTranslations("ResourcesPage")
+  const { resources } = await getResources()
+
   return (
     <>
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
@@ -31,11 +32,7 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
         </div>
       </div>
 
-      <DataTable
-        columns={columns}
-        data={sampleResources}
-        PopoverContent={Popover}
-      />
+      <DataTable columns={columns} data={resources} PopoverContent={Popover} />
     </>
   )
 }

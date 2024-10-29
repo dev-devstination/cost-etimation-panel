@@ -184,7 +184,31 @@
           "number": "Output must be a number"
         }
       },
+      "rate": {
+        "label": "Rate"
+      },
+      "exchange_rate": {
+        "label": "Exchange Rate"
+      },
       "resource_compositions": {
+        "tableHeaders": {
+          "description": "Description",
+          "unit": "Unit",
+          "isComposite": "Composite",
+          "factor": "Factor",
+          "rate": "Rate",
+          "quantity": "Quantity",
+          "amount": "Amount"
+        },
+        "selectedResources": "Selected Resources",
+        "totalCost": "Total Cost",
+        "availableResources": "Available Resources",
+        "addSelectedResources": "Add Resources",
+        "remove": "Remove",
+        "selectCategory": "Select Category",
+        "selectSubcategory": "Select Subcategory",
+        "searchResources": "Search resources...",
+        "clearFilters": "Clear Filters",
         "child_resource_id": {
           "label": "Child Resource",
           "validation": {

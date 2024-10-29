@@ -22,12 +22,16 @@ export function ColumnHeader<TData>({
   }
 
   return (
-    <Button
-      variant="ghost"
-      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    >
-      {t(`commonTableHeaders.${title}`)}
-      <ArrowUpDown className="size-4 ltr:ml-2 rtl:mr-2" />
-    </Button>
+    <div className="flex items-center gap-x-2">
+      <span className="shrink-0">{t(`commonTableHeaders.${title}`)}</span>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="shrink-0 p-0"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        <ArrowUpDown className="size-4" />
+      </Button>
+    </div>
   )
 }

@@ -100,7 +100,7 @@ export function DataTable<TData, TValue>({
               ))}
             </TableRow>
           </PopoverTrigger>
-          <UIPopoverContent className="w-80">
+          <UIPopoverContent className="w-full">
             <PopoverContent data={row.original} />
           </UIPopoverContent>
         </Popover>

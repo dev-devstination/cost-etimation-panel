@@ -9,7 +9,7 @@ export const getResourceSubcategories = async () => {
   const subcategoriesOptions = subcategories.map((subcategory) => ({
     label: subcategory.name,
     value: subcategory.id,
-    category_id: subcategory.category_id,
+    category_id: subcategory.category.id,
   }))
 
   return { subcategoriesOptions, subcategories }
