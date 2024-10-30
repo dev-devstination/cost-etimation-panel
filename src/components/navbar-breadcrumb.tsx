@@ -22,6 +22,7 @@ const pathMap: Record<string, keyof IntlMessages["common"]["pages"]> = {
 export const NavbarBreadcrumb = () => {
   const t = useTranslations("common.pages")
   const pathname = usePathname()
+
   const pathSegments = pathname.split("/").filter((segment) => segment)
 
   return (

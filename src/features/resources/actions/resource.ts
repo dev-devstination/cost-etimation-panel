@@ -7,47 +7,24 @@ import { ActionState } from "@/types"
 
 import { ResourceFormData } from "../schemas/resource"
 
-export async function updateResourceAction(
+export async function resourceAction(
   _: ActionState,
-  data: ResourceFormData & { id: string }
+  data: ResourceFormData & { id?: string }
 ): Promise<ActionState> {
   const { id, ...body } = data
   try {
-    await fetcher(`/resources/${id}`, {
-      method: "PATCH",
-      body,
-    })
-
-    logger.info("Resource updated successfully", { data })
-    revalidatePath(`/resources/${id}`)
-
-    return { status: "success", message: "resourceUpdated" }
-  } catch (error) {
-    if (error instanceof ApiError) {
-      logger.error("Resource update error", {
-        error: error.message,
-        statusCode: error.statusCode,
-        body: data,
+    if (id) {
+      await fetcher(`/resources/${id}`, {
+        method: "PATCH",
+        body,
       })
 
-      switch (error.statusCode) {
-        default:
-          return { status: "destructive", message: "default" }
-      }
+      logger.info("Resource updated successfully", { data })
+      revalidatePath(`/resources/${id}`)
+
+      return { status: "success", message: "resourceUpdated" }
     }
 
-    return {
-      message: "default",
-      status: "destructive",
-    }
-  }
-}
-
-export async function createResourceAction(
-  _: ActionState,
-  data: ResourceFormData
-): Promise<ActionState> {
-  try {
     await fetcher("/resources", {
       method: "POST",
       body: data,

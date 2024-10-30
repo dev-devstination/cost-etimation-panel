@@ -14,7 +14,7 @@ const Sidebar: React.FC<SidebarProps> = ({ navLinks }) => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="border-b p-5">
+      <div className="h-16 border-b p-5">
         <DashboardLogo />
       </div>
       <nav className="flex-1 p-4">

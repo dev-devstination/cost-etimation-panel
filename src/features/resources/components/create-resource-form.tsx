@@ -4,7 +4,7 @@ import { useFormState } from "react-dom"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Plus } from "lucide-react"
+import { Edit, Plus } from "lucide-react"
 
 import { useRouter } from "@/config/navigation"
 import { SelectOption } from "@/types"
@@ -20,12 +20,13 @@ import { Textarea } from "@/components/form/textarea"
 import { Select } from "@/components/form/select"
 import { Currency } from "@/features/currencies/interfaces/currency"
 
-import { createResourceAction } from "../actions/resource"
+import { resourceAction } from "../actions/resource"
 import { ResourceCompositionInput } from "./resource-composition-input"
 import { Resource } from "../types"
 import { generateSelectOptions } from "@/lib/utils"
 
 interface CreateResourceFormProps {
+  resource?: Resource
   resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
@@ -39,22 +40,20 @@ const initialState = {
 }
 
 export const CreateResourceForm = ({
+  resource,
   resources,
   categories,
   subcategories,
   currencies,
   units,
 }: CreateResourceFormProps) => {
-  const t = useTranslations("CreateResourcePage.form")
+  const t = useTranslations("ResourcePage.form")
   const router = useRouter()
 
   const resourceSchema = useResourceSchema()
   const [isPending, startTransition] = useTransition()
 
-  const [serverState, formAction] = useFormState(
-    createResourceAction,
-    initialState
-  )
+  const [serverState, formAction] = useFormState(resourceAction, initialState)
 
   useEffect(() => {
     const { status } = serverState
@@ -64,15 +63,26 @@ export const CreateResourceForm = ({
     }
   }, [router, serverState])
 
+  const defaultResourceCompositions = resource?.resource_compositions?.map(
+    (comp) => ({
+      child_resource_id: comp.child_resource_id,
+      qty: comp.qty.toString(),
+    })
+  )
+
   const form = useForm<ResourceFormData>({
     resolver: zodResolver(resourceSchema),
     defaultValues: {
-      basic_rate: "",
-      code: "",
-      description: "",
-      factor: "",
-      output: "",
-      remarks: "",
+      basic_rate: resource?.basic_rate?.toString() || "",
+      code: resource?.code || "",
+      description: resource?.description || "",
+      factor: resource?.factor?.toString() || "",
+      output: resource?.output?.toString() || "",
+      remarks: resource?.remarks || "",
+      category_id: resource?.category?.id,
+      sub_category_id: resource?.sub_category?.id,
+      unit_id: resource?.unit?.id,
+      resource_compositions: defaultResourceCompositions,
     },
   })
 
@@ -98,7 +108,7 @@ export const CreateResourceForm = ({
 
   const onSubmit = (data: ResourceFormData) => {
     startTransition(() => {
-      formAction(data)
+      formAction({ ...data, id: resource?.id })
     })
   }
 
@@ -310,6 +320,7 @@ export const CreateResourceForm = ({
 
         <div className="col-span-12">
           <ResourceCompositionInput
+            resourceCompositions={defaultResourceCompositions}
             resources={resources}
             categories={categories}
             subcategories={subcategories}
@@ -322,8 +333,12 @@ export const CreateResourceForm = ({
         />
 
         <SubmitButton className="w-auto" isLoading={isPending}>
-          <Plus className="size-4 ltr:mr-2 rtl:ml-2" />
-          {t("save")}
+          {resource ? (
+            <Edit className="size-4 ltr:mr-2 rtl:ml-2" />
+          ) : (
+            <Plus className="size-4 ltr:mr-2 rtl:ml-2" />
+          )}
+          {resource ? t("update") : t("save")}
         </SubmitButton>
       </form>
     </Form>

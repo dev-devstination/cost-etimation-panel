@@ -2,7 +2,7 @@ import { z } from "zod"
 import { useTranslations } from "next-intl"
 
 export const useResourceSchema = () => {
-  const t = useTranslations("CreateResourcePage.form")
+  const t = useTranslations("ResourcePage.form")
 
   return z.object({
     basic_rate: z

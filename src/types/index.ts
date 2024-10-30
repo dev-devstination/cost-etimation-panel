@@ -1,7 +1,7 @@
 import { LucideIcon } from "lucide-react"
 
 export interface LocalizedPageProps {
-  params: { locale: string }
+  params: { locale: "en" | "ar" }
 }
 
 export interface NavigationLink {

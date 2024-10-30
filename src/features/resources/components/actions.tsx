@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { Resource } from "@/features/resources/types"
 import { PriceHistory } from "@/features/resources/components/price-history"
+import { Link } from "@/config/navigation"
 
 interface ActionsProps {
   resource: Resource
@@ -29,9 +30,11 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
     <div className="flex items-center space-x-2" data-prevent-propagation>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="size-8">
-            <Eye className="size-4" />
-            <span className="sr-only">{t("view")}</span>
+          <Button variant="ghost" size="icon" className="size-8" asChild>
+            <Link href={`/resources/${resource.id}`}>
+              <Eye className="size-4" />
+              <span className="sr-only">{t("view")}</span>
+            </Link>
           </Button>
         </TooltipTrigger>
         <TooltipContent>

@@ -42,7 +42,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
       {/* Main content area */}
       <div className="flex min-h-screen flex-1 flex-col overflow-hidden">
         {/* Navbar */}
-        <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-card p-4 text-card-foreground">
+        <header className="fixed inset-x-0 top-0 z-10 flex h-16 items-center justify-between border-b bg-card p-4 text-card-foreground">
           <div className="flex items-center gap-x-4">
             {/* Sheet component for mobile sidebar */}
             <Sheet>
@@ -76,9 +76,9 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
             </Sheet>
 
             <DashboardLogo />
-            <div className="hidden lg:flex lg:ltr:ml-44 lg:rtl:mr-44">
+            {/* <div className="hidden lg:flex lg:ltr:ml-44 lg:rtl:mr-44">
               <NavbarBreadcrumb />
-            </div>
+            </div> */}
           </div>
 
           {/* Right side navbar items */}
@@ -92,7 +92,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
         {/* Page content */}
         <main
           id="main-content"
-          className="flex-1 overflow-auto p-6 lg:ltr:ml-64 lg:rtl:mr-64"
+          className="mt-16 flex-1 overflow-auto p-6 lg:ltr:ml-64 lg:rtl:mr-64"
         >
           {children}
         </main>

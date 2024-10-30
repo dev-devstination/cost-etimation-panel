@@ -1,4 +1,4 @@
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
+import { unstable_setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
 import { CreateResourceForm } from "@/features/resources/components/create-resource-form"
@@ -7,13 +7,18 @@ import { getResourceSubcategories } from "@/features/resources/lib/get-resource-
 import { getCurrencies } from "@/features/currencies/lib/get-currencies"
 import { getUnits } from "@/features/units/lib/get-units"
 import { getResources } from "@/features/resources/lib/get-resources"
+import { getResourceById } from "@/features/resources/lib/get-resource-by-id"
 
-const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
-  params: { locale },
+interface CreateNewResourcePageProps extends LocalizedPageProps {
+  params: { id: string; locale: "en" | "ar" }
+}
+
+const CreateNewResourcePage: React.FC<CreateNewResourcePageProps> = async ({
+  params: { locale, id },
 }) => {
   unstable_setRequestLocale(locale)
-  const t = await getTranslations("ResourcePage")
 
+  const { resource } = await getResourceById(id)
   const { categoriesOptions } = await getResourceCategories()
   const { subcategoriesOptions } = await getResourceSubcategories()
   const { currencies } = await getCurrencies()
@@ -23,9 +28,10 @@ const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
   return (
     <>
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <h1 className="text-2xl font-bold">{resource.description}</h1>
       </div>
       <CreateResourceForm
+        resource={resource}
         resources={resources}
         categories={categoriesOptions}
         subcategories={subcategoriesOptions}

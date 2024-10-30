@@ -137,7 +137,7 @@
   "HomePage": {
     "title": "Hello world!"
   },
-  "CreateResourcePage": {
+  "ResourcePage": {
     "title": "Create New Resource",
     "form": {
       "title": "Resource Information",
@@ -246,6 +246,7 @@
         "label": "Remarks",
         "placeholder": "Enter the remarks"
       },
+      "update": "Save",
       "save": "Create Resource",
       "cancel": "Cancel"
     }

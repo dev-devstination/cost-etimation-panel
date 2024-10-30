@@ -21,21 +21,29 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface ResourceCompositionInputProps {
   resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
+  resourceCompositions?: ResourceFormData["resource_compositions"]
 }
 
 export const ResourceCompositionInput: React.FC<
   ResourceCompositionInputProps
-> = ({ resources, categories, subcategories }) => {
-  const t = useTranslations("CreateResourcePage.form.resource_compositions")
+> = ({ resources, categories, subcategories, resourceCompositions }) => {
+  const t = useTranslations("ResourcePage.form.resource_compositions")
   const [selectedResources, setSelectedResources] = useState<string[]>([])
-  const [availableResources, setAvailableResources] =
-    useState<Resource[]>(resources)
+  const [availableResources, setAvailableResources] = useState<Resource[]>(
+    resourceCompositions
+      ? resources.filter(
+          (resource) =>
+            !resourceCompositions.some(
+              (comp) => comp.child_resource_id === resource.id
+            )
+        )
+      : resources
+  )
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedSubcategory, setSelectedSubcategory] = useState("")
