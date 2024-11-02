@@ -5,7 +5,7 @@ import logger from "@/lib/logger"
 import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
 
-import { ResourceFormData } from "../schemas/resource"
+import { ResourceFormData, UpdateResourcesSchema } from "../schemas/resource"
 
 export async function resourceAction(
   _: ActionState,
@@ -34,6 +34,42 @@ export async function resourceAction(
     revalidatePath("/resources")
 
     return { status: "success", message: "resourceAdded" }
+  } catch (error) {
+    if (error instanceof ApiError) {
+      logger.error("Resource add error", {
+        error: error.message,
+        statusCode: error.statusCode,
+        body: data,
+      })
+
+      switch (error.statusCode) {
+        default:
+          return { status: "destructive", message: "default" }
+      }
+    }
+
+    return {
+      message: "default",
+      status: "destructive",
+    }
+  }
+}
+
+export async function updateResourcesAction(
+  _: ActionState,
+  data: UpdateResourcesSchema
+): Promise<ActionState> {
+  const { resources } = data
+  try {
+    await fetcher(`/resources`, {
+      method: "PATCH",
+      body: resources,
+    })
+
+    logger.info("Resource updated successfully", { data })
+    revalidatePath(`/resources`)
+
+    return { status: "success", message: "resourcesUpdated" }
   } catch (error) {
     if (error instanceof ApiError) {
       logger.error("Resource add error", {

@@ -1,7 +1,7 @@
 import { unstable_setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
-import { CreateResourceForm } from "@/features/resources/components/create-resource-form"
+import { ResourceForm } from "@/features/resources/components/resource-form"
 import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
 import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 import { getCurrencies } from "@/features/currencies/lib/get-currencies"
@@ -30,7 +30,7 @@ const CreateNewResourcePage: React.FC<CreateNewResourcePageProps> = async ({
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h1 className="text-2xl font-bold">{resource.description}</h1>
       </div>
-      <CreateResourceForm
+      <ResourceForm
         resource={resource}
         resources={resources}
         categories={categoriesOptions}

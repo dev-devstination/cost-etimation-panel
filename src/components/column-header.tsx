@@ -26,6 +26,7 @@ export function ColumnHeader<TData>({
       <span className="shrink-0">{t(`commonTableHeaders.${title}`)}</span>
       <Button
         variant="ghost"
+        type="button"
         size="icon"
         className="shrink-0 p-0"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}

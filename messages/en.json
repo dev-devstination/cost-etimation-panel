@@ -261,6 +261,7 @@
     "projet": "Project",
     "user": "User",
     "table": {
+      "save": "Save",
       "code": "Code",
       "description": "Description",
       "category": "Category:",
@@ -799,6 +800,7 @@
     "unitActivated": "Unit activated successfully",
     "unitDeactivated": "Unit deactivated successfully",
     "resourceAdded": "Resource added successfully",
-    "resourceUpdated": "Resource updated successfully"
+    "resourceUpdated": "Resource updated successfully",
+    "resourcesUpdated": "Resources updated successfully"
   }
 }

@@ -4,11 +4,9 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 import { Link } from "@/config/navigation"
 import { Filters } from "@/features/resources/components/filters"
 import { Button } from "@/components/ui/button"
-import { DataTable } from "@/components/data-table"
-import { columns } from "@/features/resources/components/columns"
-import { Popover } from "@/features/resources/components/popover"
 import { LocalizedPageProps } from "@/types"
 import { getResources } from "@/features/resources/lib/get-resources"
+import { UpdateResourcesTable } from "@/features/resources/components/update-resources-table"
 
 const ResourcesPage: React.FC<LocalizedPageProps> = async ({
   params: { locale },
@@ -32,7 +30,7 @@ const ResourcesPage: React.FC<LocalizedPageProps> = async ({
         </div>
       </div>
 
-      <DataTable columns={columns} data={resources} PopoverContent={Popover} />
+      <UpdateResourcesTable resources={resources} />
     </>
   )
 }

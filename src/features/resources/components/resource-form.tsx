@@ -39,7 +39,7 @@ const initialState = {
   status: undefined,
 }
 
-export const CreateResourceForm = ({
+export const ResourceForm = ({
   resource,
   resources,
   categories,
@@ -87,8 +87,8 @@ export const CreateResourceForm = ({
   })
 
   const {
-    basic_rate,
     factor,
+    basic_rate,
     currency_id,
     category_id,
     resource_compositions,
@@ -102,7 +102,6 @@ export const CreateResourceForm = ({
       return total + Number(comp.qty) * rate
     }, 0) || 0
 
-  useEffect(() => {}, [])
   const exchange_rate =
     currencies.find(({ id }) => id === currency_id)?.exchange_rate || 1
 
@@ -138,6 +137,19 @@ export const CreateResourceForm = ({
         shouldDirty: true,
       })
     }
+  }
+
+  const getResourceRate = (resource?: Resource) => {
+    if (!resource) {
+      return 0
+    }
+
+    const initialRate = Number(basic_rate) * Number(factor)
+    if (!resource_compositions?.length) {
+      return initialRate
+    }
+
+    return initialRate + (totalCost || 0)
   }
 
   return (
@@ -283,7 +295,7 @@ export const CreateResourceForm = ({
             <Input
               label={t("rate.label")}
               disabled
-              value={Number(basic_rate || 0) * Number(factor || 1)}
+              value={getResourceRate(resource)}
             />
           </div>
 

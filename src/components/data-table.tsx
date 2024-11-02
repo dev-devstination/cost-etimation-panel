@@ -94,7 +94,10 @@ export function DataTable<TData, TValue>({
               onClick={(e) => handleRowClick(e, row)}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell
+                  key={cell.id}
+                  className="max-w-80 truncate whitespace-nowrap"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
@@ -109,7 +112,7 @@ export function DataTable<TData, TValue>({
 
     return (
       <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-        {row.getVisibleCells().map((cell: any) => (
+        {row.getVisibleCells().map((cell) => (
           <TableCell key={cell.id}>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </TableCell>

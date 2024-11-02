@@ -72,5 +72,30 @@ export const useResourceSchema = () => {
   })
 }
 
+export const updateResourcesSchema = z.object({
+  resources: z.array(
+    z.object({
+      id: z.string(),
+      basic_rate: z
+        .string()
+        .min(1)
+        .refine((val) => !isNaN(parseFloat(val)) && parseFloat(val) > 0)
+        .transform((val) => parseFloat(parseFloat(val).toFixed(2))),
+      factor: z
+        .string()
+        .optional()
+        .transform((val) => (val === "" ? "1" : val))
+        .refine(
+          (val) =>
+            val === undefined ||
+            (!isNaN(parseFloat(val)) && parseFloat(val) > 0)
+        )
+        .transform((val) => (val ? parseFloat(parseFloat(val).toFixed(2)) : 1)),
+    })
+  ),
+})
+
+export type UpdateResourcesSchema = z.input<typeof updateResourcesSchema>
+
 export type ResourceSchema = ReturnType<typeof useResourceSchema>
 export type ResourceFormData = z.input<ResourceSchema>
