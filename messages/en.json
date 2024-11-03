@@ -293,7 +293,8 @@
       "inUse": "Resources in use",
       "master": "Master resources",
       "apply": "Apply Filters",
-      "clear": "Clear Filters"
+      "clear": "Clear Filters",
+      "active": "Active"
     }
   },
   "components": {

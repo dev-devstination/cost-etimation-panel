@@ -42,7 +42,7 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
         </TooltipContent>
       </Tooltip>
 
-      <Dialog>
+      {/* <Dialog>
         <DialogTrigger asChild>
           <div>
             <Tooltip>
@@ -58,14 +58,14 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
             </Tooltip>
           </div>
         </DialogTrigger>
-        {/* <DialogContent className="max-w-7xl">
+        <DialogContent className="max-w-7xl">
           <DialogHeader>
             <DialogTitle>{resource.description}</DialogTitle>
             <DialogDescription>{t("priceHistory")}</DialogDescription>
           </DialogHeader>
           <PriceHistory resource={resource} />
-        </DialogContent> */}
-      </Dialog>
+        </DialogContent>
+      </Dialog> */}
     </div>
   )
 }

@@ -1,8 +1,6 @@
 "use client"
 
-import { CalendarIcon } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table"
-// import { format } from "date-fns"
 
 import { Resource } from "@/features/resources/types"
 import { Actions } from "@/features/resources/components/actions"
@@ -10,7 +8,6 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
-import { formatDate } from "@/lib/utils"
 
 import { FactorColumn } from "./factor-column"
 import { ResourceInputCell } from "./resource-input-cell"
@@ -96,28 +93,28 @@ export const columns: ColumnDef<Resource>[] = [
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.master} />,
   },
-  {
-    accessorKey: "isUsed",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="inUse" sortable />
-    },
-    cell: () => <FlaggedCell checked={false} />,
-  },
-  {
-    accessorKey: "updatedDate",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="lastUpdated" sortable />
-    },
-    cell: () => {
-      const date = new Date().getMilliseconds()
-      return (
-        <div className="flex items-center">
-          <CalendarIcon className="mr-2 size-4 opacity-50" />
-          <span className="text-sm">{formatDate(date)}</span>
-        </div>
-      )
-    },
-  },
+  // {
+  //   accessorKey: "isUsed",
+  //   header: ({ column }) => {
+  //     return <ColumnHeader column={column} title="inUse" sortable />
+  //   },
+  //   cell: () => <FlaggedCell checked={false} />,
+  // },
+  // {
+  //   accessorKey: "updatedDate",
+  //   header: ({ column }) => {
+  //     return <ColumnHeader column={column} title="lastUpdated" sortable />
+  //   },
+  //   cell: () => {
+  //     const date = new Date().getMilliseconds()
+  //     return (
+  //       <div className="flex items-center">
+  //         <CalendarIcon className="mr-2 size-4 opacity-50" />
+  //         <span className="text-sm">{formatDate(date)}</span>
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     id: "actions",
     cell: ({ row }) => <Actions resource={row.original} />,

@@ -31,3 +31,9 @@ export interface Resource {
   active: boolean
   children?: ResourceComposition[]
 }
+
+export interface ResourceFilters {
+  resourceType?: string
+  isComposite: boolean
+  isMaster: boolean
+}

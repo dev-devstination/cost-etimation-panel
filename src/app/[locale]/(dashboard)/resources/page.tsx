@@ -2,19 +2,36 @@ import { Plus } from "lucide-react"
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 
 import { Link } from "@/config/navigation"
-import { Filters } from "@/features/resources/components/filters"
 import { Button } from "@/components/ui/button"
 import { LocalizedPageProps } from "@/types"
 import { getResources } from "@/features/resources/lib/get-resources"
 import { UpdateResourcesTable } from "@/features/resources/components/update-resources-table"
+import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
+import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 
-const ResourcesPage: React.FC<LocalizedPageProps> = async ({
+interface ResourcesPageProps extends LocalizedPageProps {
+  searchParams: {
+    category?: string
+    subcategory?: string
+    active?: string
+  }
+}
+
+const ResourcesPage: React.FC<ResourcesPageProps> = async ({
   params: { locale },
+  searchParams,
 }) => {
   unstable_setRequestLocale(locale)
   const t = await getTranslations("ResourcesPage")
 
-  const { resources } = await getResources()
+  const { resources } = await getResources({
+    categoryId: searchParams.category,
+    subcategoryId: searchParams.subcategory,
+    active: searchParams.active,
+  })
+
+  const { categoriesOptions } = await getResourceCategories()
+  const { subcategoriesOptions } = await getResourceSubcategories()
 
   return (
     <>
@@ -29,10 +46,11 @@ const ResourcesPage: React.FC<LocalizedPageProps> = async ({
         </div>
       </div>
 
-      <div className="space-y-4">
-        <Filters />
-        <UpdateResourcesTable resources={resources} />
-      </div>
+      <UpdateResourcesTable
+        resources={resources}
+        categoriesOptions={categoriesOptions}
+        subcategoriesOptions={subcategoriesOptions}
+      />
     </>
   )
 }
