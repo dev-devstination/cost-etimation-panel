@@ -114,15 +114,15 @@ export const ResourceCompositionInput: React.FC<
 
     selectedResources.forEach((resourceId) => {
       const resource = resources.find((r) => r.id === resourceId)
-      if (resource?.resource_compositions?.length) {
-        resource.resource_compositions.forEach((comp) => {
+      if (resource?.children?.length) {
+        resource.children.forEach((comp) => {
           if (
             !fields.some(
-              (field) => field.child_resource_id === comp.child_resource_id
+              (field) => field.child_resource_id === comp.child_resource.id
             )
           ) {
             newCompositions.push({
-              child_resource_id: comp.child_resource_id,
+              child_resource_id: comp.child_resource.id,
               qty: comp.qty.toString(),
             })
           }
@@ -234,7 +234,7 @@ export const ResourceCompositionInput: React.FC<
                       {resource.unit.name}
                     </TableCell>
                     <TableCell className="text-center">
-                      {resource.resource_compositions?.length ? (
+                      {resource.children?.length ? (
                         <CheckCircle className="mx-auto size-4 text-primary" />
                       ) : null}
                     </TableCell>

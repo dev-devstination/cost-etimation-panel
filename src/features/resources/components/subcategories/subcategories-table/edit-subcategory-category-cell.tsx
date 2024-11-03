@@ -62,7 +62,7 @@ export const EditSubcategoryCategoryCell: React.FC<
     <Select
       disabled={isPending}
       onValueChange={onChange}
-      defaultValue={subcategory.category_id}
+      defaultValue={subcategory.category.id}
     >
       <SelectTrigger>
         <SelectValue />

@@ -21,7 +21,6 @@ const ResourcesPage: React.FC<LocalizedPageProps> = async ({
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <Filters />
           <Button asChild>
             <Link href="/resources/new">
               <Plus className="size-4 ltr:mr-2 rtl:ml-2" /> {t("actions.add")}
@@ -30,7 +29,10 @@ const ResourcesPage: React.FC<LocalizedPageProps> = async ({
         </div>
       </div>
 
-      <UpdateResourcesTable resources={resources} />
+      <div className="space-y-4">
+        <Filters />
+        <UpdateResourcesTable resources={resources} />
+      </div>
     </>
   )
 }

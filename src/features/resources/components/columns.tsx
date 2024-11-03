@@ -87,9 +87,7 @@ export const columns: ColumnDef<Resource>[] = [
     header: ({ column }) => {
       return <ColumnHeader column={column} title="composite" sortable />
     },
-    cell: ({ row }) => (
-      <FlaggedCell checked={!!row.original.resource_compositions} />
-    ),
+    cell: ({ row }) => <FlaggedCell checked={!!row.original.children} />,
   },
   {
     accessorKey: "master",

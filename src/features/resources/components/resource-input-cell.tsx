@@ -21,17 +21,13 @@ export const ResourceInputCell: React.FC<BasicRateCellProps> = ({
   const { basic_rate, factor } = form.watch(`resources.${index}`)
 
   const getResourceRate = () => {
-    if (!resource) {
-      return 0
-    }
-    console.log(resource)
     const initialRate = Number(basic_rate) * Number(factor)
 
-    if (!resource.resource_compositions?.length) {
+    if (!resource?.children?.length) {
       return initialRate
     }
 
-    const totalCost = resource.resource_compositions.reduce((total, comp) => {
+    const totalCost = resource.children.reduce((total, comp) => {
       return total + comp.amount
     }, 0)
 

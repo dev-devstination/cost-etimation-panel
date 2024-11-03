@@ -4,7 +4,9 @@ import { Category, Subcategory } from "@/types"
 
 export interface ResourceComposition {
   amount: number
-  child_resource_id: string
+  child_id: string
+  child_resource: Resource
+  company_id: string
   id: string
   qty: number
   resource_id: string
@@ -27,5 +29,5 @@ export interface Resource {
   cost: number
   master: boolean
   active: boolean
-  resource_compositions?: ResourceComposition[]
+  children?: ResourceComposition[]
 }

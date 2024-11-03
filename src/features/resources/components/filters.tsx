@@ -1,5 +1,5 @@
-import { useLocale, useTranslations } from "next-intl"
-import { Filter, X } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,73 +10,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
 import { Checkbox } from "@/components/ui/checkbox"
 
 export const Filters = () => {
   const t = useTranslations("ResourcesPage")
-  const locale = useLocale()
-
-  const isRTL = locale === "ar"
 
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline" className="gap-2">
-          <Filter className="size-4" />
-          {t("filters.title")}
-        </Button>
-      </SheetTrigger>
-      <SheetContent
-        side={isRTL ? "left" : "right"}
-        className="w-[300px] sm:w-[400px]"
-      >
-        <SheetHeader>
-          <SheetTitle>{t("filters.title")}</SheetTitle>
-          <SheetDescription>{t("filters.description")}</SheetDescription>
-        </SheetHeader>
-        <div className="mt-6 flex flex-col gap-4">
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder={t("filters.category")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">{t("filters.allCategories")}</SelectItem>
-              {/* Add more categories here */}
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder={t("filters.subcategory")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">
-                {t("filters.allSubcategories")}
-              </SelectItem>
-              {/* Add more subcategories here */}
-            </SelectContent>
-          </Select>
+    <div className="mt-6 space-y-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Input placeholder={t("filters.search")} />
 
-          <Select>
-            <SelectTrigger>
-              <SelectValue placeholder={t("filters.resouceType")} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">
-                {t("filters.allResourceTypes")}
-              </SelectItem>
-              {/* Add more categories here */}
-            </SelectContent>
-          </Select>
-          <Input placeholder={t("filters.search")} />
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder={t("filters.category")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("filters.allCategories")}</SelectItem>
+            {/* Add more categories here */}
+          </SelectContent>
+        </Select>
+
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder={t("filters.subcategory")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("filters.allSubcategories")}</SelectItem>
+            {/* Add more subcategories here */}
+          </SelectContent>
+        </Select>
+
+        <Select>
+          <SelectTrigger>
+            <SelectValue placeholder={t("filters.resouceType")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("filters.allResourceTypes")}</SelectItem>
+            {/* Add more categories here */}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex items-center gap-6">
           <div className="flex items-center space-x-2 rtl:space-x-reverse">
             <Checkbox id="composite" />
             <label
@@ -86,6 +62,7 @@ export const Filters = () => {
               {t("filters.composite")}
             </label>
           </div>
+
           <div className="flex items-center space-x-2 rtl:space-x-reverse">
             <Checkbox id="inUse" />
             <label
@@ -95,6 +72,7 @@ export const Filters = () => {
               {t("filters.inUse")}
             </label>
           </div>
+
           <div className="flex items-center space-x-2 rtl:space-x-reverse">
             <Checkbox id="master" />
             <label
@@ -104,21 +82,17 @@ export const Filters = () => {
               {t("filters.master")}
             </label>
           </div>
-          <SheetClose asChild>
-            <Button type="button" className="mt-4">
-              {t("filters.apply")}
-            </Button>
-          </SheetClose>
-          <Button
-            type="button"
-            variant="outline"
-            className="flex-1 gap-2 transition-all duration-300 ease-in-out hover:bg-destructive hover:text-destructive-foreground"
-          >
-            <X className="size-4" />
-            {t("filters.clear")}
-          </Button>
         </div>
-      </SheetContent>
-    </Sheet>
+
+        <Button
+          type="button"
+          variant="outline"
+          className="ml-auto gap-2 transition-all duration-300 ease-in-out hover:bg-destructive hover:text-destructive-foreground"
+        >
+          <X className="size-4" />
+          {t("filters.clear")}
+        </Button>
+      </div>
+    </div>
   )
 }

@@ -63,12 +63,10 @@ export const ResourceForm = ({
     }
   }, [router, serverState])
 
-  const defaultResourceCompositions = resource?.resource_compositions?.map(
-    (comp) => ({
-      child_resource_id: comp.child_resource_id,
-      qty: comp.qty.toString(),
-    })
-  )
+  const defaultResourceCompositions = resource?.children?.map((comp) => ({
+    child_resource_id: comp.child_resource.id,
+    qty: comp.qty.toString(),
+  }))
 
   const form = useForm<ResourceFormData>({
     resolver: zodResolver(resourceSchema),
@@ -139,11 +137,7 @@ export const ResourceForm = ({
     }
   }
 
-  const getResourceRate = (resource?: Resource) => {
-    if (!resource) {
-      return 0
-    }
-
+  const getResourceRate = () => {
     const initialRate = Number(basic_rate) * Number(factor)
     if (!resource_compositions?.length) {
       return initialRate
@@ -292,11 +286,7 @@ export const ResourceForm = ({
 
           {/* Rate */}
           <div className="col-span-12 lg:col-span-2">
-            <Input
-              label={t("rate.label")}
-              disabled
-              value={getResourceRate(resource)}
-            />
+            <Input label={t("rate.label")} disabled value={getResourceRate()} />
           </div>
 
           {/* output */}
