@@ -1,8 +1,8 @@
 "use client"
 import { useTranslations } from "next-intl"
 
-import { DashboardLogo } from "@/components/logo"
-import { NavigationLink } from "@/components/navigation-link"
+import { DashboardLogo } from "./logo"
+import { NavigationLink } from "./navigation-link"
 import { NavigationLink as INavigationLink } from "@/types"
 
 interface SidebarProps {
