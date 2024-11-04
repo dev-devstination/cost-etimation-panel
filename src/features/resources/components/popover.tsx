@@ -10,7 +10,7 @@ interface PopoverProps {
 }
 
 export const Popover: React.FC<PopoverProps> = ({ data }) => {
-  const t = useTranslations("resources.table")
+  const t = useTranslations("ResourcesPage.table")
 
   return (
     <div className="space-y-4">
@@ -19,12 +19,12 @@ export const Popover: React.FC<PopoverProps> = ({ data }) => {
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
           <Tag className="size-4 text-primary" />
           <span className="text-sm font-medium">{t("category")} </span>
-          <span className="text-sm">{data.category}</span>
+          <span className="text-sm">{data.category.name}</span>
         </div>
         <div className="flex items-center space-x-2">
           <Layers className="size-4 text-primary" />
           <span className="text-sm font-medium">{t("subCategory")} </span>
-          <span className="text-sm">{data.subCategory}</span>
+          <span className="text-sm">{data.sub_category.name}</span>
         </div>
       </div>
     </div>

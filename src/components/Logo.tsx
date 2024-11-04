@@ -27,18 +27,14 @@ export const DashboardLogo: React.FC = () => {
 
   return (
     <div className="group flex items-center space-x-1 text-2xl font-black">
-      <div className="relative transition-transform duration-300 ease-in-out group-hover:scale-105">
+      <div className="relative transition-transform duration-300 ease-in-out">
         <span className="text-primary">{t("firstLetter")}</span>
         <span className="text-foreground">{t("secondLetter")}</span>
         <span className="text-primary">{t("restOfWord")}</span>
       </div>
-      <div className="overflow-hidden">
-        <span className="inline-block max-w-0 whitespace-nowrap text-sm font-medium text-muted-foreground opacity-0 transition-all duration-300 ease-in-out group-hover:max-w-xs group-hover:opacity-100">
-          {t("subtitle")}
-        </span>
-      </div>
+
       <svg
-        className="size-5 text-primary transition-transform duration-300 ease-in-out group-hover:rotate-180"
+        className="size-5 text-primary transition-transform duration-300 ease-in-out"
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

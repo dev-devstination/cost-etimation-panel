@@ -17,7 +17,7 @@ interface PriceHistoryProps {
 }
 
 export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
-  const t = useTranslations("resources")
+  const t = useTranslations("ResourcesPage")
 
   return (
     <div className="space-y-6">
@@ -33,9 +33,9 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
               <dt className="font-medium">{t("table.description")}</dt>
               <dd>{resource.description}</dd>
               <dt className="font-medium">{t("table.category")}</dt>
-              <dd>{resource.category}</dd>
+              <dd>{resource.category.name}</dd>
               <dt className="font-medium">{t("table.unit")}</dt>
-              <dd>{resource.unit}</dd>
+              <dd>{resource.unit.name}</dd>
             </dl>
           </CardContent>
         </Card>
@@ -47,13 +47,13 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
           <CardContent>
             <dl className="grid grid-cols-2 gap-2 text-sm">
               <dt className="font-medium">{t("table.basicRate")}</dt>
-              <dd>{resource.basicRate.toFixed(2)}</dd>
+              <dd>{resource.basic_rate.toFixed(2)}</dd>
               <dt className="font-medium">{t("table.factor")}</dt>
               <dd>{resource.factor.toFixed(2)}</dd>
               <dt className="font-medium">{t("table.rate")}</dt>
-              <dd>{(resource.basicRate * resource.factor).toFixed(2)}</dd>
+              <dd>{(resource.basic_rate * resource.factor).toFixed(2)}</dd>
               <dt className="font-medium">{t("table.lastUpdated")}</dt>
-              <dd>{resource.updatedDate}</dd>
+              {/* <dd>{resource.updatedDate}</dd> */}
             </dl>
           </CardContent>
         </Card>
@@ -78,7 +78,7 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {resource.history.map((entry, index) => (
+                {/* {resource.history.map((entry, index) => (
                   <TableRow key={index}>
                     <TableCell>{entry.date}</TableCell>
                     <TableCell>
@@ -93,7 +93,7 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
                     <TableCell>{entry.factor.toFixed(2)}</TableCell>
                     <TableCell>{entry.finalRate.toFixed(2)}</TableCell>
                   </TableRow>
-                ))}
+                ))} */}
               </TableBody>
             </Table>
           </ScrollArea>

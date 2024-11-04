@@ -1,5 +1,8 @@
 {
   "common": {
+    "account": "Account",
+    "settings": "Settings",
+    "logout": "Logout",
     "clearFilters": "Clear Filters",
     "filterBy": "Filter by {field}...",
     "rowsSelected": "{selected} of {total} row(s) selected.",
@@ -17,6 +20,12 @@
     "goToPreviousPage": "Go to previous page",
     "goToNextPage": "Go to next page",
     "goToLastPage": "Go to last page",
+    "factorDialog": {
+      "title": "Factor",
+      "description": "Set factor for all selected items",
+      "actionButton": "Set Factor",
+      "cancel": "Cancel"
+    },
     "commonTableHeaders": {
       "code": "Code",
       "description": "Description",
@@ -27,7 +36,17 @@
       "rate": "Rate",
       "master": "Master",
       "inUse": "In Use",
-      "lastUpdated": "Last Updated"
+      "lastUpdated": "Last Updated",
+      "email": "Email",
+      "role": "Role",
+      "active": "Active",
+      "name": "Name",
+      "category": "Category",
+      "currency": "Currency",
+      "exchange_rate": "Exchange Rate",
+      "clientName": "Client Name",
+      "consultantName": "Consultant Name",
+      "area": "Area"
     },
     "selectAll": "Select All",
     "error": {
@@ -51,14 +70,188 @@
       "home": "Home",
       "dashboard": "Dashboard",
       "resources": "Resources",
-      "settings": "Settings"
+      "settings": "Settings",
+      "account": "Account",
+      "company": "Company",
+      "members": "Members",
+      "activities": "Activities",
+      "categories": "Categories",
+      "subcategories": "Subcategories",
+      "projects": "Projects",
+      "currencies": "Currencies",
+      "units": "Units",
+      "new": "New"
     }
   },
-
+  "CurrenciesPage": {
+    "title": "Currencies",
+    "dialog": {
+      "add": "Add Currency",
+      "title": "Add New Currency",
+      "description": "Add a new currency to your currencies"
+    },
+    "form": {
+      "currencyInformation": "Currency Information",
+      "exchangeRates": "Exchange Rates",
+      "code": {
+        "label": "Code",
+        "placeholder": "Enter the currency code",
+        "validation": {
+          "required": "Code is required"
+        }
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "Enter the currency country",
+        "validation": {
+          "required": "Country is required"
+        }
+      },
+      "currency": {
+        "label": "Currency",
+        "placeholder": "Enter the currency name",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "exchange_rate": {
+        "label": "Exchange Rate",
+        "placeholder": "Enter the exchange rate",
+        "validation": {
+          "required": "Exchange rate is required",
+          "invalid": "Please enter a valid exchange rate"
+        }
+      },
+      "rate": {
+        "label": "Rate",
+        "placeholder": "Enter the rate",
+        "validation": {
+          "required": "Rate is required",
+          "invalid": "Please enter a valid rate"
+        }
+      },
+      "save": "Add Currency",
+      "cancel": "Cancel"
+    }
+  },
   "HomePage": {
     "title": "Hello world!"
   },
-  "resources": {
+  "ResourcePage": {
+    "title": "Create New Resource",
+    "form": {
+      "title": "Resource Information",
+      "basic_rate": {
+        "label": "Basic Rate",
+        "placeholder": "Enter the basic rate",
+        "validation": {
+          "required": "Basic rate is required",
+          "positive": "Basic rate must be positive"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "code": {
+        "label": "Code",
+        "placeholder": "Enter the code",
+        "validation": {
+          "required": "Code is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "factor": {
+        "label": "Factor",
+        "placeholder": "Enter the factor",
+        "validation": {
+          "positive": "Factor must be positive"
+        }
+      },
+      "output": {
+        "label": "Output",
+        "placeholder": "Enter the output",
+        "validation": {
+          "number": "Output must be a number"
+        }
+      },
+      "rate": {
+        "label": "Rate"
+      },
+      "exchange_rate": {
+        "label": "Exchange Rate"
+      },
+      "resource_compositions": {
+        "tableHeaders": {
+          "description": "Description",
+          "unit": "Unit",
+          "isComposite": "Composite",
+          "factor": "Factor",
+          "rate": "Rate",
+          "quantity": "Quantity",
+          "amount": "Amount"
+        },
+        "selectedResources": "Selected Resources",
+        "totalCost": "Total Cost",
+        "availableResources": "Available Resources",
+        "addSelectedResources": "Add Resources",
+        "remove": "Remove",
+        "selectCategory": "Select Category",
+        "selectSubcategory": "Select Subcategory",
+        "searchResources": "Search resources...",
+        "clearFilters": "Clear Filters",
+        "child_resource_id": {
+          "label": "Child Resource",
+          "validation": {
+            "required": "Child resource is required"
+          }
+        },
+        "qty": {
+          "label": "Quantity",
+          "validation": {
+            "required": "Quantity is required",
+            "positive_integer": "Quantity must be a positive integer"
+          }
+        }
+      },
+      "sub_category_id": {
+        "label": "Subcategory",
+        "validation": {
+          "required": "Subcategory is required"
+        }
+      },
+      "unit_id": {
+        "label": "Unit",
+        "validation": {
+          "required": "Unit is required"
+        }
+      },
+      "currency_id": {
+        "label": "Currency",
+        "placeholder": "Default is the company currency",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "remarks": {
+        "label": "Remarks",
+        "placeholder": "Enter the remarks"
+      },
+      "update": "Save",
+      "save": "Create Resource",
+      "cancel": "Cancel"
+    }
+  },
+  "ResourcesPage": {
     "title": "Resources",
     "resourceDetails": "Resource Details",
     "currentPricing": "Current Pricing",
@@ -68,6 +261,7 @@
     "projet": "Project",
     "user": "User",
     "table": {
+      "save": "Save",
       "code": "Code",
       "description": "Description",
       "category": "Category:",
@@ -92,11 +286,15 @@
       "allCategories": "All Categories",
       "subcategory": "Subcategory",
       "allSubcategories": "All Subcategories",
+      "resouceType": "Resource Type",
+      "allResourceTypes": "All Resource Types",
       "search": "Search resources...",
       "composite": "Composite resources",
       "inUse": "Resources in use",
       "master": "Master resources",
-      "apply": "Apply Filters"
+      "apply": "Apply Filters",
+      "clear": "Clear Filters",
+      "active": "Active"
     }
   },
   "components": {
@@ -164,12 +362,6 @@
     "passwordMatch": "Passwords do not match",
     "invalidType": "Invalid type for {field}",
     "custom": {
-      "firstName": {
-        "min": "First name must be at least 2 characters"
-      },
-      "lastName": {
-        "min": "Last name must be at least 2 characters"
-      },
       "password": {
         "min": "Password must be at least 8 characters",
         "strength": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character"
@@ -195,6 +387,421 @@
     "language": {
       "en": "English",
       "ar": "العربية"
+    },
+    "projectSelector": {
+      "selectProject": "Select Project",
+      "noCurrentProject": "No project",
+      "currentProject": "Current Project: "
+    },
+    "navlinks": {
+      "home": "Home",
+      "resources": "Resources",
+      "accountInformation": "User",
+      "companyInformation": "Company",
+      "members": "Members",
+      "billingPlans": "Billing and Plans",
+      "security": "Security",
+      "categories": "Categories",
+      "settings": "Settings",
+      "subcategories": "Subcategories",
+      "activity": "Activity",
+      "projects": "Projects",
+      "currencies": "Currencies",
+      "units": "Units"
     }
+  },
+  "CompanyPage": {
+    "title": "Company Settings",
+    "form": {
+      "title": "Company Information",
+      "name": {
+        "label": "Company Name",
+        "placeholder": "Enter your company name",
+        "validation": {
+          "required": "Company name is required"
+        }
+      },
+      "currency_id": {
+        "label": "Currency",
+        "placeholder": "Select a currency",
+        "validation": {
+          "required": "Currency is required"
+        }
+      },
+      "location": {
+        "label": "Company Location",
+        "placeholder": "Enter your company location",
+        "validation": {
+          "required": "Company location is required"
+        }
+      },
+      "logo": {
+        "label": "Company Logo",
+        "description": "Upload a logo for your company",
+        "placeholder": "Upload your company logo"
+      },
+      "save": "Save Changes"
+    }
+  },
+  "UnitsPage": {
+    "title": "Units",
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the unit name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the unit description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "save": "Add Unit",
+      "cancel": "Cancel"
+    },
+    "dialog": {
+      "add": "Add Unit",
+      "title": "Add New Unit",
+      "description": "Add a new unit to your units"
+    }
+  },
+  "AccountPage": {
+    "title": "Account Settings",
+    "form": {
+      "title": "Personal Information",
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter your first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter your last name"
+      },
+      "surName": {
+        "label": "Sur Name",
+        "placeholder": "Enter your sur name"
+      },
+      "email": {
+        "label": "Email",
+        "description": "Your email address cannot be changed",
+        "validation": {
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "position": {
+        "label": "Position",
+        "placeholder": "Enter your position"
+      },
+      "phoneNumber": {
+        "label": "Phone Number",
+        "placeholder": "Enter your phone number",
+        "validation": {
+          "invalid": "Please enter a valid phone number"
+        }
+      },
+      "image": {
+        "label": "Profile Image",
+        "description": "Upload a profile picture (optional)"
+      },
+      "save": "Save Changes"
+    }
+  },
+  "MembersPage": {
+    "title": "Members",
+    "memberRole": {
+      "admin": "Admin",
+      "writer": "Writer",
+      "reader": "Reader"
+    },
+    "dialog": {
+      "add": "Add Member",
+      "title": "Add New Member",
+      "description": "Add a new member to your company"
+    },
+    "form": {
+      "title": "Add Member",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter the member's email",
+        "validation": {
+          "required": "Email is required",
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Select a role",
+        "validation": {
+          "required": "Please select a role"
+        }
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter the member's password",
+        "validation": {
+          "min": "Password must be at least 8 characters",
+          "max": "Password must be at most 72 characters",
+          "required": "Password is required"
+        }
+      },
+      "password_confirmation": {
+        "label": "Confirm Password",
+        "placeholder": "Confirm the member's password",
+        "validation": {
+          "match": "Passwords must match",
+          "required": "Password confirmation is required"
+        }
+      },
+      "save": "Add Member",
+      "cancel": "Cancel"
+    }
+  },
+  "ActivitiesCategoriesPage": {
+    "title": "Activity Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "save": "Add Category",
+      "cancel": "Cancel"
+    }
+  },
+  "ActivitiesSubcategoriesPage": {
+    "title": "Activity Subcategories",
+    "dialog": {
+      "add": "Add Subcategory",
+      "title": "Add New Subcategory",
+      "description": "Add a new subcategory to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the subcategory name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "save": "Add Subcategory",
+      "cancel": "Cancel"
+    }
+  },
+  "ResourcesCategoriesPage": {
+    "title": "Resources Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "save": "Add Category",
+      "cancel": "Cancel"
+    }
+  },
+  "ResourcesSubcategoriesPage": {
+    "title": "Resources Subcategories",
+    "dialog": {
+      "add": "Add Subcategory",
+      "title": "Add New Subcategory",
+      "description": "Add a new subcategory to your activities"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the subcategory name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "save": "Add Subcategory",
+      "cancel": "Cancel"
+    }
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "overview": "Overview",
+    "current": "Current Project",
+    "projectsList": {
+      "title": "Projects List"
+    },
+    "currentProject": {
+      "noCurrentProject": "No project selected",
+      "projectInfo": "Project Info",
+      "client_name": "Client Name: ",
+      "consultant_name": "Consultant Name: ",
+      "area": "Area: ",
+      "category": "Category: ",
+      "projectDates": "Project Dates",
+      "queries_dead_line_date": "Queries Deadline Date: ",
+      "release_date": "Release Date: ",
+      "site_visit_date": "Site Visit Date: ",
+      "submission_date": "Submission Date: "
+    },
+    "noCurrentProject": "No current project",
+    "dialog": {
+      "create": "Create Project",
+      "edit": "Edit Project",
+      "title": "Create New Project",
+      "description": "Create a new project to your projects"
+    },
+    "form": {
+      "basicInfo": "Basic Info",
+      "dates": "Dates",
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the project name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "client_name": {
+        "label": "Client Name",
+        "placeholder": "Enter the client name",
+        "validation": {
+          "required": "Client name is required"
+        }
+      },
+      "consultant_name": {
+        "label": "Consultant Name",
+        "placeholder": "Enter the consultant name",
+        "validation": {
+          "required": "Consultant name is required"
+        }
+      },
+      "queries_dead_line_date": {
+        "label": "Deadline Date",
+        "placeholder": "Select the deadline date",
+        "validation": {
+          "required": "Deadline date is required"
+        }
+      },
+      "release_date": {
+        "label": "Release Date",
+        "placeholder": "Select the release date",
+        "validation": {
+          "required": "Release date is required"
+        }
+      },
+      "site_visit_date": {
+        "label": "Site Visit Date",
+        "placeholder": "Select the site visit date",
+        "validation": {
+          "required": "Site visit date is required"
+        }
+      },
+      "submission_date": {
+        "label": "Submission Date",
+        "placeholder": "Select the submission date",
+        "validation": {
+          "required": "Submission date is required"
+        }
+      },
+      "area": {
+        "label": "Area",
+        "placeholder": "Enter the area",
+        "validation": {
+          "required": "Area is required",
+          "invalid": "Please enter a valid area"
+        }
+      },
+      "create": "Create Project",
+      "update": "Update Project",
+      "cancel": "Cancel"
+    }
+  },
+  "ProjectsCategoriesPage": {
+    "title": "Categories",
+    "dialog": {
+      "add": "Add Category",
+      "title": "Add New Category",
+      "description": "Add a new category to your projects"
+    },
+    "form": {
+      "name": {
+        "label": "Name",
+        "placeholder": "Enter the category name",
+        "validation": {
+          "required": "Name is required"
+        }
+      },
+      "cancel": "Cancel",
+      "save": "Add Category"
+    }
+  },
+  "apiErrors": {
+    "default": "Oops! Something went wrong. Please try again later.",
+    "emailAlreadyExists": "This email is already registered. Please use a different email or try logging in.",
+    "invalidCredentials": "Invalid email or password. Please try again."
+  },
+  "apiSuccess": {
+    "accountUpdated": "Account updated successfully",
+    "companyUpdated": "Company updated successfully",
+    "memberAdded": "Member added successfully",
+    "memberActivated": "Member activated successfully",
+    "memberDeactivated": "Member deactivated successfully",
+    "categoryActivated": "Category activated successfully",
+    "categoryDeactivated": "Category deactivated successfully",
+    "categoryAdded": "Category added successfully",
+    "categoryUpdated": "Category updated successfully",
+    "subcategoryAdded": "Subcategory added successfully",
+    "subcategoryUpdated": "Subcategory updated successfully",
+    "subcategoryDeactivated": "Subcategory deactivated successfully",
+    "subcategoryActivated": "Subcategory activated successfully",
+    "memberUpdated": "Member updated successfully",
+    "projectCreated": "Project created successfully",
+    "projectUpdated": "Project updated successfully",
+    "projectActivated": "Project activated successfully",
+    "projectDeactivated": "Project deactivated successfully",
+    "currencyAdded": "Currency added successfully",
+    "currencyUpdated": "Currency updated successfully",
+    "currencyActivated": "Currency activated successfully",
+    "currencyDeactivated": "Currency deactivated successfully",
+    "unitAdded": "Unit added successfully",
+    "unitUpdated": "Unit updated successfully",
+    "unitActivated": "Unit activated successfully",
+    "unitDeactivated": "Unit deactivated successfully",
+    "resourceAdded": "Resource added successfully",
+    "resourceUpdated": "Resource updated successfully",
+    "resourcesUpdated": "Resources updated successfully"
   }
 }

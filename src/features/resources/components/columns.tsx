@@ -1,8 +1,6 @@
 "use client"
 
-import { CalendarIcon } from "lucide-react"
 import { ColumnDef } from "@tanstack/react-table"
-import { format } from "date-fns"
 
 import { Resource } from "@/features/resources/types"
 import { Actions } from "@/features/resources/components/actions"
@@ -10,7 +8,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
-import { InputCell } from "@/components/input-cell"
+
+import { FactorColumn } from "./factor-column"
+import { ResourceInputCell } from "./resource-input-cell"
 
 export const columns: ColumnDef<Resource>[] = [
   {
@@ -19,7 +19,7 @@ export const columns: ColumnDef<Resource>[] = [
       return <SelectAllColumn table={table} title="code" />
     },
     cell: ({ row }) => (
-      <div className="flex items-center space-x-2">
+      <div className="flex items-center space-x-2" data-prevent-propagation>
         <Checkbox
           checked={row.getIsSelected()}
           onCheckedChange={(value) => row.toggleSelected(!!value)}
@@ -40,84 +40,81 @@ export const columns: ColumnDef<Resource>[] = [
   {
     accessorKey: "unit",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="unit" />
+      return <ColumnHeader column={column} title="unit" sortable />
     },
     cell: ({ row }) => {
-      return <div className="text-center">{row.original.unit}</div>
+      return <div className="text-center">{row.original.unit.name}</div>
     },
   },
   {
-    accessorKey: "basicRate",
+    accessorKey: "basic_rate",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="basicRate" />
+      return <ColumnHeader column={column} title="basicRate" sortable />
     },
     cell: ({ row }) => {
-      const amount = row.original.basicRate
-      const formatted = amount.toFixed(2)
-      return <InputCell defaultValue={formatted} />
+      return <ResourceInputCell index={row.index} name="basic_rate" />
     },
   },
   {
     accessorKey: "factor",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="factor" />
+    header: () => {
+      return <FactorColumn />
     },
     cell: ({ row }) => {
-      const amount = row.original.factor
-      const formatted = amount.toFixed(2)
-      return <InputCell defaultValue={formatted} />
+      return <ResourceInputCell index={row.index} name="factor" />
     },
   },
   {
     accessorKey: "rate",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="rate" />
+      return <ColumnHeader column={column} title="rate" sortable />
     },
     cell: ({ row }) => {
-      const basicRate = row.original.basicRate
-      const factor = row.original.factor
-      const rate = basicRate * factor
-      const formatted = rate.toFixed(2)
-      return <div className="text-center font-medium">{formatted}</div>
-    },
-  },
-  {
-    accessorKey: "composite",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="composite" />
-    },
-    cell: ({ row }) => <FlaggedCell checked={row.original.isComposite} />,
-  },
-
-  {
-    accessorKey: "isMaster",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="master" />
-    },
-    cell: ({ row }) => <FlaggedCell checked={row.original.isMaster} />,
-  },
-  {
-    accessorKey: "isUsed",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="inUse" />
-    },
-    cell: ({ row }) => <FlaggedCell checked={row.original.isUsed} />,
-  },
-  {
-    accessorKey: "updatedDate",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="lastUpdated" sortable />
-    },
-    cell: ({ row }) => {
-      const date = new Date(row.original.updatedDate)
       return (
-        <div className="flex items-center">
-          <CalendarIcon className="mr-2 size-4 opacity-50" />
-          <span className="text-sm">{format(date, "MMM dd, yyyy")}</span>
-        </div>
+        <ResourceInputCell
+          resource={row.original}
+          index={row.index}
+          name="rate"
+        />
       )
     },
   },
+  {
+    accessorKey: "isComposite",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="composite" sortable />
+    },
+    cell: ({ row }) => <FlaggedCell checked={!!row.original.children} />,
+  },
+  {
+    accessorKey: "master",
+    header: ({ column }) => {
+      return <ColumnHeader column={column} title="master" sortable />
+    },
+    cell: ({ row }) => <FlaggedCell checked={row.original.master} />,
+  },
+  // {
+  //   accessorKey: "isUsed",
+  //   header: ({ column }) => {
+  //     return <ColumnHeader column={column} title="inUse" sortable />
+  //   },
+  //   cell: () => <FlaggedCell checked={false} />,
+  // },
+  // {
+  //   accessorKey: "updatedDate",
+  //   header: ({ column }) => {
+  //     return <ColumnHeader column={column} title="lastUpdated" sortable />
+  //   },
+  //   cell: () => {
+  //     const date = new Date().getMilliseconds()
+  //     return (
+  //       <div className="flex items-center">
+  //         <CalendarIcon className="mr-2 size-4 opacity-50" />
+  //         <span className="text-sm">{formatDate(date)}</span>
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     id: "actions",
     cell: ({ row }) => <Actions resource={row.original} />,

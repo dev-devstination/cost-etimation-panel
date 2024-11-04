@@ -7,7 +7,7 @@
   "plugins": ["tailwindcss"],
   "rules": {
     "tailwindcss/classnames-order": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": ["error", { "varsIgnorePattern": "^[A-Z]" }],
     "react/no-unescaped-entities": "off",
     // Avoid hardcoded labels
     "react/jsx-no-literals": "error",

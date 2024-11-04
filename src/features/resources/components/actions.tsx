@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl"
-import { Eye, Trash2, History } from "lucide-react"
+import { Eye, History } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dialog"
 import { Resource } from "@/features/resources/types"
 import { PriceHistory } from "@/features/resources/components/price-history"
+import { Link } from "@/config/navigation"
 
 interface ActionsProps {
   resource: Resource
@@ -24,14 +25,16 @@ interface ActionsProps {
 
 export const Actions: React.FC<ActionsProps> = ({ resource }) => {
   const t = useTranslations("common")
-  console.log("Resource: ", resource)
+
   return (
-    <div className="flex items-center space-x-2" data-actions-column>
+    <div className="flex items-center space-x-2" data-prevent-propagation>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="size-8">
-            <Eye className="size-4" />
-            <span className="sr-only">{t("view")}</span>
+          <Button variant="ghost" size="icon" className="size-8" asChild>
+            <Link href={`/resources/${resource.id}`}>
+              <Eye className="size-4" />
+              <span className="sr-only">{t("view")}</span>
+            </Link>
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -39,19 +42,7 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
         </TooltipContent>
       </Tooltip>
 
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon" className="size-8">
-            <Trash2 className="size-4" />
-            <span className="sr-only">{t("delete")}</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>{t("delete")}</p>
-        </TooltipContent>
-      </Tooltip>
-
-      <Dialog>
+      {/* <Dialog>
         <DialogTrigger asChild>
           <div>
             <Tooltip>
@@ -74,7 +65,7 @@ export const Actions: React.FC<ActionsProps> = ({ resource }) => {
           </DialogHeader>
           <PriceHistory resource={resource} />
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   )
 }

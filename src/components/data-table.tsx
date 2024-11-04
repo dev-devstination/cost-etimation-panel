@@ -30,16 +30,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 
-type AccessorKeys<T> = T extends { accessorKey: infer K }
-  ? K extends string
-    ? K
-    : never
-  : never
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  filterKeys?: AccessorKeys<ColumnDef<TData, TValue>>[]
   PopoverContent?: React.ComponentType<{ data: TData }>
 }
 
@@ -75,7 +68,7 @@ export function DataTable<TData, TValue>({
 
   const handleRowClick = (e: React.MouseEvent, row: Row<TData>) => {
     const target = e.target as HTMLElement
-    const isActionColumn = target.closest("[data-actions-column]")
+    const isActionColumn = target.closest("[data-prevent-propagation]")
     const isDialog = target.closest("[role='dialog']")
     const isOverlay = target.closest("[data-overlay]")
 
@@ -101,13 +94,16 @@ export function DataTable<TData, TValue>({
               onClick={(e) => handleRowClick(e, row)}
             >
               {row.getVisibleCells().map((cell) => (
-                <TableCell key={cell.id}>
+                <TableCell
+                  key={cell.id}
+                  className="max-w-80 truncate whitespace-nowrap"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>
               ))}
             </TableRow>
           </PopoverTrigger>
-          <UIPopoverContent className="w-80">
+          <UIPopoverContent className="w-full">
             <PopoverContent data={row.original} />
           </UIPopoverContent>
         </Popover>
@@ -116,7 +112,7 @@ export function DataTable<TData, TValue>({
 
     return (
       <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-        {row.getVisibleCells().map((cell: any) => (
+        {row.getVisibleCells().map((cell) => (
           <TableCell key={cell.id}>
             {flexRender(cell.column.columnDef.cell, cell.getContext())}
           </TableCell>
@@ -164,30 +160,6 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
       <TablePagination table={table} />
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {t("rowsSelected", {
-            selected: table.getFilteredSelectedRowModel().rows.length,
-            total: table.getFilteredRowModel().rows.length,
-          })}
-        </div>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {t("previous")}
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {t("next")}
-        </Button>
-      </div> */}
     </div>
   )
 }

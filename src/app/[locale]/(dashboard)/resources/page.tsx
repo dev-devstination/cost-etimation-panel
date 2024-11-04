@@ -1,28 +1,43 @@
 import { Plus } from "lucide-react"
-import { unstable_setRequestLocale } from "next-intl/server"
-import { useTranslations } from "next-intl"
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
 
 import { Link } from "@/config/navigation"
-import { Filters } from "@/features/resources/components/filters"
 import { Button } from "@/components/ui/button"
-import { DataTable } from "@/components/data-table"
-import { columns } from "@/features/resources/components/columns"
-import { sampleResources } from "@/features/resources/types"
-import { Popover } from "@/features/resources/components/popover"
 import { LocalizedPageProps } from "@/types"
+import { getResources } from "@/features/resources/lib/get-resources"
+import { UpdateResourcesTable } from "@/features/resources/components/update-resources-table"
+import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
+import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 
-const ResourcesPage: React.FC<LocalizedPageProps> = ({
+interface ResourcesPageProps extends LocalizedPageProps {
+  searchParams: {
+    category?: string
+    subcategory?: string
+    active?: string
+  }
+}
+
+const ResourcesPage: React.FC<ResourcesPageProps> = async ({
   params: { locale },
+  searchParams,
 }) => {
   unstable_setRequestLocale(locale)
+  const t = await getTranslations("ResourcesPage")
 
-  const t = useTranslations("resources")
+  const { resources } = await getResources({
+    categoryId: searchParams.category,
+    subcategoryId: searchParams.subcategory,
+    active: searchParams.active,
+  })
+
+  const { categoriesOptions } = await getResourceCategories()
+  const { subcategoriesOptions } = await getResourceSubcategories()
+
   return (
     <>
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
         <div className="flex items-center space-x-2 rtl:space-x-reverse">
-          <Filters />
           <Button asChild>
             <Link href="/resources/new">
               <Plus className="size-4 ltr:mr-2 rtl:ml-2" /> {t("actions.add")}
@@ -31,11 +46,10 @@ const ResourcesPage: React.FC<LocalizedPageProps> = ({
         </div>
       </div>
 
-      <DataTable
-        columns={columns}
-        data={sampleResources}
-        filterKeys={["description"]}
-        PopoverContent={Popover}
+      <UpdateResourcesTable
+        resources={resources}
+        categoriesOptions={categoriesOptions}
+        subcategoriesOptions={subcategoriesOptions}
       />
     </>
   )
