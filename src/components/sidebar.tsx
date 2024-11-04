@@ -1,7 +1,7 @@
 "use client"
 import { useTranslations } from "next-intl"
 
-import { DashboardLogo } from "./logo"
+// import { DashboardLogo } from "./logo"
 import { NavigationLink } from "./navigation-link"
 import { NavigationLink as INavigationLink } from "@/types"
 
@@ -14,9 +14,7 @@ const Sidebar: React.FC<SidebarProps> = ({ navLinks }) => {
 
   return (
     <div className="flex h-full flex-col">
-      <div className="h-16 border-b p-5">
-        <DashboardLogo />
-      </div>
+      <div className="h-16 border-b p-5">{/* <DashboardLogo /> */}</div>
       <nav className="flex-1 p-4">
         {Object.entries(navLinks).map(([title, links]) => (
           <div key={title} className="mb-4">
