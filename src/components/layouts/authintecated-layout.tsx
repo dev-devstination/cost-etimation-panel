@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import { ToggleThemeButton } from "@/components/ToggleThemeButton"
-import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
+// import { NavbarBreadcrumb } from "@/components/navbar-breadcrumb"
 import { UserProfile } from "@/components/user-profile"
-import { DashboardLogo } from "@/components/logo"
+// import { DashboardLogo } from "@/components/logo"
 import { ProjectSelector } from "@/features/projects/components/project-switcher"
 import LanguageSwitcher from "@/components/language-switcher"
 
@@ -75,7 +75,7 @@ export const AuthenticatedLayout: React.FC<AuthenticatedLayoutProps> = ({
               </SheetContent>
             </Sheet>
 
-            <DashboardLogo />
+            {/* <DashboardLogo /> */}
             {/* <div className="hidden lg:flex lg:ltr:ml-44 lg:rtl:mr-44">
               <NavbarBreadcrumb />
             </div> */}
