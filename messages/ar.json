@@ -1,71 +1,267 @@
 {
   "common": {
+    "account": "الحساب",
+    "settings": "الإعدادات",
+    "logout": "تسجيل الخروج",
+    "clearFilters": "مسح الفلاتر",
     "filterBy": "تصفية حسب {field}...",
-    "rowsSelected": "تم تحديد {selected} من أصل {total} صف.",
+    "rowsSelected": "{selected} من {total} صف(وف) محدد.",
     "noResults": "لم يتم العثور على نتائج",
     "previous": "السابق",
     "next": "التالي",
-    "clearFilters": "مسح التصفية",
-    "selectAll": "اختيار الكل",
     "view": "عرض",
     "delete": "حذف",
-    "priceHistory": "سجل الأسعار{hasColon, select, true {: } other { }}",
+    "priceHistory": "تاريخ السعر",
     "more": "المزيد",
     "close": "إغلاق",
-    "rowsPerPage": "الصفوف لكل صفحة",
+    "rowsPerPage": "عدد الصفوف لكل صفحة",
     "pageOf": "الصفحة {current} من {total}",
-    "goToFirstPage": "الانتقال إلى الصفحة الأولى",
-    "goToPreviousPage": "الانتقال إلى الصفحة السابقة",
-    "goToNextPage": "الانتقال إلى الصفحة التالية",
-    "goToLastPage": "الانتقال إلى الصفحة الأخيرة",
+    "goToFirstPage": "الذهاب إلى الصفحة الأولى",
+    "goToPreviousPage": "الذهاب إلى الصفحة السابقة",
+    "goToNextPage": "الذهاب إلى الصفحة التالية",
+    "goToLastPage": "الذهاب إلى الصفحة الأخيرة",
+    "factorDialog": {
+      "title": "العامل",
+      "description": "تعيين العامل لجميع العناصر المحددة",
+      "actionButton": "تعيين العامل",
+      "cancel": "إلغاء"
+    },
     "commonTableHeaders": {
-      "code": "كود",
+      "code": "الرمز",
       "description": "الوصف",
-      "unit": "الوحده",
-      "basicRate": "المعدل الاساسي",
+      "unit": "الوحدة",
+      "basicRate": "السعر الأساسي",
       "factor": "العامل",
       "composite": "مركب",
-      "rate": "المعدل الإجمالي",
+      "rate": "السعر",
       "master": "رئيسي",
       "inUse": "قيد الاستخدام",
-      "lastUpdated": "آخر تحديث"
+      "lastUpdated": "آخر تحديث",
+      "email": "البريد الإلكتروني",
+      "role": "الدور",
+      "active": "نشط",
+      "name": "الاسم",
+      "category": "الفئة",
+      "currency": "العملة",
+      "exchange_rate": "سعر الصرف",
+      "clientName": "اسم العميل",
+      "consultantName": "اسم المستشار",
+      "area": "المنطقة"
     },
+    "selectAll": "تحديد الكل",
     "error": {
-      "defaultTitle": "عذراً، حدث خطأ ما",
-      "defaultDescription": "واجهنا مشكلة غير متوقعة. لقد تم إبلاغ فريق الدعم الفني.",
+      "defaultTitle": "عذرًا! حدث خطأ ما",
+      "defaultDescription": "لقد واجهنا خطأ غير متوقع. تم إبلاغ فريقنا.",
       "notFound": {
         "title": "الصفحة غير موجودة",
-        "description": "يبدو أن الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
+        "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها."
       },
       "server": {
         "title": "خطأ في الخادم",
-        "description": "نواجه بعض المشاكل الفنية حالياً. يرجى المحاولة مرة أخرى بعد قليل."
+        "description": "نواجه بعض المشاكل في الخادم. يرجى المحاولة مرة أخرى لاحقًا."
       },
-      "id": "رقم الخطأ: {id}"
+      "id": "معرف الخطأ: {id}"
     },
     "action": {
       "tryAgain": "حاول مرة أخرى",
-      "goHome": "العودة للرئيسية"
+      "goHome": "الذهاب إلى الصفحة الرئيسية"
     },
-
-    "home": "الرئيسية",
-    "dashboard": "لوحة التحكم",
-    "resources": "الموارد",
-    "settings": "الإعدادات"
+    "pages": {
+      "home": "الصفحة الرئيسية",
+      "dashboard": "لوحة التحكم",
+      "resources": "الموارد",
+      "settings": "الإعدادات",
+      "account": "الحساب",
+      "company": "الشركة",
+      "members": "الأعضاء",
+      "activities": "الأنشطة",
+      "categories": "الفئات",
+      "subcategories": "الفئات الفرعية",
+      "projects": "المشاريع",
+      "currencies": "العملات",
+      "units": "الوحدات",
+      "new": "جديد"
+    }
   },
-  "homePage": {
-    "title": "أهلاً وسهلاً!"
+  "CurrenciesPage": {
+    "title": "العملات",
+    "dialog": {
+      "add": "إضافة عملة",
+      "title": "إضافة عملة جديدة",
+      "description": "إضافة عملة جديدة إلى العملات الخاصة بك"
+    },
+    "form": {
+      "currencyInformation": "معلومات العملة",
+      "exchangeRates": "أسعار الصرف",
+      "code": {
+        "label": "الرمز",
+        "placeholder": "أدخل رمز العملة",
+        "validation": {
+          "required": "الرمز مطلوب"
+        }
+      },
+      "country": {
+        "label": "الدولة",
+        "placeholder": "أدخل دولة العملة",
+        "validation": {
+          "required": "الدولة مطلوبة"
+        }
+      },
+      "currency": {
+        "label": "العملة",
+        "placeholder": "أدخل اسم العملة",
+        "validation": {
+          "required": "العملة مطلوبة"
+        }
+      },
+      "exchange_rate": {
+        "label": "سعر الصرف",
+        "placeholder": "أدخل سعر الصرف",
+        "validation": {
+          "required": "سعر الصرف مطلوب",
+          "invalid": "يرجى إدخال سعر صرف صالح"
+        }
+      },
+      "rate": {
+        "label": "السعر",
+        "placeholder": "أدخل السعر",
+        "validation": {
+          "required": "السعر مطلوب",
+          "invalid": "يرجى إدخال سعر صالح"
+        }
+      },
+      "save": "إضافة عملة",
+      "cancel": "إلغاء"
+    }
   },
-  "resources": {
+  "HomePage": {
+    "title": "مرحبًا بالعالم!"
+  },
+  "ResourcePage": {
+    "title": "إنشاء مورد جديد",
+    "form": {
+      "title": "معلومات المورد",
+      "basic_rate": {
+        "label": "السعر الأساسي",
+        "placeholder": "أدخل السعر الأساسي",
+        "validation": {
+          "required": "السعر الأساسي مطلوب",
+          "positive": "يجب أن يكون السعر الأساسي إيجابيًا"
+        }
+      },
+      "category_id": {
+        "label": "الفئة",
+        "placeholder": "اختر فئة",
+        "validation": {
+          "required": "الفئة مطلوبة"
+        }
+      },
+      "code": {
+        "label": "الرمز",
+        "placeholder": "أدخل الرمز",
+        "validation": {
+          "required": "الرمز مطلوب"
+        }
+      },
+      "description": {
+        "label": "الوصف",
+        "placeholder": "أدخل الوصف",
+        "validation": {
+          "required": "الوصف مطلوب"
+        }
+      },
+      "factor": {
+        "label": "العامل",
+        "placeholder": "أدخل العامل",
+        "validation": {
+          "positive": "يجب أن يكون العامل إيجابيًا"
+        }
+      },
+      "output": {
+        "label": "الإنتاج",
+        "placeholder": "أدخل الإنتاج",
+        "validation": {
+          "number": "يجب أن يكون الإنتاج رقمًا"
+        }
+      },
+      "rate": {
+        "label": "السعر"
+      },
+      "exchange_rate": {
+        "label": "سعر الصرف"
+      },
+      "resource_compositions": {
+        "tableHeaders": {
+          "description": "الوصف",
+          "unit": "الوحدة",
+          "isComposite": "مركب",
+          "factor": "العامل",
+          "rate": "السعر",
+          "quantity": "الكمية",
+          "amount": "المبلغ"
+        },
+        "selectedResources": "الموارد المحددة",
+        "totalCost": "التكلفة الإجمالية",
+        "availableResources": "الموارد المتاحة",
+        "addSelectedResources": "إضافة الموارد",
+        "remove": "إزالة",
+        "selectCategory": "اختر فئة",
+        "selectSubcategory": "اختر فئة فرعية",
+        "searchResources": "ابحث عن الموارد...",
+        "clearFilters": "مسح الفلاتر",
+        "child_resource_id": {
+          "label": "المورد الفرعي",
+          "validation": {
+            "required": "المورد الفرعي مطلوب"
+          }
+        },
+        "qty": {
+          "label": "الكمية",
+          "validation": {
+            "required": "الكمية مطلوبة",
+            "positive_integer": "يجب أن تكون الكمية عددًا صحيحًا موجبًا"
+          }
+        }
+      },
+      "sub_category_id": {
+        "label": "الفئة الفرعية",
+        "validation": {
+          "required": "الفئة الفرعية مطلوبة"
+        }
+      },
+      "unit_id": {
+        "label": "الوحدة",
+        "validation": {
+          "required": "الوحدة مطلوبة"
+        }
+      },
+      "currency_id": {
+        "label": "العملة",
+        "placeholder": "الافتراضي هو عملة الشركة",
+        "validation": {
+          "required": "العملة مطلوبة"
+        }
+      },
+      "remarks": {
+        "label": "ملاحظات",
+        "placeholder": "أدخل الملاحظات"
+      },
+      "update": "حفظ",
+      "save": "إنشاء مورد",
+      "cancel": "إلغاء"
+    }
+  },
+  "ResourcesPage": {
     "title": "الموارد",
-    "resourceDetails": "Resource Details",
-    "currentPricing": "Current Pricing",
-    "priceHistory": "Price History",
-    "date": "Date",
-    "projectState": "Project State",
-    "projet": "Project",
-    "user": "User",
+    "resourceDetails": "تفاصيل المورد",
+    "currentPricing": "التسعير الحالي",
+    "priceHistory": "تاريخ السعر",
+    "date": "التاريخ",
+    "projectState": "حالة المشروع",
+    "projet": "المشروع",
+    "user": "المستخدم",
     "table": {
+      "save": "حفظ",
       "code": "الرمز",
       "description": "الوصف",
       "category": "الفئة:",
@@ -73,22 +269,18 @@
       "unit": "الوحدة",
       "composite": "مركب",
       "basicRate": "السعر الأساسي",
-      "factor": {
-        "label": "Factor",
-        "title": "Factor",
-        "description": "Set factor for all selected items"
-      },
+      "factor": "العامل",
       "rate": "السعر",
-      "lastUpdated": "Last Updated",
+      "lastUpdated": "آخر تحديث",
       "actions": "الإجراءات"
     },
     "actions": {
-      "add": "Create New Resource",
-      "edit": "Edit",
-      "delete": "Delete"
+      "add": "إنشاء مورد جديد",
+      "edit": "تعديل",
+      "delete": "حذف"
     },
     "filters": {
-      "title": "البحث",
+      "title": "الفلاتر",
       "description": "تطبيق الفلاتر لتضييق نطاق الموارد",
       "category": "الفئة",
       "allCategories": "جميع الفئات",
@@ -96,31 +288,32 @@
       "allSubcategories": "جميع الفئات الفرعية",
       "resouceType": "نوع المورد",
       "allResourceTypes": "جميع أنواع الموارد",
-      "search": "البحث في الموارد...",
+      "search": "ابحث عن الموارد...",
       "composite": "الموارد المركبة",
-      "inUse": "الموارد المستخدمة",
+      "inUse": "الموارد قيد الاستخدام",
       "master": "الموارد الرئيسية",
       "apply": "تطبيق الفلاتر",
-      "clear": "مسح الفلاتر"
+      "clear": "مسح الفلاتر",
+      "active": "نشط"
     }
   },
   "components": {
     "toggleTheme": {
-      "ariaLabel": "تغيير المظهر",
-      "srText": "تغيير المظهر"
+      "ariaLabel": "تبديل السمة",
+      "srText": "تبديل السمة"
     },
     "logo": {
-      "firstLetter": "C",
-      "secondLetter": "o",
-      "restOfWord": "st",
-      "subtitle": "Estimation",
-      "alt": "Logo"
+      "firstLetter": "ك",
+      "secondLetter": "و",
+      "restOfWord": "ست",
+      "subtitle": "تقدير",
+      "alt": "الشعار"
     }
   },
   "auth": {
     "signInTitle": "تسجيل الدخول إلى حسابك",
     "signUpTitle": "إنشاء حسابك",
-    "welcomeBackgroundLabel": "صورة خلفية",
+    "welcomeBackgroundLabel": "قسم صورة خلفية زخرفية",
     "form": {
       "email": {
         "label": "البريد الإلكتروني",
@@ -128,86 +321,487 @@
       },
       "password": {
         "label": "كلمة المرور",
-        "placeholder": "أدخل كلمة المرور"
+        "placeholder": "أدخل كلمة المرور الخاصة بك"
       },
       "repeatPassword": {
-        "label": "تكرار كلمة المرور",
-        "placeholder": "كرر كلمة المرور"
+        "label": "أعد كلمة المرور",
+        "placeholder": "أعد كلمة المرور الخاصة بك"
       },
       "firstName": {
         "label": "الاسم الأول",
         "placeholder": "أدخل اسمك الأول"
       },
       "lastName": {
-        "label": "اسم العائلة",
-        "placeholder": "أدخل اسم عائلتك"
+        "label": "الاسم الأخير",
+        "placeholder": "أدخل اسمك الأخير"
       },
       "confirmPassword": {
         "label": "تأكيد كلمة المرور",
-        "placeholder": "أعد إدخال كلمة المرور"
+        "placeholder": "أكد كلمة المرور الخاصة بك"
       }
     },
     "action": {
       "login": "تسجيل الدخول",
-      "forgotPassword": "نسيت كلمة المرور؟",
-      "register": "إنشاء حساب جديد",
-      "sendResetLink": "إرسال رابط التفعيل",
-      "backToLogin": "العودة لتسجيل الدخول"
+      "forgotPassword": "هل نسيت كلمة المرور؟",
+      "register": "تسجيل",
+      "sendResetLink": "إرسال رابط إعادة التعيين",
+      "backToLogin": "العودة إلى تسجيل الدخول"
     },
     "message": {
       "noAccount": "ليس لديك حساب؟",
-      "haveAccount": "لديك حساب بالفعل؟",
-      "checkEmail": "تفقد بريدك الإلكتروني",
-      "passwordResetInstructions": "لقد أرسلنا لك تعليمات إعادة تعيين كلمة المرور. يرجى التحقق من بريدك الإلكتروني."
+      "haveAccount": "هل لديك حساب بالفعل؟",
+      "checkEmail": "تحقق من بريدك الإلكتروني",
+      "passwordResetInstructions": "لقد أرسلنا تعليمات إعادة تعيين كلمة المرور إلى بريدك الإلكتروني."
     }
   },
   "validation": {
-    "required": "حقل {field} مطلوب",
-    "minLength": "يجب أن يحتوي {field} على {min} أحرف على الأقل",
-    "maxLength": "يجب ألا يتجاوز {field} {max} حرفاً",
-    "email": "يرجى إدخال بريد إلكتروني صحيح",
-    "passwordMatch": "كلمتا المرور غير متطابقتين",
-    "invalidType": "قيمة غير صالحة في حقل {field}",
+    "required": "{field} مطلوب",
+    "minLength": "يجب أن يكون {field} على الأقل {min} حرفًا",
+    "maxLength": "يجب أن يكون {field} على الأكثر {max} حرفًا",
+    "email": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "passwordMatch": "كلمات المرور غير متطابقة",
+    "invalidType": "نوع غير صالح لـ {field}",
     "custom": {
-      "passwordStrength": "يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وتتضمن حروفاً كبيرة وصغيرة وأرقاماً ورموزاً",
-      "firstName": {
-        "error": {
-          "min": "يجب أن يتكون الاسم الأول من حرفين على الأقل"
-        }
-      },
-      "lastName": {
-        "error": {
-          "min": "يجب أن يتكون اسم العائلة من حرفين على الأقل"
-        }
-      },
       "password": {
-        "error": {
-          "min": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل"
-        }
+        "min": "يجب أن تكون كلمة المرور على الأقل 8 أحرف",
+        "strength": "يجب أن تحتوي كلمة المرور على الأقل 8 أحرف، حرف كبير واحد، حرف صغير واحد، رقم واحد، وحرف خاص واحد"
       },
       "repeatPassword": {
-        "error": {
-          "match": "كلمات المرور غير متطابقة"
-        }
+        "match": "يجب أن تتطابق كلمات المرور"
       }
     }
   },
   "layout": {
-    "skipToContent": "انتقل إلى المحتوى",
+    "skipToContent": "تخطي إلى المحتوى",
     "toggleSidebar": "تبديل الشريط الجانبي",
     "notifications": "الإشعارات",
     "changeLanguage": "تغيير اللغة",
-    "userProfile": "الملف الشخصي",
-    "home": "الرئيسية",
+    "userProfile": "ملف المستخدم",
+    "home": "الصفحة الرئيسية",
     "resources": "الموارد",
     "settings": "الإعدادات",
     "currentLanguage": "اللغة الحالية",
     "dashboard": "لوحة التحكم",
     "mobileNavigation": "القائمة",
-    "mobileNavigationDescription": "خيارات التصفح",
+    "mobileNavigationDescription": "تنقل الموقع",
     "language": {
-      "en": "English",
+      "en": "الإنجليزية",
       "ar": "العربية"
+    },
+    "projectSelector": {
+      "selectProject": "اختر مشروع",
+      "noCurrentProject": "لا يوجد مشروع",
+      "currentProject": "المشروع الحالي: "
+    },
+    "navlinks": {
+      "home": "الصفحة الرئيسية",
+      "resources": "الموارد",
+      "accountInformation": "المستخدم",
+      "companyInformation": "الشركة",
+      "members": "الأعضاء",
+      "billingPlans": "الفواتير والخطط",
+      "security": "الأمان",
+      "categories": "الفئات",
+      "settings": "الإعدادات",
+      "subcategories": "الفئات الفرعية",
+      "activity": "النشاط",
+      "projects": "المشاريع",
+      "currencies": "العملات",
+      "units": "الوحدات"
     }
+  },
+  "CompanyPage": {
+    "title": "إعدادات الشركة",
+    "form": {
+      "title": "معلومات الشركة",
+      "name": {
+        "label": "اسم الشركة",
+        "placeholder": "أدخل اسم شركتك",
+        "validation": {
+          "required": "اسم الشركة مطلوب"
+        }
+      },
+      "currency_id": {
+        "label": "العملة",
+        "placeholder": "اختر عملة",
+        "validation": {
+          "required": "العملة مطلوبة"
+        }
+      },
+      "location": {
+        "label": "موقع الشركة",
+        "placeholder": "أدخل موقع شركتك",
+        "validation": {
+          "required": "موقع الشركة مطلوب"
+        }
+      },
+      "logo": {
+        "label": "شعار الشركة",
+        "description": "قم بتحميل شعار لشركتك",
+        "placeholder": "قم بتحميل شعار شركتك"
+      },
+      "save": "حفظ التغييرات"
+    }
+  },
+  "UnitsPage": {
+    "title": "الوحدات",
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الوحدة",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "description": {
+        "label": "الوصف",
+        "placeholder": "أدخل وصف الوحدة",
+        "validation": {
+          "required": "الوصف مطلوب"
+        }
+      },
+      "save": "إضافة وحدة",
+      "cancel": "إلغاء"
+    },
+    "dialog": {
+      "add": "إضافة وحدة",
+      "title": "إضافة وحدة جديدة",
+      "description": "إضافة وحدة جديدة إلى الوحدات الخاصة بك"
+    }
+  },
+  "AccountPage": {
+    "title": "إعدادات الحساب",
+    "form": {
+      "title": "المعلومات الشخصية",
+      "firstName": {
+        "label": "الاسم الأول",
+        "placeholder": "أدخل اسمك الأول"
+      },
+      "lastName": {
+        "label": "الاسم الأخير",
+        "placeholder": "أدخل اسمك الأخير"
+      },
+      "surName": {
+        "label": "اسم العائلة",
+        "placeholder": "أدخل اسم عائلتك"
+      },
+      "email": {
+        "label": "البريد الإلكتروني",
+        "description": "لا يمكن تغيير عنوان بريدك الإلكتروني",
+        "validation": {
+          "invalid": "يرجى إدخال عنوان بريد إلكتروني صالح"
+        }
+      },
+      "position": {
+        "label": "المنصب",
+        "placeholder": "أدخل منصبك"
+      },
+      "phoneNumber": {
+        "label": "رقم الهاتف",
+        "placeholder": "أدخل رقم هاتفك",
+        "validation": {
+          "invalid": "يرجى إدخال رقم هاتف صالح"
+        }
+      },
+      "image": {
+        "label": "صورة الملف الشخصي",
+        "description": "قم بتحميل صورة شخصية (اختياري)"
+      },
+      "save": "حفظ التغييرات"
+    }
+  },
+  "MembersPage": {
+    "title": "الأعضاء",
+    "memberRole": {
+      "admin": "مسؤول",
+      "writer": "كاتب",
+      "reader": "قارئ"
+    },
+    "dialog": {
+      "add": "إضافة عضو",
+      "title": "إضافة عضو جديد",
+      "description": "إضافة عضو جديد إلى شركتك"
+    },
+    "form": {
+      "title": "إضافة عضو",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل البريد الإلكتروني للعضو",
+        "validation": {
+          "required": "البريد الإلكتروني مطلوب",
+          "invalid": "يرجى إدخال عنوان بريد إلكتروني صالح"
+        }
+      },
+      "role": {
+        "label": "الدور",
+        "placeholder": "اختر دورًا",
+        "validation": {
+          "required": "يرجى اختيار دور"
+        }
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة مرور العضو",
+        "validation": {
+          "min": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+          "max": "يجب أن تكون كلمة المرور مكونة من 72 حرفًا على الأكثر",
+          "required": "كلمة المرور مطلوبة"
+        }
+      },
+      "password_confirmation": {
+        "label": "تأكيد كلمة المرور",
+        "placeholder": "أكد كلمة مرور العضو",
+        "validation": {
+          "match": "يجب أن تتطابق كلمات المرور",
+          "required": "تأكيد كلمة المرور مطلوب"
+        }
+      },
+      "save": "إضافة عضو",
+      "cancel": "إلغاء"
+    }
+  },
+  "ActivitiesCategoriesPage": {
+    "title": "فئات الأنشطة",
+    "dialog": {
+      "add": "إضافة فئة",
+      "title": "إضافة فئة جديدة",
+      "description": "إضافة فئة جديدة إلى أنشطتك"
+    },
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الفئة",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "save": "إضافة فئة",
+      "cancel": "إلغاء"
+    }
+  },
+  "ActivitiesSubcategoriesPage": {
+    "title": "الفئات الفرعية للأنشطة",
+    "dialog": {
+      "add": "إضافة فئة فرعية",
+      "title": "إضافة فئة فرعية جديدة",
+      "description": "إضافة فئة فرعية جديدة إلى أنشطتك"
+    },
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الفئة الفرعية",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "category_id": {
+        "label": "الفئة",
+        "placeholder": "اختر فئة",
+        "validation": {
+          "required": "الفئة مطلوبة"
+        }
+      },
+      "save": "إضافة فئة فرعية",
+      "cancel": "إلغاء"
+    }
+  },
+  "ResourcesCategoriesPage": {
+    "title": "فئات الموارد",
+    "dialog": {
+      "add": "إضافة فئة",
+      "title": "إضافة فئة جديدة",
+      "description": "إضافة فئة جديدة إلى مواردك"
+    },
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الفئة",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "save": "إضافة فئة",
+      "cancel": "إلغاء"
+    }
+  },
+  "ResourcesSubcategoriesPage": {
+    "title": "الفئات الفرعية للموارد",
+    "dialog": {
+      "add": "إضافة فئة فرعية",
+      "title": "إضافة فئة فرعية جديدة",
+      "description": "إضافة فئة فرعية جديدة إلى مواردك"
+    },
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الفئة الفرعية",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "category_id": {
+        "label": "الفئة",
+        "placeholder": "اختر فئة",
+        "validation": {
+          "required": "الفئة مطلوبة"
+        }
+      },
+      "save": "إضافة فئة فرعية",
+      "cancel": "إلغاء"
+    }
+  },
+  "ProjectsPage": {
+    "title": "المشاريع",
+    "overview": "نظرة عامة",
+    "current": "المشروع الحالي",
+    "projectsList": {
+      "title": "قائمة المشاريع"
+    },
+    "currentProject": {
+      "noCurrentProject": "لم يتم اختيار مشروع",
+      "projectInfo": "معلومات المشروع",
+      "client_name": "اسم العميل: ",
+      "consultant_name": "اسم المستشار: ",
+      "area": "المنطقة: ",
+      "category": "الفئة: ",
+      "projectDates": "تواريخ المشروع",
+      "queries_dead_line_date": "تاريخ انتهاء الاستفسارات: ",
+      "release_date": "تاريخ الإصدار: ",
+      "site_visit_date": "تاريخ زيارة الموقع: ",
+      "submission_date": "تاريخ التسليم: "
+    },
+    "noCurrentProject": "لا يوجد مشروع حالي",
+    "dialog": {
+      "create": "إنشاء مشروع",
+      "edit": "تعديل مشروع",
+      "title": "إنشاء مشروع جديد",
+      "description": "إنشاء مشروع جديد إلى مشاريعك"
+    },
+    "form": {
+      "basicInfo": "المعلومات الأساسية",
+      "dates": "التواريخ",
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم المشروع",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "category_id": {
+        "label": "الفئة",
+        "placeholder": "اختر فئة",
+        "validation": {
+          "required": "الفئة مطلوبة"
+        }
+      },
+      "client_name": {
+        "label": "اسم العميل",
+        "placeholder": "أدخل اسم العميل",
+        "validation": {
+          "required": "اسم العميل مطلوب"
+        }
+      },
+      "consultant_name": {
+        "label": "اسم المستشار",
+        "placeholder": "أدخل اسم المستشار",
+        "validation": {
+          "required": "اسم المستشار مطلوب"
+        }
+      },
+      "queries_dead_line_date": {
+        "label": "تاريخ انتهاء الاستفسارات",
+        "placeholder": "اختر تاريخ انتهاء الاستفسارات",
+        "validation": {
+          "required": "تاريخ انتهاء الاستفسارات مطلوب"
+        }
+      },
+      "release_date": {
+        "label": "تاريخ الإصدار",
+        "placeholder": "اختر تاريخ الإصدار",
+        "validation": {
+          "required": "تاريخ الإصدار مطلوب"
+        }
+      },
+      "site_visit_date": {
+        "label": "تاريخ زيارة الموقع",
+        "placeholder": "اختر تاريخ زيارة الموقع",
+        "validation": {
+          "required": "تاريخ زيارة الموقع مطلوب"
+        }
+      },
+      "submission_date": {
+        "label": "تاريخ التسليم",
+        "placeholder": "اختر تاريخ التسليم",
+        "validation": {
+          "required": "تاريخ التسليم مطلوب"
+        }
+      },
+      "area": {
+        "label": "المنطقة",
+        "placeholder": "أدخل المنطقة",
+        "validation": {
+          "required": "المنطقة مطلوبة",
+          "invalid": "يرجى إدخال منطقة صالحة"
+        }
+      },
+      "create": "إنشاء مشروع",
+      "update": "تحديث مشروع",
+      "cancel": "إلغاء"
+    }
+  },
+  "ProjectsCategoriesPage": {
+    "title": "الفئات",
+    "dialog": {
+      "add": "إضافة فئة",
+      "title": "إضافة فئة جديدة",
+      "description": "إضافة فئة جديدة إلى مشاريعك"
+    },
+    "form": {
+      "name": {
+        "label": "الاسم",
+        "placeholder": "أدخل اسم الفئة",
+        "validation": {
+          "required": "الاسم مطلوب"
+        }
+      },
+      "cancel": "إلغاء",
+      "save": "إضافة فئة"
+    }
+  },
+  "apiErrors": {
+    "default": "عذرًا! حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقًا.",
+    "emailAlreadyExists": "هذا البريد الإلكتروني مسجل بالفعل. يرجى استخدام بريد إلكتروني مختلف أو محاولة تسجيل الدخول.",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى."
+  },
+  "apiSuccess": {
+    "accountUpdated": "تم تحديث الحساب بنجاح",
+    "companyUpdated": "تم تحديث الشركة بنجاح",
+    "memberAdded": "تمت إضافة العضو بنجاح",
+    "memberActivated": "تم تفعيل العضو بنجاح",
+    "memberDeactivated": "تم إلغاء تفعيل العضو بنجاح",
+    "categoryActivated": "تم تفعيل الفئة بنجاح",
+    "categoryDeactivated": "تم إلغاء تفعيل الفئة بنجاح",
+    "categoryAdded": "تمت إضافة الفئة بنجاح",
+    "categoryUpdated": "تم تحديث الفئة بنجاح",
+    "subcategoryAdded": "تمت إضافة الفئة الفرعية بنجاح",
+    "subcategoryUpdated": "تم تحديث الفئة الفرعية بنجاح",
+    "subcategoryDeactivated": "تم إلغاء تفعيل الفئة الفرعية بنجاح",
+    "subcategoryActivated": "تم تفعيل الفئة الفرعية بنجاح",
+    "memberUpdated": "تم تحديث العضو بنجاح",
+    "projectCreated": "تم إنشاء المشروع بنجاح",
+    "projectUpdated": "تم تحديث المشروع بنجاح",
+    "projectActivated": "تم تفعيل المشروع بنجاح",
+    "projectDeactivated": "تم إلغاء تفعيل المشروع بنجاح",
+    "currencyAdded": "تمت إضافة العملة بنجاح",
+    "currencyUpdated": "تم تحديث العملة بنجاح",
+    "currencyActivated": "تم تفعيل العملة بنجاح",
+    "currencyDeactivated": "تم إلغاء تفعيل العملة بنجاح",
+    "unitAdded": "تمت إضافة الوحدة بنجاح",
+    "unitUpdated": "تم تحديث الوحدة بنجاح",
+    "unitActivated": "تم تفعيل الوحدة بنجاح",
+    "unitDeactivated": "تم إلغاء تفعيل الوحدة بنجاح",
+    "resourceAdded": "تمت إضافة المورد بنجاح",
+    "resourceUpdated": "تم تحديث المورد بنجاح",
+    "resourcesUpdated": "تم تحديث الموارد بنجاح"
   }
 }
