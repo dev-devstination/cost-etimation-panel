@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl"
-import { Eye, History } from "lucide-react"
+import { Eye } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -7,16 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog"
 import { Resource } from "@/features/resources/types"
-import { PriceHistory } from "@/features/resources/components/price-history"
 import { Link } from "@/config/navigation"
 
 interface ActionsProps {

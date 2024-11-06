@@ -3,8 +3,8 @@ import { useFormContext } from "react-hook-form"
 import { InputCell } from "@/components/input-cell"
 import { FormControl, FormField, FormItem } from "@/components/ui/form"
 
-import { UpdateResourcesSchema } from "../schemas/resource"
-import { Resource } from "../types"
+import { UpdateResourcesSchema } from "@/features/resources/schemas/resource"
+import { Resource } from "@/features/resources/types"
 
 interface BasicRateCellProps {
   index: number

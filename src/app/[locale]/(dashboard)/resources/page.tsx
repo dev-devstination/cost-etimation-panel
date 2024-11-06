@@ -5,7 +5,7 @@ import { Link } from "@/config/navigation"
 import { Button } from "@/components/ui/button"
 import { LocalizedPageProps } from "@/types"
 import { getResources } from "@/features/resources/lib/get-resources"
-import { UpdateResourcesTable } from "@/features/resources/components/update-resources-table"
+import { UpdateResourcesTable } from "@/features/resources/components/resources/table/update-resources-table"
 import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
 import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 

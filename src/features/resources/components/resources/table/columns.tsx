@@ -3,14 +3,14 @@
 import { ColumnDef } from "@tanstack/react-table"
 
 import { Resource } from "@/features/resources/types"
-import { Actions } from "@/features/resources/components/actions"
+import { Actions } from "@/features/resources/components/resources/table/actions"
 import { Checkbox } from "@/components/ui/checkbox"
 import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
 
-import { FactorColumn } from "./factor-column"
-import { ResourceInputCell } from "./resource-input-cell"
+import { FactorColumn } from "@/features/resources/components/resources/table/factor-column"
+import { ResourceInputCell } from "@/features/resources/components/resources/table/resource-input-cell"
 
 export const columns: ColumnDef<Resource>[] = [
   {
