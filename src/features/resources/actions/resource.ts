@@ -90,3 +90,38 @@ export async function updateResourcesAction(
     }
   }
 }
+
+export async function resourceStateAction(
+  _: ActionState,
+  data: { id: string; active: boolean }
+): Promise<ActionState> {
+  try {
+    await fetcher(`/resources/${data.id}`, {
+      method: "PATCH",
+      body: { active: data.active },
+    })
+
+    logger.info("Resource activated successfully", { data })
+    revalidatePath("/resources")
+
+    return { status: "success", message: "resourceUpdated" }
+  } catch (error) {
+    if (error instanceof ApiError) {
+      logger.error("Resource activation/deactivation error", {
+        error: error.message,
+        statusCode: error.statusCode,
+        body: data,
+      })
+
+      switch (error.statusCode) {
+        default:
+          return { status: "destructive", message: "default" }
+      }
+    }
+
+    return {
+      message: "default",
+      status: "destructive",
+    }
+  }
+}
