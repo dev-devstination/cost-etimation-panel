@@ -407,7 +407,8 @@
       "activity": "Activity",
       "projects": "Projects",
       "currencies": "Currencies",
-      "units": "Units"
+      "units": "Units",
+      "activities": "Activities"
     }
   },
   "CompanyPage": {

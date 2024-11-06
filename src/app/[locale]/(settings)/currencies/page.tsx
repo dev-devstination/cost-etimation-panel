@@ -1,4 +1,4 @@
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
 import { fetcherSSR } from "@/lib/api/fetcher"
@@ -10,7 +10,7 @@ import { columns } from "@/features/currencies/components/currencies-table/colum
 export default async function CurrenciesPage({
   params: { locale },
 }: LocalizedPageProps) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const t = await getTranslations("CurrenciesPage")
   const { data: currencies } = await fetcherSSR<Currency[]>(
     "/setting/currencies"

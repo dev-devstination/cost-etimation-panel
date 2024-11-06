@@ -1,5 +1,6 @@
 import {
   Building,
+  ClipboardList,
   DollarSign,
   FileText,
   Home,
@@ -23,6 +24,7 @@ export const MAIN_NAVLINKS: NavigationLink = {
   default: [
     { url: "/", label: "home", icon: Home },
     { url: "/resources", label: "resources", icon: FileText },
+    { url: "/activities", label: "activities", icon: ClipboardList },
     { url: "/currencies", label: "settings", icon: Settings },
   ],
 }

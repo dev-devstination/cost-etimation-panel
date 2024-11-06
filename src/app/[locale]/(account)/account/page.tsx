@@ -1,4 +1,4 @@
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
 import { AccountForm } from "@/features/users/components/account-form"
@@ -7,7 +7,7 @@ import { whoAmI } from "@/features/users/api/who-am-i"
 export default async function AccountPage({
   params: { locale },
 }: LocalizedPageProps) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const user = await whoAmI()
 
   const t = await getTranslations("AccountPage")
