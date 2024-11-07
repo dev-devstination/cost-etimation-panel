@@ -411,6 +411,96 @@
       "activities": "Activities"
     }
   },
+  "ActivitiesPage": {
+    "title": "Activities",
+    "actions": {
+      "add": "Create New Activity"
+    },
+    "form": {
+      "proposed_rate": {
+        "label": "Proposed Rate"
+      },
+      "remarks": {
+        "label": "Remarks"
+      },
+      "rate": {
+        "label": "Rate"
+      },
+      "output": {
+        "label": "Output",
+        "validation": {
+          "number": "Output must be a number"
+        }
+      },
+      "sub_category_id": {
+        "label": "Subcategory",
+        "placeholder": "Select a subcategory",
+        "validation": {
+          "required": "Subcategory is required"
+        }
+      },
+      "unit_id": {
+        "label": "Unit",
+        "validation": {
+          "required": "Unit is required"
+        }
+      },
+      "activity_compositions": {
+        "searchResources": "Search resources...",
+        "clearFilters": "Clear Filters",
+        "selectCategory": "Select Category",
+        "selectSubcategory": "Select Subcategory",
+        "availableResources": "Available Resources",
+        "addSelectedResources": "Add Resources",
+        "selectedResources": "Selected Resources",
+        "totalCost": "Total Cost",
+        "tableHeaders": {
+          "description": "Description",
+          "unit": "Unit",
+          "isComposite": "Composite",
+          "factor": "Factor",
+          "rate": "Rate",
+          "quantity": "Quantity",
+          "amount": "Amount"
+        },
+        "validation": {
+          "min_length": "At least one resource is required"
+        },
+        "child_resource_id": {
+          "validation": {
+            "required": "Resources is required"
+          }
+        },
+        "qty": {
+          "validation": {
+            "required": "Quantity is required",
+            "positive_integer": "Quantity must be a positive integer"
+          }
+        }
+      },
+      "category_id": {
+        "label": "Category",
+        "placeholder": "Select a category",
+        "validation": {
+          "required": "Category is required"
+        }
+      },
+      "code": {
+        "label": "Code",
+        "validation": {
+          "required": "Code is required"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "update": "Save",
+      "save": "Create Activity"
+    }
+  },
   "CompanyPage": {
     "title": "Company Settings",
     "form": {
@@ -803,6 +893,9 @@
     "unitDeactivated": "Unit deactivated successfully",
     "resourceAdded": "Resource added successfully",
     "resourceUpdated": "Resource updated successfully",
-    "resourcesUpdated": "Resources updated successfully"
+    "resourcesUpdated": "Resources updated successfully",
+    "activityAdded": "Activity added successfully",
+    "activityUpdated": "Activity updated successfully",
+    "activitiesUpdated": "Activities updated successfully"
   }
 }

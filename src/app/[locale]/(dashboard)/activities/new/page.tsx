@@ -1,22 +1,28 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
-import { ResourceForm } from "@/features/resources/components/resources/resource-form"
-import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
-import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
-import { getCurrencies } from "@/features/currencies/lib/get-currencies"
 import { getUnits } from "@/features/units/lib/get-units"
 import { getResources } from "@/features/resources/lib/get-resources"
+import { getActivityCategories } from "@/features/activities/lib/get-activity-categories"
+import { getActivitySubcategories } from "@/features/activities/lib/get-activity-subcategory"
+import { ActivityForm } from "@/features/activities/components/activities/activity-form"
+import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
+import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 
-const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
+const CreateNewActivityPage: React.FC<LocalizedPageProps> = async ({
   params: { locale },
 }) => {
   setRequestLocale(locale)
-  const t = await getTranslations("ResourcePage")
+  const t = await getTranslations("ActivitiesPage")
 
-  const { categoriesOptions } = await getResourceCategories()
-  const { subcategoriesOptions } = await getResourceSubcategories()
-  const { currencies } = await getCurrencies()
+  const { categoriesOptions: activityCategoriesOptions } =
+    await getActivityCategories()
+  const { subcategoriesOptions: activitySubcategoriesOptions } =
+    await getActivitySubcategories()
+  const { categoriesOptions: resourceCategoriesOptions } =
+    await getResourceCategories()
+  const { subcategoriesOptions: resourceSubcategoriesOptions } =
+    await getResourceSubcategories()
   const { unitsOptions } = await getUnits()
   const { resources } = await getResources()
 
@@ -25,15 +31,16 @@ const CreateNewResourcePage: React.FC<LocalizedPageProps> = async ({
       <div className="flex flex-row items-center justify-between space-y-0 pb-4">
         <h1 className="text-2xl font-bold">{t("title")}</h1>
       </div>
-      <ResourceForm
+      <ActivityForm
         resources={resources}
-        categories={categoriesOptions}
-        subcategories={subcategoriesOptions}
-        currencies={currencies}
-        units={unitsOptions}
+        activityCategoriesOptions={activityCategoriesOptions}
+        activitySubcategoriesOptions={activitySubcategoriesOptions}
+        resourceCategoriesOptions={resourceCategoriesOptions}
+        resourceSubcategoriesOptions={resourceSubcategoriesOptions}
+        unitsOptions={unitsOptions}
       />
     </>
   )
 }
 
-export default CreateNewResourcePage
+export default CreateNewActivityPage
