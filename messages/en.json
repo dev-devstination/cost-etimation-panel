@@ -27,6 +27,7 @@
       "cancel": "Cancel"
     },
     "commonTableHeaders": {
+      "output": "Output",
       "code": "Code",
       "description": "Description",
       "unit": "Unit",
@@ -415,6 +416,15 @@
     "title": "Activities",
     "actions": {
       "add": "Create New Activity"
+    },
+    "filters": {
+      "search": "Search activities...",
+      "category": "Category",
+      "subcategory": "Subcategory",
+      "active": "Active",
+      "master": "Master",
+      "apply": "Apply Filters",
+      "clear": "Clear Filters"
     },
     "form": {
       "proposed_rate": {

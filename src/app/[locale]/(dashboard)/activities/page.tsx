@@ -8,6 +8,7 @@ import { UpdateResourcesTable } from "@/features/resources/components/resources/
 import { getActivities } from "@/features/activities/lib/get-activities"
 import { getActivityCategories } from "@/features/activities/lib/get-activity-categories"
 import { getActivitySubcategories } from "@/features/activities/lib/get-activity-subcategory"
+import { UpdateActivitiesTable } from "@/features/activities/components/activities/table/update-activities-table"
 
 interface ResourcesPageProps extends LocalizedPageProps {
   searchParams: {
@@ -46,11 +47,11 @@ const ResourcesPage: React.FC<ResourcesPageProps> = async ({
         </div>
       </div>
 
-      {/* <UpdateResourcesTable
-        resources={resources}
+      <UpdateActivitiesTable
+        activities={activities}
         categoriesOptions={categoriesOptions}
         subcategoriesOptions={subcategoriesOptions}
-      /> */}
+      />
     </>
   )
 }

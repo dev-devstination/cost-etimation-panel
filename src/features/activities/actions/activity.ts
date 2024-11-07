@@ -90,7 +90,7 @@ export async function updateActivitiesAction(
   }
 }
 
-export async function resourceStateAction(
+export async function activityStateAction(
   _: ActionState,
   data: { id: string; active: boolean }
 ): Promise<ActionState> {
