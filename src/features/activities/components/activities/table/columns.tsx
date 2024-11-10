@@ -2,17 +2,16 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
-import { Resource } from "@/features/resources/types"
-import { Actions } from "@/features/resources/components/actions"
+import { Actions } from "@/features/activities/components/activities/table/actions"
 import { Checkbox } from "@/components/ui/checkbox"
 import { SelectAllColumn } from "@/components/select-header"
 import { ColumnHeader } from "@/components/column-header"
 import { FlaggedCell } from "@/components/flagged-cell"
 
-import { FactorColumn } from "./factor-column"
-import { ResourceInputCell } from "./resource-input-cell"
+import { Activity } from "@/features/activities/types"
+import { ActivityInputCell } from "./activity-input-cell"
 
-export const columns: ColumnDef<Resource>[] = [
+export const columns: ColumnDef<Activity>[] = [
   {
     id: "select",
     header: ({ table }) => {
@@ -47,21 +46,12 @@ export const columns: ColumnDef<Resource>[] = [
     },
   },
   {
-    accessorKey: "basic_rate",
+    accessorKey: "output",
     header: ({ column }) => {
-      return <ColumnHeader column={column} title="basicRate" sortable />
+      return <ColumnHeader column={column} title="output" sortable />
     },
     cell: ({ row }) => {
-      return <ResourceInputCell index={row.index} name="basic_rate" />
-    },
-  },
-  {
-    accessorKey: "factor",
-    header: () => {
-      return <FactorColumn />
-    },
-    cell: ({ row }) => {
-      return <ResourceInputCell index={row.index} name="factor" />
+      return <ActivityInputCell index={row.index} name="output" />
     },
   },
   {
@@ -71,20 +61,13 @@ export const columns: ColumnDef<Resource>[] = [
     },
     cell: ({ row }) => {
       return (
-        <ResourceInputCell
-          resource={row.original}
+        <ActivityInputCell
           index={row.index}
           name="rate"
+          activity={row.original}
         />
       )
     },
-  },
-  {
-    accessorKey: "isComposite",
-    header: ({ column }) => {
-      return <ColumnHeader column={column} title="composite" sortable />
-    },
-    cell: ({ row }) => <FlaggedCell checked={!!row.original.children} />,
   },
   {
     accessorKey: "master",
@@ -93,30 +76,8 @@ export const columns: ColumnDef<Resource>[] = [
     },
     cell: ({ row }) => <FlaggedCell checked={row.original.master} />,
   },
-  // {
-  //   accessorKey: "isUsed",
-  //   header: ({ column }) => {
-  //     return <ColumnHeader column={column} title="inUse" sortable />
-  //   },
-  //   cell: () => <FlaggedCell checked={false} />,
-  // },
-  // {
-  //   accessorKey: "updatedDate",
-  //   header: ({ column }) => {
-  //     return <ColumnHeader column={column} title="lastUpdated" sortable />
-  //   },
-  //   cell: () => {
-  //     const date = new Date().getMilliseconds()
-  //     return (
-  //       <div className="flex items-center">
-  //         <CalendarIcon className="mr-2 size-4 opacity-50" />
-  //         <span className="text-sm">{formatDate(date)}</span>
-  //       </div>
-  //     )
-  //   },
-  // },
   {
     id: "actions",
-    cell: ({ row }) => <Actions resource={row.original} />,
+    cell: ({ row }) => <Actions activity={row.original} />,
   },
 ]

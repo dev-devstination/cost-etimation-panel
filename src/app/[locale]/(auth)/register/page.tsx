@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { unstable_setRequestLocale } from "next-intl/server"
+import { setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
 import { RegisterForm } from "@/features/auth/components/register-form"
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RegisterPage({
   params: { locale },
 }: LocalizedPageProps) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
 
   return <RegisterForm />
 }

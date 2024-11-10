@@ -16,7 +16,7 @@ import {
 import { DialogTitle } from "@radix-ui/react-dialog"
 import { Input } from "@/components/ui/input"
 
-import { UpdateResourcesSchema } from "../schemas/resource"
+import { UpdateResourcesSchema } from "@/features/resources/schemas/resource"
 
 export const FactorColumn = () => {
   const t = useTranslations("common.factorDialog")

@@ -10,8 +10,7 @@ import { FormField } from "@/components/ui/form"
 import { Input } from "@/components/form/input"
 import { SelectOption } from "@/types"
 
-import { ResourceFormData } from "../schemas/resource"
-import { Resource } from "../types"
+import { Resource } from "@/features/resources/types"
 import { Select } from "@/components/form/select"
 import {
   Table,
@@ -21,24 +20,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { ActivityFormData } from "@/features/activities/schemas/activity"
 
-interface ResourceCompositionInputProps {
+interface ActivityCompositionInputProps {
   resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
-  resourceCompositions?: ResourceFormData["resource_compositions"]
+  activityCompositions?: ActivityFormData["activity_compositions"]
 }
 
-export const ResourceCompositionInput: React.FC<
-  ResourceCompositionInputProps
-> = ({ resources, categories, subcategories, resourceCompositions }) => {
-  const t = useTranslations("ResourcePage.form.resource_compositions")
+export const ActivityCompositionInput: React.FC<
+  ActivityCompositionInputProps
+> = ({ resources, categories, subcategories, activityCompositions }) => {
+  const t = useTranslations("ActivitiesPage.form.activity_compositions")
   const [selectedResources, setSelectedResources] = useState<string[]>([])
   const [availableResources, setAvailableResources] = useState<Resource[]>(
-    resourceCompositions
+    activityCompositions
       ? resources.filter(
           (resource) =>
-            !resourceCompositions.some(
+            !activityCompositions.some(
               (comp) => comp.child_resource_id === resource.id
             )
         )
@@ -48,10 +48,10 @@ export const ResourceCompositionInput: React.FC<
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedSubcategory, setSelectedSubcategory] = useState("")
 
-  const form = useFormContext<ResourceFormData>()
+  const form = useFormContext<ActivityFormData>()
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "resource_compositions",
+    name: "activity_compositions",
   })
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export const ResourceCompositionInput: React.FC<
       const rate = resource.basic_rate * resource.factor
       return (
         total +
-        calculateAmount(form.watch(`resource_compositions.${index}.qty`), rate)
+        calculateAmount(form.watch(`activity_compositions.${index}.qty`), rate)
       )
     }, 0)
   }
@@ -110,7 +110,7 @@ export const ResourceCompositionInput: React.FC<
   }
 
   const handleAddResources = () => {
-    const newCompositions: ResourceFormData["resource_compositions"] = []
+    const newCompositions: ActivityFormData["activity_compositions"] = []
 
     selectedResources.forEach((resourceId) => {
       const resource = resources.find((r) => r.id === resourceId)
@@ -296,7 +296,7 @@ export const ResourceCompositionInput: React.FC<
                   if (!resource) return null
                   const rate = resource.basic_rate * resource.factor
                   const quantity = form.watch(
-                    `resource_compositions.${index}.qty`
+                    `activity_compositions.${index}.qty`
                   )
                   const amount = calculateAmount(quantity, rate)
 
@@ -307,7 +307,7 @@ export const ResourceCompositionInput: React.FC<
                       <TableCell>
                         <FormField
                           control={form.control}
-                          name={`resource_compositions.${index}.qty`}
+                          name={`activity_compositions.${index}.qty`}
                           render={({ field }) => (
                             <Input
                               {...field}

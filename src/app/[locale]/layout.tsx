@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { NextIntlClientProvider } from "next-intl"
-import { getMessages, unstable_setRequestLocale } from "next-intl/server"
+import { getMessages, setRequestLocale } from "next-intl/server"
 
 import { getLocaleDirection, Locale, locales } from "@/config/locales"
 import { Toaster } from "@/components/ui/toaster"
@@ -26,7 +26,7 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { locale: Locale }
 }>) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages()

@@ -20,9 +20,9 @@ import { Textarea } from "@/components/form/textarea"
 import { Select } from "@/components/form/select"
 import { Currency } from "@/features/currencies/interfaces/currency"
 
-import { resourceAction } from "../actions/resource"
+import { resourceAction } from "../../actions/resource"
 import { ResourceCompositionInput } from "./resource-composition-input"
-import { Resource } from "../types"
+import { Resource } from "../../types"
 import { generateSelectOptions } from "@/lib/utils"
 
 interface CreateResourceFormProps {

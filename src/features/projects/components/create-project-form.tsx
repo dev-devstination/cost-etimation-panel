@@ -55,7 +55,7 @@ export const CreateProjectForm: React.FC<CreateProjectFormProps> = ({
       area: project?.area || "",
       client_name: project?.client_name || "",
       consultant_name: project?.consultant_name || "",
-      category_id: project?.category_id,
+      category_id: project?.category.id,
       queries_dead_line_date: project?.queries_dead_line_date,
       release_date: project?.release_date,
       site_visit_date: project?.site_visit_date,

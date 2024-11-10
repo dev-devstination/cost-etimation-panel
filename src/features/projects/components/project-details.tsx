@@ -5,8 +5,6 @@ import { Project } from "@/features/projects/interfaces/project"
 import { BuildingIcon, CalendarIcon, LayoutIcon, UserIcon } from "lucide-react"
 import { formatDate } from "@/lib/utils"
 
-import { fetcherSSR } from "@/lib/api/fetcher"
-import { Category } from "@/types"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 interface ProjectDetailsProps {
   project?: Project
@@ -16,13 +14,6 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = async ({
   project,
 }) => {
   const t = await getTranslations("ProjectsPage.currentProject")
-
-  const { data: categories } =
-    await fetcherSSR<Category[]>(`/projects/categories`)
-
-  const projectCategory = categories?.find(
-    (category) => category.id === project?.category_id
-  )
 
   if (!project) {
     return (
@@ -61,7 +52,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = async ({
               <InfoItem
                 icon={<BuildingIcon className="size-4" />}
                 label={t("category")}
-                value={projectCategory?.name ?? "N/A"}
+                value={project.category.name}
               />
             </div>
           </div>

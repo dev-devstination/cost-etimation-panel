@@ -1,11 +1,11 @@
 import { Plus } from "lucide-react"
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { Link } from "@/config/navigation"
 import { Button } from "@/components/ui/button"
 import { LocalizedPageProps } from "@/types"
 import { getResources } from "@/features/resources/lib/get-resources"
-import { UpdateResourcesTable } from "@/features/resources/components/update-resources-table"
+import { UpdateResourcesTable } from "@/features/resources/components/resources/table/update-resources-table"
 import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
 import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 
@@ -21,7 +21,7 @@ const ResourcesPage: React.FC<ResourcesPageProps> = async ({
   params: { locale },
   searchParams,
 }) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const t = await getTranslations("ResourcesPage")
 
   const { resources } = await getResources({

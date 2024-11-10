@@ -1,7 +1,7 @@
-import { unstable_setRequestLocale } from "next-intl/server"
+import { setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
-import { ResourceForm } from "@/features/resources/components/resource-form"
+import { ResourceForm } from "@/features/resources/components/resources/resource-form"
 import { getResourceCategories } from "@/features/resources/lib/get-resource-categories"
 import { getResourceSubcategories } from "@/features/resources/lib/get-resource-subcategory"
 import { getCurrencies } from "@/features/currencies/lib/get-currencies"
@@ -16,7 +16,7 @@ interface CreateNewResourcePageProps extends LocalizedPageProps {
 const CreateNewResourcePage: React.FC<CreateNewResourcePageProps> = async ({
   params: { locale, id },
 }) => {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
 
   const { resource } = await getResourceById(id)
   const { categoriesOptions } = await getResourceCategories()

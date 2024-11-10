@@ -1,4 +1,4 @@
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { LocalizedPageProps } from "@/types"
 import { fetcherSSR } from "@/lib/api/fetcher"
@@ -10,7 +10,7 @@ import { Subcategory, Category } from "@/types"
 export default async function SubcategoriesPage({
   params: { locale },
 }: LocalizedPageProps) {
-  unstable_setRequestLocale(locale)
+  setRequestLocale(locale)
   const t = await getTranslations("ActivitiesSubcategoriesPage")
   const { data: subcategories } = await fetcherSSR<Subcategory[]>(
     "/activities/subcategories"

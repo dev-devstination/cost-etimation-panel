@@ -12,15 +12,15 @@ import { SubmitButton } from "@/components/submit-button"
 import { useToast } from "@/hooks/use-toast"
 import { SelectOption } from "@/types"
 
-import { columns } from "./columns"
-import { Resource, ResourceFilters } from "../types"
-import { Popover } from "./popover"
+import { columns } from "@/features/resources/components/resources/table/columns"
+import { Resource, ResourceFilters } from "@/features/resources/types"
+import { Popover } from "@/features/resources/components/resources/table/popover"
 import {
   updateResourcesSchema,
   UpdateResourcesSchema,
-} from "../schemas/resource"
-import { updateResourcesAction } from "../actions/resource"
-import { Filters } from "./filters"
+} from "@/features/resources/schemas/resource"
+import { updateResourcesAction } from "@/features/resources/actions/resource"
+import { Filters } from "../filters"
 
 interface UpdateResourcesTableProps {
   resources: Resource[]
