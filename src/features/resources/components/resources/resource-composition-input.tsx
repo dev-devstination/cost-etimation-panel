@@ -10,8 +10,8 @@ import { FormField } from "@/components/ui/form"
 import { Input } from "@/components/form/input"
 import { SelectOption } from "@/types"
 
-import { ResourceFormData } from "../schemas/resource"
-import { Resource } from "../types"
+import { ResourceFormData } from "@/features/resources/schemas/resource"
+import { Resource } from "@/features/resources/types"
 import { Select } from "@/components/form/select"
 import {
   Table,
