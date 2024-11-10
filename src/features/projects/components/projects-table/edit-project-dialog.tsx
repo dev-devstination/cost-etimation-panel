@@ -1,5 +1,5 @@
 import { useTranslations } from "next-intl"
-import { Edit } from "lucide-react"
+import { Eye } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -26,7 +26,7 @@ export const EditProjectDialog: React.FC<EditProjectDialogProps> = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Edit className="size-4" />
+          <Eye className="size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
