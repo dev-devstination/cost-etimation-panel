@@ -27,6 +27,7 @@
       "cancel": "Cancel"
     },
     "commonTableHeaders": {
+      "project": "Project",
       "output": "Output",
       "code": "Code",
       "description": "Description",
@@ -409,7 +410,42 @@
       "projects": "Projects",
       "currencies": "Currencies",
       "units": "Units",
-      "activities": "Activities"
+      "activities": "Activities",
+      "bills": "Bills"
+    }
+  },
+  "BillsPage": {
+    "title": "Bills",
+    "dialog": {
+      "add": "Add Bill",
+      "title": "Add New Bill",
+      "description": "Add a new bill to your projects"
+    },
+    "form": {
+      "number": {
+        "label": "Bill Number",
+        "placeholder": "No.",
+        "validation": {
+          "required": "Bill number is required",
+          "positive": "Bill number must be positive"
+        }
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the bill description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "project_id": {
+        "label": "Project",
+        "placeholder": "Select a project",
+        "validation": {
+          "required": "Project is required"
+        }
+      },
+      "save": "Add Bill",
+      "cancel": "Cancel"
     }
   },
   "ActivitiesPage": {
@@ -906,6 +942,8 @@
     "resourcesUpdated": "Resources updated successfully",
     "activityAdded": "Activity added successfully",
     "activityUpdated": "Activity updated successfully",
-    "activitiesUpdated": "Activities updated successfully"
+    "activitiesUpdated": "Activities updated successfully",
+    "billAdded": "Bill added successfully",
+    "billUpdated": "Bill updated successfully"
   }
 }

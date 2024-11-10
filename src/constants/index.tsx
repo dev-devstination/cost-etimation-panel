@@ -55,6 +55,11 @@ export const SETTINGS_NAVLINKS: NavigationLink = {
       label: "categories",
       icon: Tag,
     },
+    {
+      url: "/projects/bills",
+      label: "bills",
+      icon: FileText,
+    },
   ],
   resources: [
     {

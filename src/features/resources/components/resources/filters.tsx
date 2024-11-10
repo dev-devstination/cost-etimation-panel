@@ -16,7 +16,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { SelectOption } from "@/types"
 
-import { ResourceFilters } from "../types"
+import { ResourceFilters } from "@/features/resources/types"
 
 interface FiltersProps {
   // eslint-disable-next-line no-unused-vars
