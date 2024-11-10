@@ -39,13 +39,17 @@ jobs:
         username: ${{ secrets.DIGITAL_OCEAN_CONTAINER_REGISTRY_USERNAME }}
         password: ${{ secrets.DIGITAL_OCEAN_CONTAINER_REGISTRY_PASSWORD }}
 
-#    - name: update cost-estimation .env with secrets values - staging
-#      env:
-#        NEXT_PUBLIC_ENV: ${{ vars.NEXT_PUBLIC_ENV }}
-#      run: |
-#        envsubst < .env.ci > .env.ci.tmp
-#        rm -rf .env || true
-#        mv .env.ci.tmp .env
+    - name: update cost-estimation .env with secrets values - staging
+      env:
+        NEXT_PUBLIC_ENV: ${{ vars.NEXT_PUBLIC_ENV }}
+        LOG_LEVEL: ${{ vars.LOG_LEVEL }}
+        LOG_FORMAT: ${{ vars.LOG_FORMAT }}
+        REDACT_FIELDS: ${{ vars.REDACT_FIELDS }}
+        NEXT_PUBLIC_API_BASE_URL: ${{ vars.NEXT_PUBLIC_API_BASE_URL }}
+      run: |
+        envsubst < .env.ci > .env.ci.tmp
+        rm -rf .env || true
+        mv .env.ci.tmp .env
         
     - name: Build and push cost-estimation
       uses: docker/build-push-action@v3
