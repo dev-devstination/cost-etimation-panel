@@ -4,6 +4,7 @@ import {
   DollarSign,
   FileText,
   Home,
+  Layout,
   Lock,
   Scale,
   Settings,
@@ -59,6 +60,11 @@ export const SETTINGS_NAVLINKS: NavigationLink = {
       url: "/projects/bills",
       label: "bills",
       icon: FileText,
+    },
+    {
+      url: "/projects/divisions",
+      label: "divisions",
+      icon: Layout,
     },
   ],
   resources: [

@@ -139,6 +139,41 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "DivisionsPage": {
+    "title": "Divisions",
+    "dialog": {
+      "add": "Add Division",
+      "title": "Add New Division",
+      "description": "Add a new division to your divisions"
+    },
+    "form": {
+      "title": "Division Information",
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter the description",
+        "validation": {
+          "required": "Description is required"
+        }
+      },
+      "number": {
+        "label": "Number",
+        "placeholder": "Enter the number",
+        "validation": {
+          "required": "Number is required",
+          "positive": "Number must be positive"
+        }
+      },
+      "project_id": {
+        "label": "Project",
+        "placeholder": "Select a project",
+        "validation": {
+          "required": "Project is required"
+        }
+      },
+      "save": "Add Division",
+      "cancel": "Cancel"
+    }
+  },
   "ResourcePage": {
     "title": "Create New Resource",
     "form": {
@@ -398,6 +433,7 @@
     "navlinks": {
       "home": "Home",
       "resources": "Resources",
+      "divisions": "Division",
       "accountInformation": "User",
       "companyInformation": "Company",
       "members": "Members",
@@ -944,6 +980,8 @@
     "activityUpdated": "Activity updated successfully",
     "activitiesUpdated": "Activities updated successfully",
     "billAdded": "Bill added successfully",
-    "billUpdated": "Bill updated successfully"
+    "billUpdated": "Bill updated successfully",
+    "divisionAdded": "Division added successfully",
+    "divisionUpdated": "Division updated successfully"
   }
 }
