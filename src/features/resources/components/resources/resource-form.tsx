@@ -72,25 +72,38 @@ export const ResourceForm = ({
     factor: child.factor.toString(),
   }))
 
-  const defaultResourcePrices = resource?.prices
-    ?.sort((a, b) => {
-      // Sort by updated_at in descending order
-      const dateA = new Date(a.updated_at).getTime()
-      const dateB = new Date(b.updated_at).getTime()
-      return dateB - dateA
-    })
-    .map((price) => ({
+  const sortedPrices = resource?.prices?.sort((a, b) => {
+    const dateA = new Date(a.updated_at).getTime()
+    const dateB = new Date(b.updated_at).getTime()
+    return dateB - dateA
+  })
+
+  const defaultResourcePrices =
+    sortedPrices?.map((price) => ({
       basic_rate: price.basic_rate.toString(),
       factor: price.factor.toString(),
       currency_id: price.currency.id,
-    }))
+    })) || []
 
   const form = useForm<ResourceFormData>({
     resolver: zodResolver(resourceSchema),
     defaultValues: {
-      prices: defaultResourcePrices || [
-        { basic_rate: "", factor: "1", currency_id: currencies[0].id },
-      ],
+      prices: !isClone
+        ? [
+            {
+              basic_rate: defaultResourcePrices[0]?.basic_rate || "",
+              factor: defaultResourcePrices[0]?.factor || "1",
+              currency_id: currencies[0].id,
+            },
+            ...defaultResourcePrices,
+          ]
+        : [
+            {
+              basic_rate: defaultResourcePrices[0]?.basic_rate || "",
+              factor: defaultResourcePrices[0]?.factor || "1",
+              currency_id: currencies[0].id,
+            },
+          ],
       code: resource?.code || "",
       description: resource?.description || "",
       output: resource?.output?.toString() || "",
@@ -119,10 +132,31 @@ export const ResourceForm = ({
     }, 0) || 0
 
   const onSubmit = (data: ResourceFormData) => {
+    let submissionData = { ...data }
+
+    // Check if there are 2 or more prices
+    if (data.prices && data.prices.length >= 2) {
+      const [firstPrice, secondPrice] = data.prices
+
+      // Compare the first two price objects
+      const areEqual =
+        firstPrice.basic_rate === secondPrice.basic_rate &&
+        firstPrice.factor === secondPrice.factor &&
+        firstPrice.currency_id === secondPrice.currency_id
+
+      // If they're equal, remove one of them
+      if (areEqual) {
+        submissionData = {
+          ...data,
+          prices: [firstPrice, ...data.prices.slice(2)],
+        }
+      }
+    }
+
     startTransition(() => {
       isClone
-        ? formAction({ ...data })
-        : formAction({ ...data, id: resource?.id })
+        ? formAction({ ...submissionData })
+        : formAction({ ...submissionData, id: resource?.id })
     })
   }
 
