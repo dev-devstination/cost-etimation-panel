@@ -20,10 +20,10 @@ import { Textarea } from "@/components/form/textarea"
 import { Select } from "@/components/form/select"
 import { Currency } from "@/features/currencies/interfaces/currency"
 
-import { resourceAction } from "../../actions/resource"
-import { ResourceCompositionInput } from "./resource-composition-input"
-import { Resource } from "../../types"
-import { generateSelectOptions } from "@/lib/utils"
+import { resourceAction } from "@/features/resources/actions/resource"
+import { ResourceCompositionInput } from "@/features/resources/components/resources/resource-composition-input"
+import { Resource } from "@/features/resources/types"
+import { Switch } from "@/components/form/switch"
 
 interface CreateResourceFormProps {
   resource?: Resource
@@ -63,45 +63,57 @@ export const ResourceForm = ({
     }
   }, [router, serverState])
 
-  const defaultResourceCompositions = resource?.children?.map((comp) => ({
-    child_resource_id: comp.child_resource.id,
-    qty: comp.qty.toString(),
+  const defaultResourceChildren = resource?.children?.map((child) => ({
+    child_resource_id: child.resource.id,
+    qty: child.qty.toString(),
+    factor: child.factor.toString(),
   }))
+
+  const defaultResourcePrices = resource?.prices
+    ?.sort((a, b) => {
+      // Sort by updated_at in descending order
+      const dateA = new Date(a.updated_at).getTime()
+      const dateB = new Date(b.updated_at).getTime()
+      return dateB - dateA
+    })
+    .map((price) => ({
+      basic_rate: price.basic_rate.toString(),
+      factor: price.factor.toString(),
+      currency_id: price.currency.id,
+    }))
 
   const form = useForm<ResourceFormData>({
     resolver: zodResolver(resourceSchema),
     defaultValues: {
-      basic_rate: resource?.basic_rate?.toString() || "",
+      prices: defaultResourcePrices || [
+        { basic_rate: "", factor: "1", currency_id: currencies[0].id },
+      ],
       code: resource?.code || "",
       description: resource?.description || "",
-      factor: resource?.factor?.toString() || "",
       output: resource?.output?.toString() || "",
       remarks: resource?.remarks || "",
       category_id: resource?.category?.id,
       sub_category_id: resource?.sub_category?.id,
       unit_id: resource?.unit?.id,
-      resource_compositions: defaultResourceCompositions,
+      children: defaultResourceChildren,
+      master: resource?.master,
     },
   })
 
-  const {
-    factor,
-    basic_rate,
-    currency_id,
-    category_id,
-    resource_compositions,
-  } = form.watch()
+  const { prices, category_id, children, output, master } = form.watch()
+  const priceInput = prices[0]
+  const disabled = resource && master
 
-  const totalCost =
-    resource_compositions?.reduce((total, comp) => {
-      const resource = resources.find(({ id }) => id === comp.child_resource_id)
+  const totalAmounts =
+    children?.reduce((total, child) => {
+      const resource = resources.find(
+        ({ id }) => id === child.child_resource_id
+      )
       if (!resource) return total
-      const rate = resource.basic_rate * resource.factor
-      return total + Number(comp.qty) * rate
-    }, 0) || 0
 
-  const exchange_rate =
-    currencies.find(({ id }) => id === currency_id)?.exchange_rate || 1
+      const rate = resource.basic_rate * resource.factor
+      return total + Number(child.qty) * rate * Number(child.factor)
+    }, 0) || 0
 
   const onSubmit = (data: ResourceFormData) => {
     startTransition(() => {
@@ -113,42 +125,40 @@ export const ResourceForm = ({
     (subcategory) => subcategory.category_id === category_id
   )
 
-  const handleBasicRateChange = (value: string) => {
-    if (!totalCost) return
-
-    const newOutput = totalCost / (Number(value) || 1)
-    if (!isNaN(newOutput) && isFinite(newOutput)) {
-      form.setValue("output", newOutput.toFixed(2), {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    }
-  }
-
-  const handleOutputChange = (value: string) => {
-    if (!totalCost) return
-
-    const newBasicRate = totalCost / (Number(value) || 1)
-    if (!isNaN(newBasicRate) && isFinite(newBasicRate)) {
-      form.setValue("basic_rate", newBasicRate.toFixed(2), {
-        shouldValidate: true,
-        shouldDirty: true,
-      })
-    }
-  }
-
   const getResourceRate = () => {
+    const { basic_rate, factor } = priceInput
     const initialRate = Number(basic_rate) * Number(factor)
-    if (!resource_compositions?.length) {
+    if (!totalAmounts) {
       return initialRate
     }
 
-    return initialRate + (totalCost || 0)
+    const cost = totalAmounts / (Number(output) || 1)
+
+    return (cost + Number(priceInput.basic_rate)) * Number(priceInput.factor)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 relative"
+      >
+        {/* Master */}
+        <div className="absolute -top-14 ltr:right-0 rtl:left-0">
+          <FormField
+            control={form.control}
+            name="master"
+            render={({ field }) => (
+              <div className="col-span-12 lg:col-span-1">
+                <Switch
+                  label={t("master.label")}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+        </div>
         <div className="grid grid-cols-12 gap-4">
           {/* Code */}
           <FormField
@@ -156,7 +166,7 @@ export const ResourceForm = ({
             name="code"
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-1">
-                <Input label={t("code.label")} {...field} />
+                <Input label={t("code.label")} {...field} disabled={disabled} />
               </div>
             )}
           />
@@ -167,7 +177,11 @@ export const ResourceForm = ({
             name="description"
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-11">
-                <Input label={t("description.label")} {...field} />
+                <Input
+                  label={t("description.label")}
+                  {...field}
+                  disabled={disabled}
+                />
               </div>
             )}
           />
@@ -186,6 +200,7 @@ export const ResourceForm = ({
                   options={categories}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={disabled}
                 />
               </div>
             )}
@@ -198,7 +213,7 @@ export const ResourceForm = ({
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-4">
                 <Select
-                  disabled={!subcategoryOptions.length}
+                  disabled={!subcategoryOptions.length || disabled}
                   label={t("sub_category_id.label")}
                   options={subcategoryOptions}
                   onValueChange={field.onChange}
@@ -219,6 +234,7 @@ export const ResourceForm = ({
                   options={units}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={disabled}
                 />
               </div>
             )}
@@ -229,63 +245,27 @@ export const ResourceForm = ({
           {/* Basic Rate */}
           <FormField
             control={form.control}
-            name="basic_rate"
+            name={`prices.${0}.basic_rate`}
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-2">
-                <Input
-                  label={t("basic_rate.label")}
-                  {...field}
-                  onChange={(e) => {
-                    field.onChange(e.target.value)
-                    handleBasicRateChange(e.target.value)
-                  }}
-                />
+              <div className="col-span-12 lg:col-span-3">
+                <Input label={t("basic_rate.label")} {...field} />
               </div>
             )}
           />
-
-          {/* Currency */}
-          <FormField
-            control={form.control}
-            name="currency_id"
-            render={({ field }) => (
-              <div className="col-span-12 lg:col-span-2">
-                <Select
-                  label={t("currency_id.label")}
-                  placeholder={t("currency_id.placeholder")}
-                  options={generateSelectOptions(currencies, {
-                    label: "currency",
-                    value: "id",
-                  })}
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                />
-              </div>
-            )}
-          />
-
-          {/* Currency Exchange Rate */}
-          <div className="col-span-12 lg:col-span-2">
-            <Input
-              label={t("exchange_rate.label")}
-              disabled
-              value={exchange_rate}
-            />
-          </div>
 
           {/* factor */}
           <FormField
             control={form.control}
-            name="factor"
+            name={`prices.${0}.factor`}
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-2">
+              <div className="col-span-12 lg:col-span-3">
                 <Input label={t("factor.label")} {...field} />
               </div>
             )}
           />
 
           {/* Rate */}
-          <div className="col-span-12 lg:col-span-2">
+          <div className="col-span-12 lg:col-span-3">
             <Input label={t("rate.label")} disabled value={getResourceRate()} />
           </div>
 
@@ -294,15 +274,11 @@ export const ResourceForm = ({
             control={form.control}
             name="output"
             render={({ field }) => (
-              <div className="col-span-12 lg:col-span-2">
+              <div className="col-span-12 lg:col-span-3">
                 <Input
                   label={t("output.label")}
                   {...field}
-                  disabled={!resource_compositions?.length}
-                  onChange={(e) => {
-                    field.onChange(e.target.value)
-                    handleOutputChange(e.target.value)
-                  }}
+                  disabled={!children?.length}
                 />
               </div>
             )}
@@ -314,16 +290,21 @@ export const ResourceForm = ({
           control={form.control}
           name="remarks"
           render={({ field }) => (
-            <div className="col-span-12 lg:col-span-3">
-              <Textarea label={t("remarks.label")} {...field} />
+            <div className="col-span-12">
+              <Textarea
+                label={t("remarks.label")}
+                {...field}
+                disabled={disabled}
+              />
             </div>
           )}
         />
 
         <div className="col-span-12">
           <ResourceCompositionInput
-            resourceCompositions={defaultResourceCompositions}
-            resources={resources}
+            disabled={disabled}
+            resourceCompositions={defaultResourceChildren}
+            resources={resources.filter((r) => r.id !== resource?.id)}
             categories={categories}
             subcategories={subcategories}
           />

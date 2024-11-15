@@ -178,6 +178,9 @@
     "title": "Create New Resource",
     "form": {
       "title": "Resource Information",
+      "master": {
+        "label": "Master"
+      },
       "basic_rate": {
         "label": "Basic Rate",
         "placeholder": "Enter the basic rate",
