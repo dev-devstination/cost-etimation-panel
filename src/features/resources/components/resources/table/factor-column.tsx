@@ -30,7 +30,7 @@ export const FactorColumn = () => {
 
     const resources = form.getValues("resources")
     resources.forEach((_, index) => {
-      form.setValue(`resources.${index}.factor`, newValue, {
+      form.setValue(`resources.${index}.prices.${0}.factor`, newValue, {
         shouldDirty: true,
         shouldValidate: true,
       })
