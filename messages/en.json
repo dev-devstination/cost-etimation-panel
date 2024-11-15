@@ -1,5 +1,6 @@
 {
   "common": {
+    "clone": "Clone",
     "account": "Account",
     "settings": "Settings",
     "logout": "Logout",

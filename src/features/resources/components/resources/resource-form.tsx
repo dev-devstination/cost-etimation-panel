@@ -3,6 +3,7 @@ import { useEffect, useTransition } from "react"
 import { useFormState } from "react-dom"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
+import { useSearchParams } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Edit, Plus } from "lucide-react"
 
@@ -49,6 +50,8 @@ export const ResourceForm = ({
 }: CreateResourceFormProps) => {
   const t = useTranslations("ResourcePage.form")
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const isClone = searchParams.get("clone")
 
   const resourceSchema = useResourceSchema()
   const [isPending, startTransition] = useTransition()
@@ -96,7 +99,7 @@ export const ResourceForm = ({
       sub_category_id: resource?.sub_category?.id,
       unit_id: resource?.unit?.id,
       children: defaultResourceChildren,
-      master: resource?.master,
+      master: !isClone && resource?.master,
     },
   })
 
@@ -117,7 +120,9 @@ export const ResourceForm = ({
 
   const onSubmit = (data: ResourceFormData) => {
     startTransition(() => {
-      formAction({ ...data, id: resource?.id })
+      isClone
+        ? formAction({ ...data })
+        : formAction({ ...data, id: resource?.id })
     })
   }
 

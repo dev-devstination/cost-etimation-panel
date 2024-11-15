@@ -13,24 +13,24 @@ import { FactorColumn } from "@/features/resources/components/resources/table/fa
 import { ResourceInputCell } from "@/features/resources/components/resources/table/resource-input-cell"
 
 export const columns: ColumnDef<Resource>[] = [
-  {
-    id: "select",
-    header: ({ table }) => {
-      return <SelectAllColumn table={table} title="code" />
-    },
-    cell: ({ row }) => (
-      <div className="flex items-center space-x-2" data-prevent-propagation>
-        <Checkbox
-          checked={row.getIsSelected()}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
-          aria-label="Select row"
-        />
-        <span className="text-sm font-medium">{row.original.code}</span>
-      </div>
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => {
+  //     return <SelectAllColumn table={table} title="code" />
+  //   },
+  //   cell: ({ row }) => (
+  //     <div className="flex items-center space-x-2" data-prevent-propagation>
+  //       <Checkbox
+  //         checked={row.getIsSelected()}
+  //         onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //         aria-label="Select row"
+  //       />
+  //       <span className="text-sm font-medium">{row.original.code}</span>
+  //     </div>
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "description",
     header: ({ column }) => {
@@ -84,7 +84,9 @@ export const columns: ColumnDef<Resource>[] = [
     header: ({ column }) => {
       return <ColumnHeader column={column} title="composite" sortable />
     },
-    cell: ({ row }) => <FlaggedCell checked={!!row.original.children} />,
+    cell: ({ row }) => (
+      <FlaggedCell checked={!!row.original.children?.length} />
+    ),
   },
   {
     accessorKey: "master",
