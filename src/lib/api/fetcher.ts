@@ -1,5 +1,4 @@
 import { cookies } from "next/headers"
-import { notFound } from "next/navigation"
 
 import { COOKIES } from "@/constants"
 
@@ -68,10 +67,6 @@ export async function fetcher<T>(
       let errorMessage = `API error: ${res.statusText}`
       let validations: Record<string, string> = {}
 
-      if (res.status === 404) {
-        notFound()
-      }
-
       try {
         const errorData = await res.json()
 
@@ -109,6 +104,7 @@ export async function fetcher<T>(
     if (error instanceof ApiError) {
       throw error
     }
+
     logger.error("Fetch error", { error: error, url })
     throw new ApiError(500, "An unexpected error occurred")
   }

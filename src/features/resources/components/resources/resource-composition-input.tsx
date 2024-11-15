@@ -26,12 +26,19 @@ interface ResourceCompositionInputProps {
   resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
-  resourceCompositions?: ResourceFormData["resource_compositions"]
+  resourceCompositions?: ResourceFormData["children"]
+  disabled?: boolean
 }
 
 export const ResourceCompositionInput: React.FC<
   ResourceCompositionInputProps
-> = ({ resources, categories, subcategories, resourceCompositions }) => {
+> = ({
+  resources,
+  categories,
+  subcategories,
+  resourceCompositions,
+  disabled,
+}) => {
   const t = useTranslations("ResourcePage.form.resource_compositions")
   const [selectedResources, setSelectedResources] = useState<string[]>([])
   const [availableResources, setAvailableResources] = useState<Resource[]>(
@@ -51,7 +58,7 @@ export const ResourceCompositionInput: React.FC<
   const form = useFormContext<ResourceFormData>()
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "resource_compositions",
+    name: "children",
   })
 
   useEffect(() => {
@@ -85,19 +92,18 @@ export const ResourceCompositionInput: React.FC<
     setAvailableResources(filteredResources)
   }, [fields, resources, searchTerm, selectedCategory, selectedSubcategory])
 
-  const calculateAmount = (qty: string, rate: number) => {
-    return Number(qty) * rate
+  const calculateAmount = (qty: string, rate: number, factor?: string) => {
+    return Number(qty) * rate * Number(factor)
   }
 
-  const getTotalCost = () => {
+  const getTotalAmounts = () => {
     return fields.reduce((total, field, index) => {
+      const qty = form.watch(`children.${index}.qty`)
+      const factor = form.watch(`children.${index}.factor`)
       const resource = resources.find((r) => r.id === field.child_resource_id)
       if (!resource) return total
-      const rate = resource.basic_rate * resource.factor
-      return (
-        total +
-        calculateAmount(form.watch(`resource_compositions.${index}.qty`), rate)
-      )
+
+      return total + calculateAmount(qty, resource.rate, factor)
     }, 0)
   }
 
@@ -110,27 +116,32 @@ export const ResourceCompositionInput: React.FC<
   }
 
   const handleAddResources = () => {
-    const newCompositions: ResourceFormData["resource_compositions"] = []
+    const newCompositions: ResourceFormData["children"] = []
 
     selectedResources.forEach((resourceId) => {
       const resource = resources.find((r) => r.id === resourceId)
       if (resource?.children?.length) {
-        resource.children.forEach((comp) => {
+        resource.children.forEach((child) => {
           if (
             !fields.some(
-              (field) => field.child_resource_id === comp.child_resource.id
+              (field) => field.child_resource_id === child.resource.id
             )
           ) {
             newCompositions.push({
-              child_resource_id: comp.child_resource.id,
-              qty: comp.qty.toString(),
+              child_resource_id: child.resource.id,
+              qty: child.qty.toString(),
+              factor: child.factor.toString(),
             })
           }
         })
       } else if (
         !fields.some((field) => field.child_resource_id === resourceId)
       ) {
-        newCompositions.push({ child_resource_id: resourceId, qty: "1" })
+        newCompositions.push({
+          child_resource_id: resourceId,
+          qty: "1",
+          factor: "1",
+        })
       }
     })
 
@@ -197,7 +208,9 @@ export const ResourceCompositionInput: React.FC<
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[40px] text-center"></TableHead>
+                  {!disabled && (
+                    <TableHead className="w-[40px] text-center"></TableHead>
+                  )}
                   <TableHead className="min-w-[300px]">
                     {t("tableHeaders.description")}
                   </TableHead>
@@ -207,10 +220,7 @@ export const ResourceCompositionInput: React.FC<
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.isComposite")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
-                    {t("tableHeaders.factor")}
-                  </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.rate")}
                   </TableHead>
                 </TableRow>
@@ -218,15 +228,17 @@ export const ResourceCompositionInput: React.FC<
               <TableBody>
                 {availableResources.map((resource) => (
                   <TableRow key={resource.id}>
-                    <TableCell className="text-center">
-                      <Checkbox
-                        id={`resource-${resource.id}`}
-                        checked={selectedResources.includes(resource.id)}
-                        onCheckedChange={() =>
-                          handleResourceSelection(resource.id)
-                        }
-                      />
-                    </TableCell>
+                    {!disabled && (
+                      <TableCell className="text-center">
+                        <Checkbox
+                          id={`resource-${resource.id}`}
+                          checked={selectedResources.includes(resource.id)}
+                          onCheckedChange={() =>
+                            handleResourceSelection(resource.id)
+                          }
+                        />
+                      </TableCell>
+                    )}
                     <TableCell className="truncate">
                       {resource.description}
                     </TableCell>
@@ -239,24 +251,23 @@ export const ResourceCompositionInput: React.FC<
                       ) : null}
                     </TableCell>
                     <TableCell className="text-right">
-                      {resource.factor.toFixed(2)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(resource.basic_rate * resource.factor).toFixed(2)}
+                      {resource.rate.toFixed(2)}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
-          <Button
-            onClick={handleAddResources}
-            disabled={selectedResources.length === 0}
-            variant="outline"
-            size="sm"
-          >
-            {t("addSelectedResources")}
-          </Button>
+          {!disabled && (
+            <Button
+              onClick={handleAddResources}
+              disabled={selectedResources.length === 0}
+              variant="outline"
+              size="sm"
+            >
+              {t("addSelectedResources")}
+            </Button>
+          )}
         </div>
 
         {/* Selected Resources */}
@@ -276,16 +287,16 @@ export const ResourceCompositionInput: React.FC<
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.quantity")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.factor")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.rate")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.amount")}
                   </TableHead>
-                  <TableHead className="w-[50px]"></TableHead>
+                  {!disabled && <TableHead className="w-[50px]"></TableHead>}
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -294,11 +305,14 @@ export const ResourceCompositionInput: React.FC<
                     ({ id }) => id === field.child_resource_id
                   )
                   if (!resource) return null
-                  const rate = resource.basic_rate * resource.factor
-                  const quantity = form.watch(
-                    `resource_compositions.${index}.qty`
+
+                  const quantity = form.watch(`children.${index}.qty`)
+                  const factor = form.watch(`children.${index}.factor`)
+                  const amount = calculateAmount(
+                    quantity,
+                    resource.rate,
+                    factor
                   )
-                  const amount = calculateAmount(quantity, rate)
 
                   return (
                     <TableRow key={field.id}>
@@ -307,7 +321,7 @@ export const ResourceCompositionInput: React.FC<
                       <TableCell>
                         <FormField
                           control={form.control}
-                          name={`resource_compositions.${index}.qty`}
+                          name={`children.${index}.qty`}
                           render={({ field }) => (
                             <Input
                               {...field}
@@ -316,19 +330,32 @@ export const ResourceCompositionInput: React.FC<
                           )}
                         />
                       </TableCell>
-                      <TableCell>{resource.factor.toFixed(2)}</TableCell>
-                      <TableCell>{rate.toFixed(2)}</TableCell>
-                      <TableCell>{amount.toFixed(2)}</TableCell>
                       <TableCell>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="size-8"
-                          onClick={() => remove(index)}
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
+                        <FormField
+                          control={form.control}
+                          name={`children.${index}.factor`}
+                          render={({ field }) => (
+                            <Input
+                              {...field}
+                              className="h-8 w-20 text-center text-sm"
+                            />
+                          )}
+                        />
                       </TableCell>
+                      <TableCell>{resource.rate.toFixed(2)}</TableCell>
+                      <TableCell>{amount.toFixed(2)}</TableCell>
+                      {!disabled && (
+                        <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="size-8"
+                            onClick={() => remove(index)}
+                          >
+                            <Trash2 className="size-4" />
+                          </Button>
+                        </TableCell>
+                      )}
                     </TableRow>
                   )
                 })}
@@ -338,7 +365,7 @@ export const ResourceCompositionInput: React.FC<
           <div className="flex items-center justify-end gap-2">
             <Label>{t("totalCost")}</Label>
             <Input
-              value={getTotalCost().toFixed(2)}
+              value={getTotalAmounts().toFixed(2)}
               disabled
               className="w-40 text-center"
             />

@@ -27,11 +27,13 @@ export const ResourceInputCell: React.FC<BasicRateCellProps> = ({
       return initialRate
     }
 
-    const totalCost = resource.children.reduce((total, comp) => {
-      return total + comp.amount
+    const totalAmounts = resource.children.reduce((total, child) => {
+      return total + child.amount
     }, 0)
 
-    return initialRate + totalCost
+    const cost = totalAmounts / resource.output
+
+    return (cost + Number(basic_rate)) * Number(factor)
   }
 
   if (name === "rate") {

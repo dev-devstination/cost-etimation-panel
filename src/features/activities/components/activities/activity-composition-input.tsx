@@ -118,11 +118,11 @@ export const ActivityCompositionInput: React.FC<
         resource.children.forEach((comp) => {
           if (
             !fields.some(
-              (field) => field.child_resource_id === comp.child_resource.id
+              (field) => field.child_resource_id === comp.resource.id
             )
           ) {
             newCompositions.push({
-              child_resource_id: comp.child_resource.id,
+              child_resource_id: comp.resource.id,
               qty: comp.qty.toString(),
             })
           }
