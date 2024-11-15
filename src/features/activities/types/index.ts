@@ -4,28 +4,28 @@ import { Category, Subcategory } from "@/types"
 
 export interface Children {
   activity_id: string
-  amount: number
-  child_resource: Resource
-  child_resource_id: string
   id: string
+  amount: number
   qty: number
+  resource: Resource
+  resource_id: string
 }
 
 export interface Activity {
-  unit: Unit
-  sub_category: Subcategory
-  remarks: string
-  rate: number
-  output: number
-  master: boolean
-  id: string
-  description: string
-  cost: number
-  company_id: string
-  code: string
-  children: Children[]
-  category: Category
   active: boolean
+  category: Category
+  children: Children[]
+  code: string
+  company_id: string
+  cost: number
+  description: string
+  id: string
+  master: boolean
+  output: number
+  rate: number
+  remarks: string
+  sub_category: Subcategory
+  unit: Unit
 }
 
 export interface ActivityFilters {

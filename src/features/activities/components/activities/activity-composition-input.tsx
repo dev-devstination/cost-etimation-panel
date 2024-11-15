@@ -26,12 +26,19 @@ interface ActivityCompositionInputProps {
   resources: Resource[]
   categories: SelectOption[]
   subcategories: (SelectOption & { category_id: string })[]
-  activityCompositions?: ActivityFormData["activity_compositions"]
+  activityCompositions?: ActivityFormData["children"]
+  disabled?: boolean
 }
 
 export const ActivityCompositionInput: React.FC<
   ActivityCompositionInputProps
-> = ({ resources, categories, subcategories, activityCompositions }) => {
+> = ({
+  resources,
+  categories,
+  subcategories,
+  activityCompositions,
+  disabled,
+}) => {
   const t = useTranslations("ActivitiesPage.form.activity_compositions")
   const [selectedResources, setSelectedResources] = useState<string[]>([])
   const [availableResources, setAvailableResources] = useState<Resource[]>(
@@ -39,7 +46,7 @@ export const ActivityCompositionInput: React.FC<
       ? resources.filter(
           (resource) =>
             !activityCompositions.some(
-              (comp) => comp.child_resource_id === resource.id
+              (comp) => comp.resource_id === resource.id
             )
         )
       : resources
@@ -47,11 +54,13 @@ export const ActivityCompositionInput: React.FC<
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedSubcategory, setSelectedSubcategory] = useState("")
+  const [isMaster, setIsMaster] = useState(false)
+  const [isComposite, setIsComposite] = useState(false)
 
   const form = useFormContext<ActivityFormData>()
   const { fields, append, remove } = useFieldArray({
     control: form.control,
-    name: "activity_compositions",
+    name: "children",
   })
 
   useEffect(() => {
@@ -60,8 +69,7 @@ export const ActivityCompositionInput: React.FC<
 
   useEffect(() => {
     let filteredResources = resources.filter(
-      (resource) =>
-        !fields.some((field) => field.child_resource_id === resource.id)
+      (resource) => !fields.some((field) => field.resource_id === resource.id)
     )
 
     if (searchTerm) {
@@ -82,22 +90,43 @@ export const ActivityCompositionInput: React.FC<
       )
     }
 
+    if (isMaster) {
+      filteredResources = filteredResources.filter(
+        (resource) => resource.master
+      )
+    }
+
+    if (isComposite) {
+      filteredResources = filteredResources.filter(
+        (resource) => resource.children?.length
+      )
+    }
+
     setAvailableResources(filteredResources)
-  }, [fields, resources, searchTerm, selectedCategory, selectedSubcategory])
+  }, [
+    fields,
+    isComposite,
+    isMaster,
+    resources,
+    searchTerm,
+    selectedCategory,
+    selectedSubcategory,
+  ])
 
   const calculateAmount = (qty: string, rate: number) => {
     return Number(qty) * rate
   }
 
-  const getTotalCost = () => {
+  const getTotalAmounts = () => {
     return fields.reduce((total, field, index) => {
-      const resource = resources.find((r) => r.id === field.child_resource_id)
-      if (!resource) return total
+      const qty = form.watch(`children.${index}.qty`)
+      const resource = resources.find((r) => r.id === field.resource_id)
+      if (!resource) {
+        return total
+      }
+
       const rate = resource.basic_rate * resource.factor
-      return (
-        total +
-        calculateAmount(form.watch(`activity_compositions.${index}.qty`), rate)
-      )
+      return total + calculateAmount(qty, rate)
     }, 0)
   }
 
@@ -110,27 +139,21 @@ export const ActivityCompositionInput: React.FC<
   }
 
   const handleAddResources = () => {
-    const newCompositions: ActivityFormData["activity_compositions"] = []
+    const newCompositions: ActivityFormData["children"] = []
 
     selectedResources.forEach((resourceId) => {
       const resource = resources.find((r) => r.id === resourceId)
       if (resource?.children?.length) {
         resource.children.forEach((comp) => {
-          if (
-            !fields.some(
-              (field) => field.child_resource_id === comp.resource.id
-            )
-          ) {
+          if (!fields.some((field) => field.resource_id === comp.resource.id)) {
             newCompositions.push({
-              child_resource_id: comp.resource.id,
+              resource_id: comp.resource.id,
               qty: comp.qty.toString(),
             })
           }
         })
-      } else if (
-        !fields.some((field) => field.child_resource_id === resourceId)
-      ) {
-        newCompositions.push({ child_resource_id: resourceId, qty: "1" })
+      } else if (!fields.some((field) => field.resource_id === resourceId)) {
+        newCompositions.push({ resource_id: resourceId, qty: "1" })
       }
     })
 
@@ -142,49 +165,76 @@ export const ActivityCompositionInput: React.FC<
     setSearchTerm("")
     setSelectedCategory("")
     setSelectedSubcategory("")
+    setIsComposite(false)
+    setIsMaster(false)
   }
 
   return (
     <div className="space-y-4">
       {/* Filters Section */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="space-y-2">
           <Input
             placeholder={t("searchResources")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {(searchTerm || selectedCategory || selectedCategory) && (
-            <Button
-              onClick={clearFilters}
-              variant="link"
-              type="button"
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              <X className="size-4" />
-              {t("clearFilters")}
-            </Button>
-          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <Select
-            options={categories}
-            placeholder={t("selectCategory")}
-            onValueChange={(value) => setSelectedCategory(value)}
-            value={selectedCategory}
-          />
-          <Select
-            options={subcategories.filter(
-              (sub) => !selectedCategory || sub.category_id === selectedCategory
-            )}
-            placeholder={t("selectSubcategory")}
-            onValueChange={(value) => setSelectedSubcategory(value)}
-            value={selectedSubcategory}
-            disabled={!selectedCategory}
-          />
+        <Select
+          options={categories}
+          placeholder={t("selectCategory")}
+          onValueChange={(value) => setSelectedCategory(value)}
+          value={selectedCategory}
+        />
+
+        <Select
+          options={subcategories.filter(
+            (sub) => !selectedCategory || sub.category_id === selectedCategory
+          )}
+          placeholder={t("selectSubcategory")}
+          onValueChange={(value) => setSelectedSubcategory(value)}
+          value={selectedSubcategory}
+          disabled={!selectedCategory}
+        />
+      </div>
+
+      <div className="flex h-9 flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+            <Checkbox
+              id="composite"
+              checked={isComposite}
+              onCheckedChange={(checked: boolean) => setIsComposite(checked)}
+            />
+            <Label htmlFor="composite">{t("isComposite")}</Label>
+          </div>
+
+          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+            <Checkbox
+              id="master"
+              checked={isMaster}
+              onCheckedChange={(checked: boolean) => setIsMaster(checked)}
+            />
+            <Label htmlFor="master">{t("isMaster")}</Label>
+          </div>
         </div>
+        {(searchTerm ||
+          selectedCategory ||
+          selectedSubcategory ||
+          isComposite ||
+          isMaster) && (
+          <Button
+            onClick={clearFilters}
+            variant="link"
+            type="button"
+            size="sm"
+            className="flex items-center gap-2"
+          >
+            <X className="size-4" />
+            {t("clearFilters")}
+          </Button>
+        )}
       </div>
 
       {/* Tables Section */}
@@ -197,7 +247,9 @@ export const ActivityCompositionInput: React.FC<
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[40px] text-center"></TableHead>
+                  {!disabled && (
+                    <TableHead className="w-[40px] text-center"></TableHead>
+                  )}
                   <TableHead className="min-w-[300px]">
                     {t("tableHeaders.description")}
                   </TableHead>
@@ -207,10 +259,10 @@ export const ActivityCompositionInput: React.FC<
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.isComposite")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
-                    {t("tableHeaders.factor")}
+                  <TableHead className="w-[100px] text-center">
+                    {t("tableHeaders.isMaster")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.rate")}
                   </TableHead>
                 </TableRow>
@@ -218,15 +270,17 @@ export const ActivityCompositionInput: React.FC<
               <TableBody>
                 {availableResources.map((resource) => (
                   <TableRow key={resource.id}>
-                    <TableCell className="text-center">
-                      <Checkbox
-                        id={`resource-${resource.id}`}
-                        checked={selectedResources.includes(resource.id)}
-                        onCheckedChange={() =>
-                          handleResourceSelection(resource.id)
-                        }
-                      />
-                    </TableCell>
+                    {disabled && (
+                      <TableCell className="text-center">
+                        <Checkbox
+                          id={`resource-${resource.id}`}
+                          checked={selectedResources.includes(resource.id)}
+                          onCheckedChange={() =>
+                            handleResourceSelection(resource.id)
+                          }
+                        />
+                      </TableCell>
+                    )}
                     <TableCell className="truncate">
                       {resource.description}
                     </TableCell>
@@ -238,25 +292,29 @@ export const ActivityCompositionInput: React.FC<
                         <CheckCircle className="mx-auto size-4 text-primary" />
                       ) : null}
                     </TableCell>
-                    <TableCell className="text-right">
-                      {resource.factor.toFixed(2)}
+                    <TableCell className="text-center">
+                      {resource.master ? (
+                        <CheckCircle className="mx-auto size-4 text-primary" />
+                      ) : null}
                     </TableCell>
                     <TableCell className="text-right">
-                      {(resource.basic_rate * resource.factor).toFixed(2)}
+                      {resource.rate.toFixed(2)}
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </div>
-          <Button
-            onClick={handleAddResources}
-            disabled={selectedResources.length === 0}
-            variant="outline"
-            size="sm"
-          >
-            {t("addSelectedResources")}
-          </Button>
+          {!disabled && (
+            <Button
+              onClick={handleAddResources}
+              disabled={selectedResources.length === 0}
+              variant="outline"
+              size="sm"
+            >
+              {t("addSelectedResources")}
+            </Button>
+          )}
         </div>
 
         {/* Selected Resources */}
@@ -276,29 +334,26 @@ export const ActivityCompositionInput: React.FC<
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.quantity")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.factor")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.rate")}
                   </TableHead>
-                  <TableHead className="w-[100px] text-right">
+                  <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.amount")}
                   </TableHead>
-                  <TableHead className="w-[50px]"></TableHead>
+                  {!disabled && <TableHead className="w-[50px]"></TableHead>}
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {fields.map((field, index) => {
                   const resource = resources.find(
-                    ({ id }) => id === field.child_resource_id
+                    ({ id }) => id === field.resource_id
                   )
                   if (!resource) return null
-                  const rate = resource.basic_rate * resource.factor
-                  const quantity = form.watch(
-                    `activity_compositions.${index}.qty`
-                  )
-                  const amount = calculateAmount(quantity, rate)
+                  const quantity = form.watch(`children.${index}.qty`)
+                  const amount = calculateAmount(quantity, resource.rate)
 
                   return (
                     <TableRow key={field.id}>
@@ -307,7 +362,7 @@ export const ActivityCompositionInput: React.FC<
                       <TableCell>
                         <FormField
                           control={form.control}
-                          name={`activity_compositions.${index}.qty`}
+                          name={`children.${index}.qty`}
                           render={({ field }) => (
                             <Input
                               {...field}
@@ -317,18 +372,20 @@ export const ActivityCompositionInput: React.FC<
                         />
                       </TableCell>
                       <TableCell>{resource.factor.toFixed(2)}</TableCell>
-                      <TableCell>{rate.toFixed(2)}</TableCell>
+                      <TableCell>{resource.rate.toFixed(2)}</TableCell>
                       <TableCell>{amount.toFixed(2)}</TableCell>
-                      <TableCell>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="size-8"
-                          onClick={() => remove(index)}
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
-                      </TableCell>
+                      {!disabled && (
+                        <TableCell>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="size-8"
+                            onClick={() => remove(index)}
+                          >
+                            <Trash2 className="size-4" />
+                          </Button>
+                        </TableCell>
+                      )}
                     </TableRow>
                   )
                 })}
@@ -338,7 +395,7 @@ export const ActivityCompositionInput: React.FC<
           <div className="flex items-center justify-end gap-2">
             <Label>{t("totalCost")}</Label>
             <Input
-              value={getTotalCost().toFixed(2)}
+              value={getTotalAmounts().toFixed(2)}
               disabled
               className="w-40 text-center"
             />

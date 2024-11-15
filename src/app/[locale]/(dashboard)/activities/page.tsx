@@ -4,13 +4,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Link } from "@/config/navigation"
 import { Button } from "@/components/ui/button"
 import { LocalizedPageProps } from "@/types"
-import { UpdateResourcesTable } from "@/features/resources/components/resources/table/update-resources-table"
 import { getActivities } from "@/features/activities/lib/get-activities"
 import { getActivityCategories } from "@/features/activities/lib/get-activity-categories"
 import { getActivitySubcategories } from "@/features/activities/lib/get-activity-subcategory"
 import { UpdateActivitiesTable } from "@/features/activities/components/activities/table/update-activities-table"
 
-interface ResourcesPageProps extends LocalizedPageProps {
+interface ActivitiesPageProps extends LocalizedPageProps {
   searchParams: {
     category?: string
     subcategory?: string
@@ -18,7 +17,7 @@ interface ResourcesPageProps extends LocalizedPageProps {
   }
 }
 
-const ResourcesPage: React.FC<ResourcesPageProps> = async ({
+const ActivitiesPage: React.FC<ActivitiesPageProps> = async ({
   params: { locale },
   searchParams,
 }) => {
@@ -56,4 +55,4 @@ const ResourcesPage: React.FC<ResourcesPageProps> = async ({
   )
 }
 
-export default ResourcesPage
+export default ActivitiesPage

@@ -506,6 +506,9 @@
       "clear": "Clear Filters"
     },
     "form": {
+      "master": {
+        "label": "Master"
+      },
       "proposed_rate": {
         "label": "Proposed Rate"
       },
@@ -543,7 +546,10 @@
         "addSelectedResources": "Add Resources",
         "selectedResources": "Selected Resources",
         "totalCost": "Total Cost",
+        "isComposite": "Composite",
+        "isMaster": "Master",
         "tableHeaders": {
+          "isMaster": "Master",
           "description": "Description",
           "unit": "Unit",
           "isComposite": "Composite",

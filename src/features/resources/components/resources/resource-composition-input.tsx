@@ -123,7 +123,9 @@ export const ResourceCompositionInput: React.FC<
       const qty = form.watch(`children.${index}.qty`)
       const factor = form.watch(`children.${index}.factor`)
       const resource = resources.find((r) => r.id === field.child_resource_id)
-      if (!resource) return total
+      if (!resource) {
+        return total
+      }
 
       return total + calculateAmount(qty, resource.rate, factor)
     }, 0)
