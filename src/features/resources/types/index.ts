@@ -32,7 +32,7 @@ export interface ResourceFilters {
 }
 
 export interface ResourcePrice {
-  id: string
+  ID: string
   basic_rate: number
   created_at: number
   currency: Currency

@@ -66,16 +66,16 @@ export async function updateResourcesAction(
       body: resources,
     })
 
-    logger.info("Resource updated successfully", { data })
+    logger.info("Resource updated successfully", { data: resources })
     revalidatePath(`/resources`)
 
     return { status: "success", message: "resourcesUpdated" }
   } catch (error) {
     if (error instanceof ApiError) {
-      logger.error("Resource add error", {
+      logger.error("Resources update error", {
         error: error.message,
         statusCode: error.statusCode,
-        body: data,
+        body: resources,
       })
 
       switch (error.statusCode) {

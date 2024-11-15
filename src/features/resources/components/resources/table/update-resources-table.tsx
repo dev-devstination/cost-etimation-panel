@@ -71,15 +71,77 @@ export const UpdateResourcesTable: React.FC<UpdateResourcesTableProps> = ({
     defaultValues: {
       resources: resources.map((resource) => ({
         id: resource.id,
-        basic_rate: resource.basic_rate.toString(),
-        factor: resource.factor.toString(),
+
+        prices: resource.prices
+          .sort((a, b) => {
+            const dateA = new Date(a.updated_at).getTime()
+            const dateB = new Date(b.updated_at).getTime()
+            return dateB - dateA
+          })
+          .reduce(
+            (acc, price, index) => {
+              if (index === 0) {
+                // Add a copy of the first item at the beginning
+                return [
+                  {
+                    basic_rate: price.basic_rate.toString(),
+                    factor: price.factor.toString(),
+                    currency_id: price.currency.id,
+                  },
+                  {
+                    basic_rate: price.basic_rate.toString(),
+                    factor: price.factor.toString(),
+                    currency_id: price.currency.id,
+                  },
+                ]
+              }
+              return [
+                ...acc,
+                {
+                  basic_rate: price.basic_rate.toString(),
+                  factor: price.factor.toString(),
+                  currency_id: price.currency.id,
+                },
+              ]
+            },
+            [] as {
+              basic_rate: string
+              factor: string
+              currency_id: string
+            }[]
+          ),
       })),
     },
   })
 
   const onSubmit = (data: UpdateResourcesSchema) => {
+    const processedData = {
+      resources: data.resources.map((resource) => {
+        // If there are at least 2 prices
+        if (resource.prices.length >= 2) {
+          const [firstPrice, secondPrice] = resource.prices
+
+          // Check if the first two prices are identical
+          const areIdentical =
+            firstPrice.basic_rate === secondPrice.basic_rate &&
+            firstPrice.factor === secondPrice.factor
+
+          // If they're identical, remove the second one
+          if (areIdentical) {
+            return {
+              ...resource,
+              prices: [firstPrice, ...resource.prices.slice(2)],
+            }
+          }
+        }
+
+        // If prices are different or less than 2 prices, return as is
+        return resource
+      }),
+    }
+
     startTransition(() => {
-      formAction(data)
+      formAction(processedData)
     })
   }
 
