@@ -9,7 +9,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const formatDate = (date: number) => {
-  return format(new Date(date), "PPP")
+  // Convert seconds to milliseconds if needed
+  const timestamp = date.toString().length === 10 ? date * 1000 : date
+  return format(new Date(timestamp), "PPP")
 }
 
 export function generateSelectOptions<T>(
