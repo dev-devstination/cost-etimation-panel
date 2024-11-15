@@ -146,7 +146,7 @@ export const ResourceForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 relative"
+        className="relative space-y-6"
       >
         {/* Master */}
         <div className="absolute -top-14 ltr:right-0 rtl:left-0">
