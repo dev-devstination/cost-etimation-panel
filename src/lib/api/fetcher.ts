@@ -69,7 +69,6 @@ export async function fetcher<T>(
 
       try {
         const errorData = await res.json()
-
         if ("validations" in errorData) {
           validations = errorData.validations
         }

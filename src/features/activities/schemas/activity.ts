@@ -8,6 +8,25 @@ export const useActivitySchema = () => {
     category_id: z.string({
       required_error: t("category_id.validation.required"),
     }),
+    children: z
+      .array(
+        z.object({
+          resource_id: z.string({
+            required_error: t(
+              "activity_compositions.child_resource_id.validation.required"
+            ),
+          }),
+          qty: z
+            .string()
+            .min(1, t("activity_compositions.qty.validation.required"))
+            .refine(
+              (val) => !isNaN(parseInt(val)) && parseInt(val) > 0,
+              t("activity_compositions.qty.validation.positive_integer")
+            )
+            .transform((val) => parseInt(val)),
+        })
+      )
+      .min(1, t("activity_compositions.validation.min_length")),
     code: z
       .string({ required_error: t("code.validation.required") })
       .min(1, t("code.validation.required")),
@@ -26,25 +45,6 @@ export const useActivitySchema = () => {
       )
       .transform((val) => (val ? parseFloat(val) : 0)),
     remarks: z.string().optional(),
-    activity_compositions: z
-      .array(
-        z.object({
-          child_resource_id: z.string({
-            required_error: t(
-              "activity_compositions.child_resource_id.validation.required"
-            ),
-          }),
-          qty: z
-            .string()
-            .min(1, t("activity_compositions.qty.validation.required"))
-            .refine(
-              (val) => !isNaN(parseInt(val)) && parseInt(val) > 0,
-              t("activity_compositions.qty.validation.positive_integer")
-            )
-            .transform((val) => parseInt(val)),
-        })
-      )
-      .min(1, t("activity_compositions.validation.min_length")),
     sub_category_id: z.string({
       required_error: t("sub_category_id.validation.required"),
     }),

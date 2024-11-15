@@ -116,7 +116,7 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
                   </TableHeader>
                   <TableBody>
                     {resource.prices.map((price) => (
-                      <TableRow key={price.id}>
+                      <TableRow key={price.ID}>
                         <TableCell>{formatDate(price.updated_at)}</TableCell>
                         {/* <TableCell>
                       <div>{entry.projectName}</div>

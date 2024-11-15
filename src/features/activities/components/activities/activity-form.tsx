@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Edit, Plus } from "lucide-react"
+import { useSearchParams } from "next/navigation"
 
 import { useRouter } from "@/config/navigation"
 import { SelectOption } from "@/types"
@@ -21,6 +22,7 @@ import { Activity } from "@/features/activities/types"
 import { useActivitySchema } from "@/features/activities/schemas/activity"
 import { activityAction } from "@/features/activities/actions/activity"
 import { ActivityCompositionInput } from "@/features/activities/components/activities/activity-composition-input"
+import { Switch } from "@/components/form/switch"
 
 interface CreateActivityFormProps {
   activity?: Activity
@@ -47,6 +49,8 @@ export const ActivityForm = ({
   unitsOptions,
 }: CreateActivityFormProps) => {
   const t = useTranslations("ActivitiesPage.form")
+  const searchParams = useSearchParams()
+  const isClone = searchParams.get("clone")
   const [proposedRate, setProposedRate] = useState(activity?.rate || 0)
   const router = useRouter()
 
@@ -64,7 +68,7 @@ export const ActivityForm = ({
   }, [router, serverState])
 
   const defaultActivityCompositions = activity?.children?.map((comp) => ({
-    child_resource_id: comp.child_resource.id,
+    resource_id: comp.resource.id,
     qty: comp.qty.toString(),
   }))
 
@@ -78,23 +82,27 @@ export const ActivityForm = ({
       category_id: activity?.category?.id,
       sub_category_id: activity?.sub_category?.id,
       unit_id: activity?.unit?.id,
-      activity_compositions: defaultActivityCompositions,
+      children: defaultActivityCompositions,
+      master: !isClone && activity?.master,
     },
   })
 
-  const { category_id, activity_compositions, output } = form.watch()
+  const { category_id, children, output, master } = form.watch()
+  const disabled = activity && master
 
   const totalCost =
-    activity_compositions?.reduce((total, comp) => {
-      const resource = resources.find(({ id }) => id === comp.child_resource_id)
+    children?.reduce((total, activity) => {
+      const resource = resources.find(({ id }) => id === activity.resource_id)
       if (!resource) return total
       const rate = resource.basic_rate * resource.factor
-      return total + Number(comp.qty) * rate
+      return total + Number(activity.qty) * rate
     }, 0) || 0
 
   const onSubmit = (data: ActivityFormData) => {
     startTransition(() => {
-      formAction({ ...data, id: activity?.id })
+      isClone
+        ? formAction({ ...data })
+        : formAction({ ...data, id: activity?.id })
     })
   }
 
@@ -121,7 +129,27 @@ export const ActivityForm = ({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="relative space-y-6"
+      >
+        {/* Master */}
+        <div className="absolute -top-14 ltr:right-0 rtl:left-0">
+          <FormField
+            control={form.control}
+            name="master"
+            render={({ field }) => (
+              <div className="col-span-12 lg:col-span-1">
+                <Switch
+                  label={t("master.label")}
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </div>
+            )}
+          />
+        </div>
+
         <div className="grid grid-cols-12 gap-4">
           {/* Code */}
           <FormField
@@ -129,7 +157,7 @@ export const ActivityForm = ({
             name="code"
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-1">
-                <Input label={t("code.label")} {...field} />
+                <Input label={t("code.label")} {...field} disabled={disabled} />
               </div>
             )}
           />
@@ -140,7 +168,11 @@ export const ActivityForm = ({
             name="description"
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-11">
-                <Input label={t("description.label")} {...field} />
+                <Input
+                  label={t("description.label")}
+                  {...field}
+                  disabled={disabled}
+                />
               </div>
             )}
           />
@@ -159,6 +191,7 @@ export const ActivityForm = ({
                   options={activityCategoriesOptions}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={disabled}
                 />
               </div>
             )}
@@ -171,7 +204,7 @@ export const ActivityForm = ({
             render={({ field }) => (
               <div className="col-span-12 lg:col-span-4">
                 <Select
-                  disabled={!activitySubcategoryOptions.length}
+                  disabled={!activitySubcategoryOptions.length || disabled}
                   label={t("sub_category_id.label")}
                   options={activitySubcategoryOptions}
                   onValueChange={field.onChange}
@@ -192,6 +225,7 @@ export const ActivityForm = ({
                   options={unitsOptions}
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={disabled}
                 />
               </div>
             )}
@@ -200,7 +234,6 @@ export const ActivityForm = ({
 
         <div className="grid grid-cols-12 gap-4">
           {/* Proposed Rate */}
-
           <div className="col-span-12 lg:col-span-4">
             <Input
               label={t("proposed_rate.label")}
@@ -232,13 +265,18 @@ export const ActivityForm = ({
           name="remarks"
           render={({ field }) => (
             <div className="col-span-12 lg:col-span-3">
-              <Textarea label={t("remarks.label")} {...field} />
+              <Textarea
+                label={t("remarks.label")}
+                {...field}
+                disabled={disabled}
+              />
             </div>
           )}
         />
 
         <div className="col-span-12">
           <ActivityCompositionInput
+            disabled={disabled}
             activityCompositions={defaultActivityCompositions}
             resources={resources}
             categories={resourceCategoriesOptions}

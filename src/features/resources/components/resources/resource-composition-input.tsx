@@ -54,6 +54,8 @@ export const ResourceCompositionInput: React.FC<
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("")
   const [selectedSubcategory, setSelectedSubcategory] = useState("")
+  const [isMaster, setIsMaster] = useState(false)
+  const [isComposite, setIsComposite] = useState(false)
 
   const form = useFormContext<ResourceFormData>()
   const { fields, append, remove } = useFieldArray({
@@ -89,8 +91,28 @@ export const ResourceCompositionInput: React.FC<
       )
     }
 
+    if (isMaster) {
+      filteredResources = filteredResources.filter(
+        (resource) => resource.master
+      )
+    }
+
+    if (isComposite) {
+      filteredResources = filteredResources.filter(
+        (resource) => resource.children?.length
+      )
+    }
+
     setAvailableResources(filteredResources)
-  }, [fields, resources, searchTerm, selectedCategory, selectedSubcategory])
+  }, [
+    fields,
+    isComposite,
+    isMaster,
+    resources,
+    searchTerm,
+    selectedCategory,
+    selectedSubcategory,
+  ])
 
   const calculateAmount = (qty: string, rate: number, factor?: string) => {
     return Number(qty) * rate * Number(factor)
@@ -101,7 +123,9 @@ export const ResourceCompositionInput: React.FC<
       const qty = form.watch(`children.${index}.qty`)
       const factor = form.watch(`children.${index}.factor`)
       const resource = resources.find((r) => r.id === field.child_resource_id)
-      if (!resource) return total
+      if (!resource) {
+        return total
+      }
 
       return total + calculateAmount(qty, resource.rate, factor)
     }, 0)
@@ -153,49 +177,76 @@ export const ResourceCompositionInput: React.FC<
     setSearchTerm("")
     setSelectedCategory("")
     setSelectedSubcategory("")
+    setIsComposite(false)
+    setIsMaster(false)
   }
 
   return (
     <div className="space-y-4">
       {/* Filters Section */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="space-y-2">
           <Input
             placeholder={t("searchResources")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {(searchTerm || selectedCategory || selectedCategory) && (
-            <Button
-              onClick={clearFilters}
-              variant="link"
-              type="button"
-              size="sm"
-              className="flex items-center gap-2"
-            >
-              <X className="size-4" />
-              {t("clearFilters")}
-            </Button>
-          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <Select
-            options={categories}
-            placeholder={t("selectCategory")}
-            onValueChange={(value) => setSelectedCategory(value)}
-            value={selectedCategory}
-          />
-          <Select
-            options={subcategories.filter(
-              (sub) => !selectedCategory || sub.category_id === selectedCategory
-            )}
-            placeholder={t("selectSubcategory")}
-            onValueChange={(value) => setSelectedSubcategory(value)}
-            value={selectedSubcategory}
-            disabled={!selectedCategory}
-          />
+        <Select
+          options={categories}
+          placeholder={t("selectCategory")}
+          onValueChange={(value) => setSelectedCategory(value)}
+          value={selectedCategory}
+        />
+
+        <Select
+          options={subcategories.filter(
+            (sub) => !selectedCategory || sub.category_id === selectedCategory
+          )}
+          placeholder={t("selectSubcategory")}
+          onValueChange={(value) => setSelectedSubcategory(value)}
+          value={selectedSubcategory}
+          disabled={!selectedCategory}
+        />
+      </div>
+
+      <div className="flex h-9 flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-6">
+          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+            <Checkbox
+              id="composite"
+              checked={isComposite}
+              onCheckedChange={(checked: boolean) => setIsComposite(checked)}
+            />
+            <Label htmlFor="composite">{t("isComposite")}</Label>
+          </div>
+
+          <div className="flex items-center space-x-2 rtl:space-x-reverse">
+            <Checkbox
+              id="master"
+              checked={isMaster}
+              onCheckedChange={(checked: boolean) => setIsMaster(checked)}
+            />
+            <Label htmlFor="master">{t("isMaster")}</Label>
+          </div>
         </div>
+        {(searchTerm ||
+          selectedCategory ||
+          selectedSubcategory ||
+          isComposite ||
+          isMaster) && (
+          <Button
+            onClick={clearFilters}
+            variant="link"
+            type="button"
+            size="sm"
+            className="flex items-center gap-2"
+          >
+            <X className="size-4" />
+            {t("clearFilters")}
+          </Button>
+        )}
       </div>
 
       {/* Tables Section */}
@@ -219,6 +270,9 @@ export const ResourceCompositionInput: React.FC<
                   </TableHead>
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.isComposite")}
+                  </TableHead>
+                  <TableHead className="w-[100px] text-center">
+                    {t("tableHeaders.isMaster")}
                   </TableHead>
                   <TableHead className="w-[100px] text-center">
                     {t("tableHeaders.rate")}
@@ -247,6 +301,11 @@ export const ResourceCompositionInput: React.FC<
                     </TableCell>
                     <TableCell className="text-center">
                       {resource.children?.length ? (
+                        <CheckCircle className="mx-auto size-4 text-primary" />
+                      ) : null}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {resource.master ? (
                         <CheckCircle className="mx-auto size-4 text-primary" />
                       ) : null}
                     </TableCell>

@@ -49,9 +49,6 @@ export async function loginAction(
 
     cookies().set(COOKIES.AUTH_TOKEN, data.token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24 * 7, // 1 week
     })
   } catch (error) {
     if (error instanceof ApiError) {

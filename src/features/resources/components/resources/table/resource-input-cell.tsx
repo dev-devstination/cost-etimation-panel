@@ -18,7 +18,7 @@ export const ResourceInputCell: React.FC<BasicRateCellProps> = ({
   resource,
 }) => {
   const form = useFormContext<UpdateResourcesSchema>()
-  const { basic_rate, factor } = form.watch(`resources.${index}`)
+  const { basic_rate, factor } = form.watch(`resources.${index}.prices.${0}`)
 
   const getResourceRate = () => {
     const initialRate = Number(basic_rate) * Number(factor)
@@ -44,7 +44,7 @@ export const ResourceInputCell: React.FC<BasicRateCellProps> = ({
   return (
     <FormField
       control={form.control}
-      name={`resources.${index}.${name}`}
+      name={`resources.${index}.prices.${0}.${name}`}
       render={({ field }) => (
         <FormItem>
           <FormControl>
