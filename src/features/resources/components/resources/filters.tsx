@@ -154,15 +154,6 @@ export const Filters: React.FC<FiltersProps> = ({
             ))}
           </SelectContent>
         </Select>
-
-        {/* <Select>
-          <SelectTrigger>
-            <SelectValue placeholder={t("filters.resouceType")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">{t("filters.allResourceTypes")}</SelectItem>
-          </SelectContent>
-        </Select> */}
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
