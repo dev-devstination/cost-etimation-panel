@@ -270,7 +270,7 @@ export const ActivityCompositionInput: React.FC<
               <TableBody>
                 {availableResources.map((resource) => (
                   <TableRow key={resource.id}>
-                    {disabled && (
+                    {!disabled && (
                       <TableCell className="text-center">
                         <Checkbox
                           id={`resource-${resource.id}`}

@@ -100,7 +100,9 @@ export const ActivityForm = ({
 
   const onSubmit = (data: ActivityFormData) => {
     startTransition(() => {
-      formAction({ ...data, id: activity?.id })
+      isClone
+        ? formAction({ ...data })
+        : formAction({ ...data, id: activity?.id })
     })
   }
 
