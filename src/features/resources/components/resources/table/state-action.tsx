@@ -45,13 +45,13 @@ export const StateAction: React.FC<ActionsProps> = ({ resource }) => {
   }, [serverState, tError, tSuccess, toast])
 
   const handleResourceState = (state: boolean) => {
-    const updatedChildren = resource.children?.map((child) => ({
+    const children = resource.children?.map((child) => ({
       child_resource_id: child.id,
       factor: child.factor,
       qty: child.qty,
     }))
 
-    const updatedPrices = resource.prices.map((price) => ({
+    const prices = resource.prices.map((price) => ({
       basic_rate: price.basic_rate,
       factor: price.factor,
       currency_id: price.currency.id,
@@ -61,8 +61,8 @@ export const StateAction: React.FC<ActionsProps> = ({ resource }) => {
       formAction({
         id: resource.id,
         active: state,
-        prices: updatedPrices,
-        children: updatedChildren,
+        prices,
+        children,
       })
     })
   }

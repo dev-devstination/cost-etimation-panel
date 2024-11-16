@@ -69,3 +69,12 @@ export type UpdateActivitiesSchema = z.input<typeof updateActivitiesSchema>
 
 export type ActivitySchema = ReturnType<typeof useActivitySchema>
 export type ActivityFormData = z.input<ActivitySchema>
+
+export type ActivityStateData = {
+  id: string
+  active: boolean
+  children: {
+    resource_id: string
+    qty: number
+  }[]
+}
