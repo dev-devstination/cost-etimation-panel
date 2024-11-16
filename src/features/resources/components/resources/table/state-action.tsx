@@ -24,6 +24,7 @@ export const StateAction: React.FC<ActionsProps> = ({ resource }) => {
 
   const { toast } = useToast()
   const [isPending, startTransition] = useTransition()
+
   const [serverState, formAction] = useFormState(
     resourceStateAction,
     initialState
@@ -44,32 +45,25 @@ export const StateAction: React.FC<ActionsProps> = ({ resource }) => {
   }, [serverState, tError, tSuccess, toast])
 
   const handleResourceState = (state: boolean) => {
-    // const updatedChildren = resource.children?.map((child) => ({
-    //   child_resource_id: child.id,
-    //   factor: child.factor,
-    //   qty: child.qty,
-    // }))
-    // const updatedPrices = resource.prices.map((price) => ({
-    //   basic_rate: price.basic_rate,
-    //   factor: price.factor,
-    //   currency_id: price.currency.id,
-    // }))
-    // const updatedResource = {
-    //   id: resource.id,
-    //   active: state,
-    //   category_id: resource.category.id,
-    //   children: updatedChildren,
-    //   code: resource.code,
-    //   description: resource.description,
-    //   master: resource.master,
-    //   output: resource.output,
-    //   prices: updatedPrices,
-    //   remark: resource.remarks,
-    //   sub_category_id: resource.sub_category.id,
-    //   unit_id: resource.unit.id,
-    // }
+    const children = resource.children?.map((child) => ({
+      child_resource_id: child.id,
+      factor: child.factor,
+      qty: child.qty,
+    }))
+
+    const prices = resource.prices.map((price) => ({
+      basic_rate: price.basic_rate,
+      factor: price.factor,
+      currency_id: price.currency.id,
+    }))
+
     startTransition(() => {
-      formAction({ id: resource.id, active: state })
+      formAction({
+        id: resource.id,
+        active: state,
+        prices,
+        children,
+      })
     })
   }
 

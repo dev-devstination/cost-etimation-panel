@@ -70,6 +70,10 @@ export const UpdateActivitiesTable: React.FC<UpdateActivitiesTableProps> = ({
       activities: activities.map((activity) => ({
         id: activity.id,
         output: activity.output.toString(),
+        children: activity.children.map((child) => ({
+          resource_id: child.resource.id,
+          qty: child.qty.toString(),
+        })),
       })),
     },
   })

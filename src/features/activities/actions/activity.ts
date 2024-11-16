@@ -4,7 +4,11 @@ import { revalidatePath } from "next/cache"
 import logger from "@/lib/logger"
 import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
-import { ActivityFormData, UpdateActivitiesSchema } from "../schemas/activity"
+import {
+  ActivityFormData,
+  ActivityStateData,
+  UpdateActivitiesSchema,
+} from "../schemas/activity"
 
 export async function activityAction(
   _: ActionState,
@@ -92,15 +96,16 @@ export async function updateActivitiesAction(
 
 export async function activityStateAction(
   _: ActionState,
-  data: { id: string; active: boolean }
+  data: ActivityStateData
 ): Promise<ActionState> {
+  const { id, ...body } = data
   try {
-    await fetcher(`/activities/${data.id}`, {
+    await fetcher(`/activities/${id}`, {
       method: "PATCH",
-      body: { active: data.active },
+      body,
     })
 
-    logger.info("Activity activated successfully", { data })
+    logger.info("Activity activated successfully", { data: body })
     revalidatePath("/activities")
 
     return { status: "success", message: "activityUpdated" }

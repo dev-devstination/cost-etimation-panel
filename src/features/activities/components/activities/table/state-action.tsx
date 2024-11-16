@@ -44,8 +44,12 @@ export const StateAction: React.FC<StateActionProps> = ({ activity }) => {
   }, [serverState, tError, tSuccess, toast])
 
   const handleActivityState = (state: boolean) => {
+    const children = activity.children.map((child) => ({
+      resource_id: child.resource.id,
+      qty: child.qty,
+    }))
     startTransition(() => {
-      formAction({ id: activity.id, active: state })
+      formAction({ id: activity.id, active: state, children })
     })
   }
 

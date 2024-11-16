@@ -41,7 +41,12 @@ export const PriceHistory: React.FC<PriceHistoryProps> = ({ resource }) => {
         <div>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="ghost" size="icon" className="size-8">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-8"
+                type="button"
+              >
                 <History className="size-4" />
                 <span className="sr-only">{t("priceHistory")}</span>
               </Button>

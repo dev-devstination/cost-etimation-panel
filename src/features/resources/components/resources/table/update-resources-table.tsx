@@ -71,7 +71,11 @@ export const UpdateResourcesTable: React.FC<UpdateResourcesTableProps> = ({
     defaultValues: {
       resources: resources.map((resource) => ({
         id: resource.id,
-
+        children: resource.children?.map((child) => ({
+          child_resource_id: child.resource.id,
+          qty: child.qty.toString(),
+          factor: child.factor.toString(),
+        })),
         prices: resource.prices
           .sort((a, b) => {
             const dateA = new Date(a.updated_at).getTime()

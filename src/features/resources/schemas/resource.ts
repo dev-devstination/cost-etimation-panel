@@ -98,6 +98,7 @@ export const updateResourcesSchema = z.object({
       id: z.string(),
       prices: z.array(
         z.object({
+          currency_id: z.string().optional(),
           basic_rate: z
             .string()
             .min(1)
@@ -117,6 +118,30 @@ export const updateResourcesSchema = z.object({
             ),
         })
       ),
+      children: z
+        .array(
+          z.object({
+            child_resource_id: z.string(),
+            qty: z
+              .string()
+              .min(1)
+              .refine((val) => !isNaN(parseInt(val)) && parseInt(val) > 0)
+              .transform((val) => parseInt(val)),
+            factor: z
+              .string()
+              .optional()
+              .transform((val) => (val === "" ? "1" : val))
+              .refine(
+                (val) =>
+                  val === undefined ||
+                  (!isNaN(parseFloat(val)) && parseFloat(val) > 0)
+              )
+              .transform((val) =>
+                val ? parseFloat(parseFloat(val).toFixed(2)) : 1
+              ),
+          })
+        )
+        .optional(),
     })
   ),
 })
@@ -125,3 +150,18 @@ export type UpdateResourcesSchema = z.input<typeof updateResourcesSchema>
 
 export type ResourceSchema = ReturnType<typeof useResourceSchema>
 export type ResourceFormData = z.input<ResourceSchema>
+
+export type ResourceStateData = {
+  id: string
+  active: boolean
+  children?: {
+    child_resource_id: string
+    qty: number
+    factor: number
+  }[]
+  prices: {
+    basic_rate: number
+    factor: number
+    currency_id: string
+  }[]
+}
