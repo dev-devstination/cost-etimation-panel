@@ -5,7 +5,11 @@ import logger from "@/lib/logger"
 import { ApiError, fetcher } from "@/lib/api/fetcher"
 import { ActionState } from "@/types"
 
-import { ResourceFormData, UpdateResourcesSchema } from "../schemas/resource"
+import {
+  ResourceFormData,
+  ResourceStateData,
+  UpdateResourcesSchema,
+} from "@/features/resources/schemas/resource"
 
 export async function resourceAction(
   _: ActionState,
@@ -93,15 +97,16 @@ export async function updateResourcesAction(
 
 export async function resourceStateAction(
   _: ActionState,
-  data: { id: string; active: boolean }
+  data: ResourceStateData
 ): Promise<ActionState> {
   try {
-    await fetcher(`/resources/${data.id}`, {
+    const { id, ...body } = data
+    await fetcher(`/resources/${id}`, {
       method: "PATCH",
-      body: { active: data.active },
+      body,
     })
 
-    logger.info("Resource activated successfully", { data })
+    logger.info("Resource activated successfully", { data: body })
     revalidatePath("/resources")
 
     return { status: "success", message: "resourceUpdated" }

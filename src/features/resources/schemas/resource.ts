@@ -125,3 +125,18 @@ export type UpdateResourcesSchema = z.input<typeof updateResourcesSchema>
 
 export type ResourceSchema = ReturnType<typeof useResourceSchema>
 export type ResourceFormData = z.input<ResourceSchema>
+
+export type ResourceStateData = {
+  id: string
+  active: boolean
+  children?: {
+    child_resource_id: string
+    qty: number
+    factor: number
+  }[]
+  prices: {
+    basic_rate: number
+    factor: number
+    currency_id: string
+  }[]
+}
