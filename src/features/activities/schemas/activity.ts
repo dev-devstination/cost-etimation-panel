@@ -61,6 +61,18 @@ export const updateActivitiesSchema = z.object({
         .transform((val) => (val === "" ? "0" : val))
         .refine((val) => val === undefined || !isNaN(parseFloat(val)))
         .transform((val) => (val ? parseFloat(val) : 0)),
+      children: z
+        .array(
+          z.object({
+            resource_id: z.string(),
+            qty: z
+              .string()
+              .min(1)
+              .refine((val) => !isNaN(parseInt(val)) && parseInt(val) > 0)
+              .transform((val) => parseInt(val)),
+          })
+        )
+        .min(1),
     })
   ),
 })
